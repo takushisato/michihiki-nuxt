@@ -22,4 +22,3 @@ https://zenn.dev/mouse_484/articles/nuxt-axios-cors
 
 https://zenn.dev/code_diver/articles/dcf0ec9803cb55
 
-https://tech.noricgeographic.com/nuxt-js%E3%81%AEapi%E3%82%B3%E3%83%BC%E3%83%AB%E6%99%82%E3%81%AEcors%E5%AF%BE%E7%AD%96/
