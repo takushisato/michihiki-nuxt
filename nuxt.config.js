@@ -45,10 +45,6 @@ export default {
     proxy: true,
   },
 
-  // proxy: {
-  //   '/api/': 'https://api.tide736.net/get_tide.php?pc=4&hc=1&yr=2022&mn=3&dy=13&rg=day',
-  // },
-
   proxy: {
     '/api': {
       target: 'https://api.tide736.net/get_tide.php?pc=4&hc=1&yr=2022&mn=3&dy=13&rg=day',
@@ -60,12 +56,3 @@ export default {
   build: {
   }
 }
-
-
-
-// proxy: {
-//   '/api/': {
-//     target: 'http://localhost:8081',
-//     pathRewrite: {'^/api/': '/'}
-//   },
-// },
