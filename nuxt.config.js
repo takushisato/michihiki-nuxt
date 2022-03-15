@@ -6,7 +6,7 @@ export default {
   head: {
     title: 'michihiki-nuxt',
     htmlAttrs: {
-      lang: 'en'
+      lang: 'ja'
     },
     meta: [
       { charset: 'utf-8' },
@@ -38,9 +38,34 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    '@nuxtjs/axios',
   ],
+
+  axios: {
+    proxy: true,
+  },
+
+  // proxy: {
+  //   '/api/': 'https://api.tide736.net/get_tide.php?pc=4&hc=1&yr=2022&mn=3&dy=13&rg=day',
+  // },
+
+  proxy: {
+    '/api': {
+      target: 'https://api.tide736.net/get_tide.php?pc=4&hc=1&yr=2022&mn=3&dy=13&rg=day',
+      pathRewrite: {'^/api': ''}
+    },
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
   }
 }
+
+
+
+// proxy: {
+//   '/api/': {
+//     target: 'http://localhost:8081',
+//     pathRewrite: {'^/api/': '/'}
+//   },
+// },
