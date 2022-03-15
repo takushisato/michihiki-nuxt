@@ -1,6 +1,6 @@
 <template>
     <div>
-        <!-- <img src="https://api.tide736.net/tide_image.php?pc=28&hc=9&yr=2022&mn=3&dy=15&rg=day&w=768&h=512&lc=blue&gcs=cyan&gcf=blue&ld=on&ttd=on&tsmd=on"> -->
+        <img src="https://api.tide736.net/tide_image.php?pc=28&hc=9&yr=2022&mn=3&dy=15&rg=day&w=768&h=512&lc=blue&gcs=cyan&gcf=blue&ld=on&ttd=on&tsmd=on">
         <h1>テスト</h1>
         <!-- <span>{{ items.tide.port.harbor_namej }}</span> -->
         <span>{{ items.tide }}</span>
