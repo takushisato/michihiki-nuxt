@@ -1,28 +1,464 @@
 <template>
     <div class="container m-auto">
-       <table>
+       <table class="table-auto m-auto mt-2 mb-10 text-center">
            <thead>
-               <th>
+               <th class="text-2xl">
                    2022年 3月
                </th>
-               <th>
-                   {{ items.tide.port.harbor_namej }}
+               <th class="text-2xl">
+                   気仙沼
                </th>
            </thead>
            <tr>
-               <th>日</th>
-               <th>潮</th>
-               <th>満潮</th>
-               <th>満潮</th>
-               <th>日の出</th>
-               <th>月の出</th>
-               <th>月齢</th>
+               <th class="border px-4 py-2 bg-blue-300">日</th>
+               <th class="border px-4 py-2 bg-blue-300">潮</th>
+               <th class="border px-4 py-2 bg-blue-300">おすすめ度</th>
+               <th class="border px-4 py-2 bg-blue-300">満潮</th>
+               <th class="border px-4 py-2 bg-blue-300">満潮</th>
+               <th class="border px-4 py-2 bg-blue-300">干潮</th>
+               <th class="border px-4 py-2 bg-blue-300">干潮</th>
+               <th class="border px-4 py-2 bg-blue-300">日の出</th>
+               <th class="border px-4 py-2 bg-blue-300">日の入</th>
+               <th class="border px-4 py-2 bg-blue-300">月の出</th>
+               <th class="border px-4 py-2 bg-blue-300">月の入り</th>
+               <th class="border px-4 py-2 bg-blue-300">月齢</th>
             </tr>
            <tr>
-               <td>{{ items.title}}</td>
+               <td class="border px-4 py-2">1</td>
+               <td class="border px-4 py-2">大潮</td>
+               <td class="border px-4 py-2">おすすめ！</td>
+               <td class="border px-4 py-2">5:00</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">12:00</td>
+               <td class="border px-4 py-2">23:00</td>
+               <td class="border px-4 py-2">4:30</td>
+               <td class="border px-4 py-2">17:15</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">3:45</td>
+               <td class="border px-4 py-2">満月</td>
+            </tr>
+            <tr>
+               <td class="border px-4 py-2">2</td>
+               <td class="border px-4 py-2">大潮</td>
+               <td class="border px-4 py-2">-</td>
+               <td class="border px-4 py-2">5:00</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">12:00</td>
+               <td class="border px-4 py-2">23:00</td>
+               <td class="border px-4 py-2">4:30</td>
+               <td class="border px-4 py-2">17:15</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">3:45</td>
+               <td class="border px-4 py-2">満月</td>
+            </tr>
+            <tr>
+               <td class="border px-4 py-2">3</td>
+               <td class="border px-4 py-2">中潮</td>
+               <td class="border px-4 py-2">-</td>
+               <td class="border px-4 py-2">5:00</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">12:00</td>
+               <td class="border px-4 py-2">23:00</td>
+               <td class="border px-4 py-2">4:30</td>
+               <td class="border px-4 py-2">17:15</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">3:45</td>
+               <td class="border px-4 py-2">満月</td>
+            </tr>
+            <tr>
+               <td class="border px-4 py-2">4</td>
+               <td class="border px-4 py-2">中潮</td>
+               <td class="border px-4 py-2">-</td>
+               <td class="border px-4 py-2">5:00</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">12:00</td>
+               <td class="border px-4 py-2">23:00</td>
+               <td class="border px-4 py-2">4:30</td>
+               <td class="border px-4 py-2">17:15</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">3:45</td>
+               <td class="border px-4 py-2">満月</td>
+            </tr>
+            <tr>
+               <td class="border px-4 py-2">5</td>
+               <td class="border px-4 py-2">小潮</td>
+               <td class="border px-4 py-2">おすすめ！</td>
+               <td class="border px-4 py-2">5:00</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">12:00</td>
+               <td class="border px-4 py-2">23:00</td>
+               <td class="border px-4 py-2">4:30</td>
+               <td class="border px-4 py-2">17:15</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">3:45</td>
+               <td class="border px-4 py-2">満月</td>
+            </tr>
+            <tr>
+               <td class="border px-4 py-2">6</td>
+               <td class="border px-4 py-2">小潮</td>
+               <td class="border px-4 py-2">-</td>
+               <td class="border px-4 py-2">5:00</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">12:00</td>
+               <td class="border px-4 py-2">23:00</td>
+               <td class="border px-4 py-2">4:30</td>
+               <td class="border px-4 py-2">17:15</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">3:45</td>
+               <td class="border px-4 py-2">満月</td>
+            </tr>
+            <tr>
+               <td class="border px-4 py-2">7</td>
+               <td class="border px-4 py-2">長潮</td>
+               <td class="border px-4 py-2">-</td>
+               <td class="border px-4 py-2">5:00</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">12:00</td>
+               <td class="border px-4 py-2">23:00</td>
+               <td class="border px-4 py-2">4:30</td>
+               <td class="border px-4 py-2">17:15</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">3:45</td>
+               <td class="border px-4 py-2">満月</td>
+            </tr>
+            <tr>
+               <td class="border px-4 py-2">8</td>
+               <td class="border px-4 py-2">若潮</td>
+               <td class="border px-4 py-2">-</td>
+               <td class="border px-4 py-2">5:00</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">12:00</td>
+               <td class="border px-4 py-2">23:00</td>
+               <td class="border px-4 py-2">4:30</td>
+               <td class="border px-4 py-2">17:15</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">3:45</td>
+               <td class="border px-4 py-2">満月</td>
+            </tr>
+            <tr>
+               <td class="border px-4 py-2">9</td>
+               <td class="border px-4 py-2">中潮</td>
+               <td class="border px-4 py-2">-</td>
+               <td class="border px-4 py-2">5:00</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">12:00</td>
+               <td class="border px-4 py-2">23:00</td>
+               <td class="border px-4 py-2">4:30</td>
+               <td class="border px-4 py-2">17:15</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">3:45</td>
+               <td class="border px-4 py-2">満月</td>
+            </tr>
+            <tr>
+               <td class="border px-4 py-2">10</td>
+               <td class="border px-4 py-2">中潮</td>
+               <td class="border px-4 py-2">-</td>
+               <td class="border px-4 py-2">5:00</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">12:00</td>
+               <td class="border px-4 py-2">23:00</td>
+               <td class="border px-4 py-2">4:30</td>
+               <td class="border px-4 py-2">17:15</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">3:45</td>
+               <td class="border px-4 py-2">満月</td>
+            </tr>
+            <tr>
+               <td class="border px-4 py-2">11</td>
+               <td class="border px-4 py-2">大潮</td>
+               <td class="border px-4 py-2">-</td>
+               <td class="border px-4 py-2">5:00</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">12:00</td>
+               <td class="border px-4 py-2">23:00</td>
+               <td class="border px-4 py-2">4:30</td>
+               <td class="border px-4 py-2">17:15</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">3:45</td>
+               <td class="border px-4 py-2">満月</td>
+            </tr>
+            <tr>
+               <td class="border px-4 py-2">12</td>
+               <td class="border px-4 py-2">大潮</td>
+               <td class="border px-4 py-2">-</td>
+               <td class="border px-4 py-2">5:00</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">12:00</td>
+               <td class="border px-4 py-2">23:00</td>
+               <td class="border px-4 py-2">4:30</td>
+               <td class="border px-4 py-2">17:15</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">3:45</td>
+               <td class="border px-4 py-2">満月</td>
+            </tr>
+            <tr>
+               <td class="border px-4 py-2">13</td>
+               <td class="border px-4 py-2">中潮</td>
+               <td class="border px-4 py-2">おすすめ！</td>
+               <td class="border px-4 py-2">5:00</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">12:00</td>
+               <td class="border px-4 py-2">23:00</td>
+               <td class="border px-4 py-2">4:30</td>
+               <td class="border px-4 py-2">17:15</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">3:45</td>
+               <td class="border px-4 py-2">満月</td>
+            </tr>
+            <tr>
+               <td class="border px-4 py-2">14</td>
+               <td class="border px-4 py-2">中潮</td>
+               <td class="border px-4 py-2">-</td>
+               <td class="border px-4 py-2">5:00</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">12:00</td>
+               <td class="border px-4 py-2">23:00</td>
+               <td class="border px-4 py-2">4:30</td>
+               <td class="border px-4 py-2">17:15</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">3:45</td>
+               <td class="border px-4 py-2">満月</td>
+            </tr>
+            <tr>
+               <td class="border px-4 py-2">15</td>
+               <td class="border px-4 py-2">小潮</td>
+               <td class="border px-4 py-2">-</td>
+               <td class="border px-4 py-2">5:00</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">12:00</td>
+               <td class="border px-4 py-2">23:00</td>
+               <td class="border px-4 py-2">4:30</td>
+               <td class="border px-4 py-2">17:15</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">3:45</td>
+               <td class="border px-4 py-2">満月</td>
+            </tr>
+            <tr>
+               <td class="border px-4 py-2">16</td>
+               <td class="border px-4 py-2">小潮</td>
+               <td class="border px-4 py-2">-</td>
+               <td class="border px-4 py-2">5:00</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">12:00</td>
+               <td class="border px-4 py-2">23:00</td>
+               <td class="border px-4 py-2">4:30</td>
+               <td class="border px-4 py-2">17:15</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">3:45</td>
+               <td class="border px-4 py-2">満月</td>
+            </tr>
+            <tr>
+               <td class="border px-4 py-2">17</td>
+               <td class="border px-4 py-2">長潮</td>
+               <td class="border px-4 py-2">-</td>
+               <td class="border px-4 py-2">5:00</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">12:00</td>
+               <td class="border px-4 py-2">23:00</td>
+               <td class="border px-4 py-2">4:30</td>
+               <td class="border px-4 py-2">17:15</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">3:45</td>
+               <td class="border px-4 py-2">満月</td>
+            </tr>
+            <tr>
+               <td class="border px-4 py-2">18</td>
+               <td class="border px-4 py-2">長潮</td>
+               <td class="border px-4 py-2">-</td>
+               <td class="border px-4 py-2">5:00</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">12:00</td>
+               <td class="border px-4 py-2">23:00</td>
+               <td class="border px-4 py-2">4:30</td>
+               <td class="border px-4 py-2">17:15</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">3:45</td>
+               <td class="border px-4 py-2">満月</td>
+            </tr>
+            <tr>
+               <td class="border px-4 py-2">19</td>
+               <td class="border px-4 py-2">若潮</td>
+               <td class="border px-4 py-2">おすすめ！</td>
+               <td class="border px-4 py-2">5:00</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">12:00</td>
+               <td class="border px-4 py-2">23:00</td>
+               <td class="border px-4 py-2">4:30</td>
+               <td class="border px-4 py-2">17:15</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">3:45</td>
+               <td class="border px-4 py-2">満月</td>
+            </tr>
+            <tr>
+               <td class="border px-4 py-2">20</td>
+               <td class="border px-4 py-2">中潮</td>
+               <td class="border px-4 py-2">-</td>
+               <td class="border px-4 py-2">5:00</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">12:00</td>
+               <td class="border px-4 py-2">23:00</td>
+               <td class="border px-4 py-2">4:30</td>
+               <td class="border px-4 py-2">17:15</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">3:45</td>
+               <td class="border px-4 py-2">満月</td>
+            </tr>
+            
+            <tr>
+               <td class="border px-4 py-2">21</td>
+               <td class="border px-4 py-2">大潮</td>
+               <td class="border px-4 py-2">-</td>
+               <td class="border px-4 py-2">5:00</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">12:00</td>
+               <td class="border px-4 py-2">23:00</td>
+               <td class="border px-4 py-2">4:30</td>
+               <td class="border px-4 py-2">17:15</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">3:45</td>
+               <td class="border px-4 py-2">満月</td>
+            </tr>
+            <tr>
+               <td class="border px-4 py-2">22</td>
+               <td class="border px-4 py-2">大潮</td>
+               <td class="border px-4 py-2">-</td>
+               <td class="border px-4 py-2">5:00</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">12:00</td>
+               <td class="border px-4 py-2">23:00</td>
+               <td class="border px-4 py-2">4:30</td>
+               <td class="border px-4 py-2">17:15</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">3:45</td>
+               <td class="border px-4 py-2">満月</td>
+            </tr>
+            <tr>
+               <td class="border px-4 py-2">23</td>
+               <td class="border px-4 py-2">中潮</td>
+               <td class="border px-4 py-2">-</td>
+               <td class="border px-4 py-2">5:00</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">12:00</td>
+               <td class="border px-4 py-2">23:00</td>
+               <td class="border px-4 py-2">4:30</td>
+               <td class="border px-4 py-2">17:15</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">3:45</td>
+               <td class="border px-4 py-2">満月</td>
+            </tr>
+            <tr>
+               <td class="border px-4 py-2">24</td>
+               <td class="border px-4 py-2">中潮</td>
+               <td class="border px-4 py-2">-</td>
+               <td class="border px-4 py-2">5:00</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">12:00</td>
+               <td class="border px-4 py-2">23:00</td>
+               <td class="border px-4 py-2">4:30</td>
+               <td class="border px-4 py-2">17:15</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">3:45</td>
+               <td class="border px-4 py-2">満月</td>
+            </tr>
+            <tr>
+               <td class="border px-4 py-2">25</td>
+               <td class="border px-4 py-2">小潮</td>
+               <td class="border px-4 py-2">-</td>
+               <td class="border px-4 py-2">5:00</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">12:00</td>
+               <td class="border px-4 py-2">23:00</td>
+               <td class="border px-4 py-2">4:30</td>
+               <td class="border px-4 py-2">17:15</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">3:45</td>
+               <td class="border px-4 py-2">満月</td>
+            </tr>
+            <tr>
+               <td class="border px-4 py-2">26</td>
+               <td class="border px-4 py-2">小潮</td>
+               <td class="border px-4 py-2">-</td>
+               <td class="border px-4 py-2">5:00</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">12:00</td>
+               <td class="border px-4 py-2">23:00</td>
+               <td class="border px-4 py-2">4:30</td>
+               <td class="border px-4 py-2">17:15</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">3:45</td>
+               <td class="border px-4 py-2">満月</td>
+            </tr>
+            <tr>
+               <td class="border px-4 py-2">27</td>
+               <td class="border px-4 py-2">若潮</td>
+               <td class="border px-4 py-2">-</td>
+               <td class="border px-4 py-2">5:00</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">12:00</td>
+               <td class="border px-4 py-2">23:00</td>
+               <td class="border px-4 py-2">4:30</td>
+               <td class="border px-4 py-2">17:15</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">3:45</td>
+               <td class="border px-4 py-2">満月</td>
+            </tr>
+            <tr>
+               <td class="border px-4 py-2">28</td>
+               <td class="border px-4 py-2">若潮</td>
+               <td class="border px-4 py-2">-</td>
+               <td class="border px-4 py-2">5:00</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">12:00</td>
+               <td class="border px-4 py-2">23:00</td>
+               <td class="border px-4 py-2">4:30</td>
+               <td class="border px-4 py-2">17:15</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">3:45</td>
+               <td class="border px-4 py-2">満月</td>
+            </tr>
+            <tr>
+               <td class="border px-4 py-2">29</td>
+               <td class="border px-4 py-2">長潮</td>
+               <td class="border px-4 py-2">-</td>
+               <td class="border px-4 py-2">5:00</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">12:00</td>
+               <td class="border px-4 py-2">23:00</td>
+               <td class="border px-4 py-2">4:30</td>
+               <td class="border px-4 py-2">17:15</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">3:45</td>
+               <td class="border px-4 py-2">満月</td>
+            </tr>
+            <tr>
+               <td class="border px-4 py-2">30</td>
+               <td class="border px-4 py-2">中潮</td>
+               <td class="border px-4 py-2">-</td>
+               <td class="border px-4 py-2">5:00</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">12:00</td>
+               <td class="border px-4 py-2">23:00</td>
+               <td class="border px-4 py-2">4:30</td>
+               <td class="border px-4 py-2">17:15</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">3:45</td>
+               <td class="border px-4 py-2">満月</td>
+            </tr>
+            <tr>
+               <td class="border px-4 py-2">31</td>
+               <td class="border px-4 py-2">大潮</td>
+               <td class="border px-4 py-2">-</td>
+               <td class="border px-4 py-2">5:00</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">12:00</td>
+               <td class="border px-4 py-2">23:00</td>
+               <td class="border px-4 py-2">4:30</td>
+               <td class="border px-4 py-2">17:15</td>
+               <td class="border px-4 py-2">18:00</td>
+               <td class="border px-4 py-2">3:45</td>
+               <td class="border px-4 py-2">満月</td>
             </tr>
        </table>
-    <p>{{ items }}</p>
     </div>
 </template>
  
@@ -38,54 +474,4 @@ export default {
 </script>
 
 <style>
-         /* Tab content - closed */
-         .tab-content {
-         max-height: 0;
-         -webkit-transition: max-height .35s;
-         -o-transition: max-height .35s;
-         transition: max-height .35s;
-         }
-         /* :checked - resize to full height */
-         .tab input:checked ~ .tab-content {
-         max-height: 100vh;
-         }
-         /* Label formatting when open */
-         .tab input:checked + label{
-         /*@apply text-xl p-5 border-l-2 border-indigo-500 bg-gray-100 text-indigo*/
-         font-size: 1.25rem; /*.text-xl*/
-         padding: 1.25rem; /*.p-5*/
-         border-left-width: 2px; /*.border-l-2*/
-         border-color: #6574cd; /*.border-indigo*/
-         background-color: #f8fafc; /*.bg-gray-100 */
-         color: #6574cd; /*.text-indigo*/
-         }
-         /* Icon */
-         .tab label::after {
-         float:right;
-         right: 0;
-         top: 0;
-         display: block;
-         width: 1.5em;
-         height: 1.5em;
-         line-height: 1.5;
-         font-size: 1.25rem;
-         text-align: center;
-         -webkit-transition: all .35s;
-         -o-transition: all .35s;
-         transition: all .35s;
-         }
-         /* Icon formatting - closed */
-         .tab input[type=checkbox] + label::after {
-         content: "+";
-         font-weight:bold; /*.font-bold*/
-         border-width: 1px; /*.border*/
-         border-radius: 9999px; /*.rounded-full */
-         border-color: #b8c2cc; /*.border-grey*/
-         }
-         /* Icon formatting - open */
-         .tab input[type=checkbox]:checked + label::after {
-         transform: rotate(315deg);
-         background-color: #6574cd; /*.bg-indigo*/
-         color: #f8fafc; /*.text-grey-lightest*/
-         }
-      </style>
+</style>
