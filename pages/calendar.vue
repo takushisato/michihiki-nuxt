@@ -2,7 +2,7 @@
     <div class="container m-auto mt-10">
         <div>
             <div id="header">
-                <span class="selected-month">{{year}}年{{month}}月</span>
+                <span class="selected-month">{{ year }}年{{ month }}月</span>
                 <table class="min-w-full text-center">
                     <thead class="bg-blue-300">
                         <th v-for="(weekDay, weekDayIndex) in weekDays" :key="weekDayIndex" class="align-middle">{{weekDay}}</th>
@@ -11,7 +11,7 @@
                         <tr v-for="(weekData,weekDataIndex) in calendar" :key="weekDataIndex">
                         <td v-for="(dayNumber,dayNumberIndex) in weekData" :key="dayNumberIndex" :class="{'today':isToday(dayNumber)}">
                             <span v-if="isToday(dayNumber)" class="bg-blue-200 text-white">今日</span>
-                            <span v-else>{{dayNumber}}</span>           
+                            <span v-else>{{ dayNumber }}</span>           
                         </td>
                         </tr>
                     </tbody>
