@@ -2,11 +2,15 @@
     <div class="container m-auto">
        <table class="table-auto m-auto mt-2 mb-10 text-center">
            <thead>
-               <th class="text-2xl">{{ hiduke }}</th>
+              <!-- ここの日付も自動取得したい -->
+               <th class="text-2xl">2022年3月</th>
                <th class="text-2xl">
                    {{ items.tide.port.harbor_namej }}
                </th>
            </thead>
+
+           <!-- ここからループ処理してAPIから取得したJSONを埋め込みたい -->
+           <!-- 現在はダミーのデータで表を作ってます -->
            <tr>
                <th class="border px-4 py-2 bg-blue-300">日</th>
                <th class="border px-4 py-2 bg-blue-300">潮</th>
@@ -457,6 +461,9 @@
                <td class="border px-4 py-2">満月</td>
             </tr>
        </table>
+
+       <!-- この下の地名をクリックしたら取得するAPIのパラメータが変わって再取得し、画面を更新したい -->
+       <!-- 取り合えず、今はPタグでズラッと北海道の地名だけ載せてます -->
        <div class="block">
             <p class="block p-3 ml-3 leading-normal cursor-pointer">蘂取</p>
             <p class="block p-3 ml-3 leading-normal cursor-pointer">紗万部</p>
@@ -539,32 +546,28 @@
 export default {
    async asyncData({ app }) {
       let items = await app.$axios.$get('/hokkaido')
+      console.log(items);
       return {
          items
       }
    },
 
+   // 'https://api.tide736.net/get_tide.php?pc=1&hc=1&yr=2022&mn=3&dy=13&rg=day'
+   // 　↑　これが今読んでる北海道のAPIのパラメータ。PCが北海道、hcが北海道の地名、yr mn dy が日付、rgが取得するパラメータの期間
+   // これの日付部分を自動で更新させる様にしたい。
+   // また、ユーザーの操作よってpc hc も変更できる様にしたい。
+
    data() {
-   //   return {
-   //       PlaceName:['蘂取', '紗万部', '内岡', '内保湾', '茂世路湾', '単冠湾', '入里節', 'ニキシヨロ', '古釜府湾', '泊湾', '水晶島', '多楽島', '斜古丹', '根室', '尾岱沼', '羅臼',
-   //       'コイセボイ', '網走', '紋別', '雄武', '枝幸', '浜鬼志別', '宗谷岬', '稚内', '抜海', '鴛泊', '沓形', '船泊', '苫前', '留萌', '浜益', '小樽', '忍路', '神威岬', '岩内', 
-   //       '寿都', '瀬棚', '奥尻', '青苗', '江差', '清部', '松前', '吉岡', '湧元', '函館', '汐首岬', '戸井', '古武井', '臼尻', '森', '有珠湾', '室蘭', '苫小牧', '東静内', '三石', 
-   //       '浦河', 'えりも', '歌露', '襟裳岬', '庶野', 'ルベシベツ', '音調津', '十勝', '釧路', '厚岸', '厚岸湖', '霧多布', '落石', '花咲', '香深', '常呂', '湧別', '利尻',],
-   //   }
-   return{
-      hiduke: '',
-   }
+
    },
 
+   // 日付の取得はできてますが、上手く埋め込めない・・・
    created(){
    let date = new Date();
    this.year = date.getFullYear();
    this.month = date.getMonth() + 1;
    this.actualDay = date.getDate();
-   let hiduke = this.year + '年' +  this.month + '月';
-   return {
-      hiduke
-   }
+   let yearMonth = this.year + '年' +  this.month + '月';
    },
    
 }
@@ -574,7 +577,7 @@ export default {
 
 </style>
 
-https://zenn.dev/mouse_484/articles/nuxt-axios-cors
+// https://zenn.dev/mouse_484/articles/nuxt-axios-cors
 
-https://zenn.dev/code_diver/articles/dcf0ec9803cb55
+// https://zenn.dev/code_diver/articles/dcf0ec9803cb55
 
