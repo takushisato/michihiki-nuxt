@@ -46,9 +46,9 @@ export default {
   },
 
   proxy: {
-    '/hokkaido': {
-      target: 'https://api.tide736.net/get_tide.php?',
-      pathRewrite: {'^/hokkaido': 'pc=1&hc=1&yr=2022&mn=3&dy=13&rg=day'}
+    '/api/': {
+      target: 'https://api.tide736.net/get_tide.php',
+      pathRewrite: {'^/api/': ''}
     },
   },
 
