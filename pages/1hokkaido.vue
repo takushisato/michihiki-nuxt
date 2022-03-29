@@ -6,8 +6,8 @@
        <div class="m-10">
           <!-- 都道府県を表示 -->
             <ul>
-               <li v-for="(prefecture, index) in prefectures" :key="prefecture" @click="pcName(prefecture, index)">
-                  {{ prefecture }}
+               <li v-for="prefecture in prefectures" :key="prefecture.name" @click="pcChoice(prefecture)">
+                  {{ prefecture.name }}
                </li>
             </ul>
        </div>
@@ -15,13 +15,13 @@
        <div v-if="isShow"  class="m-10">
           <!-- 選択した都道府県に一致した港を表示 -->
             <ul>
-               <li v-for="(portName, index2) in choicePorts" :key="portName" @click="pchcParames(portName, index2)">
-                  {{ portName }}
+               <li v-for="port in ports" :key="port.portName" @click="hcChoice(port)">
+                  {{ port.portName }}
                </li>
             </ul>
             <br><br>
             <p>都道府県：{{ choicePc }}</p>
-            <p>場所：{{ choicePort }}</p>
+            <p>場所：{{ choiceHc }}</p>
        </div>
 
 
@@ -37,8 +37,8 @@
    let tideDatas = [];
 
    // APIパラメータ
-   let pc = '';  // 都道府県番号
-   let hc = ''; // 港番号
+   let pcNum = '';  // 都道府県番号
+   let hcNum = ''; // 港番号
    let yr = ''; // 年
    let mn = ''; // 月
    let dy = ''; // 日
@@ -49,554 +49,988 @@
 export default {
    data() {
       return {
-         isShow: false,
-         
          prefectures: [
-            '千島列島', // 0
-            '北海道', // 1
-            '青森県', // 2
-            '岩手県', // 3
-            '宮城県', // 4
-            '秋田県', // 5
-            '山形県', // 6
-            '福島県', // 7
-            '茨城県', // 8
-            '千葉県', // 9
-            '東京都', // 10
-            '神奈川県', // 11
-            '新潟県', // 12
-            '富山県', // 13
-            '石川県', // 14
-            '福井県', // 15
-            '静岡県', // 16
-            '愛知県', // 17
-            '三重県', // 18
-            '京都府', // 19
-            '大阪府', // 20
-            '兵庫県', // 21
-            '和歌山県', // 21
-            '鳥取県', // 22
-            '島根県', // 23
-            '岡山県', // 24
-            '広島県', // 25
-            '山口県', // 26
-            '徳島県', // 27
-            '香川県', // 28
-            '愛媛県', // 29
-            '高知県', // 30
-            '福岡県', // 31
-            '佐賀県', // 32
-            '長崎県', // 33
-            '熊本県', // 35
-            '大分県', // 36
-            '宮崎県', // 37
-            '鹿児島県', // 38
-            '沖縄県', // 39
+            {
+               name: '千島列島',
+               pcNum: 0,
+               port: [
+                  { hcNum:1, portName:'小泊' },
+                  { hcNum:2, portName:'中川湾' },
+                  { hcNum:3, portName:'片岡湾' },
+                  { hcNum:4, portName:'阿頼度島' },
+                  { hcNum:5, portName:'磐城埼' },
+                  { hcNum:6, portName:'加熊別湾' },
+                  { hcNum:7, portName:'鯨湾' },
+                  { hcNum:8, portName:'四岩' },
+                  { hcNum:9, portName:'乙前湾' },
+                  { hcNum:10, portName:'樺里埼' },
+                  { hcNum:11, portName:'潮見浦' },
+                  { hcNum:12, portName:'黒石湾' },
+                  { hcNum:13, portName:'春牟古丹島' },
+                  { hcNum:14, portName:'乙女湾' },
+                  { hcNum:15, portName:'東浦' },
+                  { hcNum:16, portName:'松輪島' },
+                  { hcNum:17, portName:'宇志知島' },
+                  { hcNum:18, portName:'武魯頓湾' },
+                  { hcNum:19, portName:'新知湾' },
+                  { hcNum:20, portName:'沙湾' },
+                  { hcNum:21, portName:'鐘湾' },
+                  { hcNum:22, portName:'床丹島' },
+                  { hcNum:23, portName:'吉野浜' },
+                  { hcNum:24, portName:'伽藍埼' },
+               ]
+            },
+            {
+               name: '北海道',
+               pcNum: 1,
+               port: [
+                  { hcNum:1, portNmae:'蘂取' },
+                  { hcNum:2, portNmae:'紗万部' },
+                  { hcNum:3, portNmae:'内岡' },
+                  { hcNum:4, portNmae:'内保湾' },
+                  { hcNum:5, portNmae:'茂世路湾'},
+                  { hcNum:6, portNmae:'単冠湾' },
+                  { hcNum:7, portNmae:'入里節' },
+                  { hcNum:8, portNmae:'ニキシヨロ' },
+                  { hcNum:9, portNmae:'古釜府湾' },
+                  { hcNum:10, portName:'泊湾' },
+                  { hcNum:11, portName:'水晶島' },
+                  { hcNum:12, portName:'多楽島' },
+                  { hcNum:13, portName:'斜古丹' },
+                  { hcNum:14, portName:'根室' },
+                  { hcNum:15, portName:'尾岱沼' },
+                  { hcNum:16, portName:'羅臼' },
+                  { hcNum:17, portName:'コイセボイ' },
+                  { hcNum:18, portName:'網走' },
+                  { hcNum:19, portName:'紋別' },
+                  { hcNum:20, portName:'雄武' },
+                  { hcNum:21, portName:'枝幸' },
+                  { hcNum:22, portName:'浜鬼志別' },
+                  { hcNum:23, portName:'宗谷岬' },
+                  { hcNum:24, portName:'稚内' },
+                  { hcNum:25, portName:'抜海' },
+                  { hcNum:26, portName:'鴛泊' },
+                  { hcNum:27, portName:'沓形' },
+                  { hcNum:28, portName:'船泊' },
+                  { hcNum:29, portName:'苫前' },
+                  { hcNum:30, portName:'留萌' },
+                  { hcNum:31, portName:'浜益' },
+                  { hcNum:32, portName:'小樽' },
+                  { hcNum:33, portName:'忍路' },
+                  { hcNum:34, portName:'神威岬' },
+                  { hcNum:35, portName:'岩内' },
+                  { hcNum:36, portName:'寿都' },
+                  { hcNum:37, portName:'瀬棚' },
+                  { hcNum:38, portName:'奥尻' },
+                  { hcNum:39, portName:'青苗' },
+                  { hcNum:40, portName:'江差' },
+                  { hcNum:41, portName:'清部' },
+                  { hcNum:42, portName:'松前' },
+                  { hcNum:43, portName:'吉岡' },
+                  { hcNum:44, portName:'湧元' },
+                  { hcNum:45, portName:'函館' },
+                  { hcNum:46, portName:'汐首岬' },
+                  { hcNum:47, portName:'戸井' },
+                  { hcNum:48, portName:'古武井' },
+                  { hcNum:49, portName:'臼尻' },
+                  { hcNum:50, portName:'森' },
+                  { hcNum:51, portName:'有珠湾' },
+                  { hcNum:52, portName:'室蘭' },
+                  { hcNum:53, portName:'苫小牧' },
+                  { hcNum:54, portName:'東静内' },
+                  { hcNum:55, portName:'三石' },
+                  { hcNum:56, portName:'浦河' },
+                  { hcNum:57, portName:'えりも' },
+                  { hcNum:58, portName:'歌露' },
+                  { hcNum:59, portName:'襟裳岬' },
+                  { hcNum:60, portName:'庶野' },
+                  { hcNum:61, portName:'ルベシベツ' },
+                  { hcNum:62, portName:'音調津' },
+                  { hcNum:63, portName:'十勝' },
+                  { hcNum:64, portName:'釧路' },
+                  { hcNum:65, portName:'厚岸' },
+                  { hcNum:66, portName:'厚岸湖' },
+                  { hcNum:67, portName:'霧多布' },
+                  { hcNum:68, portName:'落石' },
+                  { hcNum:69, portName:'花咲' },
+                  { hcNum:70, portName:'香深' },
+                  { hcNum:71, portName:'常呂' },
+                  { hcNum:72, portName:'湧別' },
+                  { hcNum:73, portName:'利尻' },
+               ]
+            },
+            {
+               name: '青森県',
+               pcNum: 2,
+               port: [
+                  { hcNum:1, portName:'竜飛埼' },
+                  { hcNum:2, portName:'三厩' },
+                  { hcNum:3, portName:'袰月' },
+                  { hcNum:4, portName:'青森' },
+                  { hcNum:5, portName:'茂浦' },
+                  { hcNum:6, portName:'小湊' },
+                  { hcNum:7, portName:'野辺地' },
+                  { hcNum:8, portName:'大湊' },
+                  { hcNum:9, portName:'大間' },
+                  { hcNum:10, portName:'大畑' },
+                  { hcNum:11, portName:'尻屋岬' },
+                  { hcNum:12, portName:'尻屋' },
+                  { hcNum:13, portName:'白糠' },
+                  { hcNum:14, portName:'泊' },
+                  { hcNum:15, portName:'八戸' },
+                  { hcNum:16, portName:'岩崎' },
+                  { hcNum:17, portName:'深浦' },
+                  { hcNum:18, portName:'鯵ヶ沢' },
+                  { hcNum:19, portName:'小泊' },
+                  { hcNum:20, portName:'関根浜' },
+                  { hcNum:21, portName:'浅虫' },
+                  { hcNum:22, portName:'竜飛' },
+               ]
+            },
+            {
+               name: '岩手県',
+               pcNum: 3,
+               port: [
+                  { hcNum:1, portName:'久慈' },
+                  { hcNum:2, portName:'宮古' },
+                  { hcNum:3, portName:'山田' },
+                  { hcNum:4, portName:'釜石' },
+                  { hcNum:5, portName:'大船渡' },
+                  { hcNum:6, portName:'八木' },
+                  { hcNum:7, portName:'茂師' },
+               ]
+            },
+            {
+               name: '宮城県',
+               pcNum: 4,
+               port: [
+                  { hcNum:1, portName:'気仙沼' },
+                  { hcNum:2, portName:'船越湾' },
+                  { hcNum:3, portName:'女川' },
+                  { hcNum:4, portName:'鮎川' },
+                  { hcNum:5, portName:'荻浜' },
+                  { hcNum:6, portName:'石巻' },
+                  { hcNum:7, portName:'野蒜湾' },
+                  { hcNum:8, portName:'石浜' },
+                  { hcNum:9, portName:'港橋' },
+                  { hcNum:10, portName:'花淵浜' },
+                  { hcNum:11, portName:'仙台' },
+                  { hcNum:12, portName:'閖上' },
+                  { hcNum:13, portName:'志津川' },
+               ]
+            },
+            {
+               name: '秋田県',
+               pcNum: 5,
+               port: [
+                  { hcNum:1, portName:'金浦' },
+                  { hcNum:2, portName:'秋田' },
+                  { hcNum:3, portName:'船川' },
+                  { hcNum:4, portName:'能代' },
+                  { hcNum:5, portName:'岩館' },
+                  { hcNum:6, portName:'男鹿' },
+               ]
+            },
+            {
+               name: '山形県',
+               pcNum: 6,
+               port: [
+                  { hcNum:1, portName:'鼠ヶ関' },
+                  { hcNum:2, portName:'由良' },
+                  { hcNum:3, portName:'加茂' },
+                  { hcNum:4, portName:'酒田' },
+               ]
+            },
+            {
+               name:'福島県',
+               pcNum: 7,
+               port: [
+                  { hcNum:1, portName:'相馬' },
+                  { hcNum:2, portName:'松川浦' },
+                  { hcNum:3, portName:'夫沢' },
+                  { hcNum:4, portName:'富岡' },
+                  { hcNum:5, portName:'四倉' },
+                  { hcNum:6, portName:'小名浜' },
+               ]   
+            },
+            {
+               name: '茨城県',
+               pcNum: 8,
+               port: [
+                  { hcNum:1, portName:'大津' },
+                  { hcNum:2, portName:'日立' },
+                  { hcNum:3, portName:'那珂湊' },
+                  { hcNum:4, portName:'鹿島' },
+                  { hcNum:5, portName:'大洗' },
+               ]
+            },
+            {
+               name: '千葉県',
+               pcNum: 12,
+               port: [
+                  { hcNum:1, portName:'新地' },
+                  { hcNum:2, portName:'銚子漁港' },
+                  { hcNum:3, portName:'犬吠埼' },
+                  { hcNum:4, portName:'名洗' },
+                  { hcNum:5, portName:'上総勝浦' },
+                  { hcNum:6, portName:'鴨川' },
+                  { hcNum:7, portName:'白浜' },
+                  { hcNum:8, portName:'布良' },
+                  { hcNum:9, portName:'船形' },
+                  { hcNum:10, portName:'岩井袋' },
+                  { hcNum:11, portName:'第１海堡' },
+                  { hcNum:12, portName:'君津' },
+                  { hcNum:13, portName:'姉崎' },
+                  { hcNum:14, portName:'市原' },
+                  { hcNum:15, portName:'寒川' },
+                  { hcNum:16, portName:'千葉灯標' },
+                  { hcNum:17, portName:'市川' },
+                  { hcNum:18, portName:'船橋' },
+                  { hcNum:19, portName:'館山' },
+               ]
+            },
+            {
+               name: '東京都',
+               pcNum: 13,
+               port: [
+                  { hcNum:1, portName:'築地' },
+                  { hcNum:2, portName:'芝浦' },
+                  { hcNum:3, portName:'羽田' },
+                  { hcNum:4, portName:'岡田' },
+                  { hcNum:5, portName:'波浮' },
+                  { hcNum:6, portName:'式根島' },
+                  { hcNum:7, portName:'神津島' },
+                  { hcNum:8, portName:'阿古' },
+                  { hcNum:9, portName:'神湊' },
+                  { hcNum:10, portName:'鳥島' },
+                  { hcNum:11, portName:'二見' },
+                  { hcNum:12, portName:'沖' },
+                  { hcNum:13, portName:'西' },
+                  { hcNum:14, portName:'晴海' },
+                  { hcNum:15, portName:'八重根' },
+                  { hcNum:16, portName:'沖ノ鳥島' },
+               ]
+            },
+            {
+               name: '神奈川県',
+               pcNum: 14,
+               port: [
+                  { hcNum:1, portName:'塩浜運河' },
+                  { hcNum:2, portName:'末広' },
+                  { hcNum:3, portName:'新港' },
+                  { hcNum:4, portName:'新山下' },
+                  { hcNum:5, portName:'根岸' },
+                  { hcNum:6, portName:'長浦' },
+                  { hcNum:7, portName:'横須賀' },
+                  { hcNum:8, portName:'走水' },
+                  { hcNum:9, portName:'浦賀' },
+                  { hcNum:10, portName:'久里浜' },
+                  { hcNum:11, portName:'金田湾' },
+                  { hcNum:12, portName:'間口' },
+                  { hcNum:13, portName:'城ヶ島' },
+                  { hcNum:14, portName:'向ヶ崎' },
+                  { hcNum:15, portName:'諸磯' },
+                  { hcNum:16, portName:'油壷' },
+                  { hcNum:17, portName:'小田和湾' },
+                  { hcNum:18, portName:'新宿湾' },
+                  { hcNum:19, portName:'江ノ島' },
+                  { hcNum:20, portName:'真鶴' },
+               ]
+            },
+            {
+               name: '新潟県',
+               pcNum: 15,
+               port: [
+                  { hcNum:1, portName:'能生' },
+                  { hcNum:2, portName:'直江津' },
+                  { hcNum:3, portName:'柏崎' },
+                  { hcNum:4, portName:'出雲崎' },
+                  { hcNum:5, portName:'寺泊' },
+                  { hcNum:6, portName:'新潟西港' },
+                  { hcNum:7, portName:'二見' },
+                  { hcNum:8, portName:'小木' },
+                  { hcNum:9, portName:'両津' },
+                  { hcNum:10, portName:'鷲崎' },
+                  { hcNum:11, portName:'岩船' },
+                  { hcNum:12, portName:'粟島' },
+                  { hcNum:13, portName:'新潟東港' },
+               ]
+            },
+            {
+               name: '富山県',
+               pcNum: 16,
+               port: [
+                  { hcNum:1, portName:'阿尾' },
+                  { hcNum:2, portName:'伏木' },
+                  { hcNum:3, portName:'富山' },
+                  { hcNum:4, portName:'生地' },
+                  { hcNum:5, portName:'宮崎' },
+               ]
+            },
+            {
+               name: '石川県',
+               pcNum: 17,
+               port: [
+                  { hcNum:1, portName:'金沢' },
+                  { hcNum:2, portName:'滝' },
+                  { hcNum:3, portName:'寺家' },
+                  { hcNum:4, portName:'輪島' },
+                  { hcNum:5, portName:'松波' },
+                  { hcNum:6, portName:'曾良' },
+                  { hcNum:7, portName:'中居入' },
+                  { hcNum:8, portName:'七尾' },
+                  { hcNum:9, portName:'穴水' },
+               ]
+            },
+            {
+               name: '福井県',
+               pcNum: 18,
+               port: [
+                  { hcNum:1, portName:'内浦湾' },
+                  { hcNum:2, portName:'和田' },
+                  { hcNum:3, portName:'小浜' },
+                  { hcNum:4, portName:'丹生' },
+                  { hcNum:5, portName:'敦賀' },
+                  { hcNum:6, portName:'福井' },
+                  { hcNum:7, portName:'三国' },
+               ]
+            },
+            {
+               name: '静岡県',
+               pcNum: 22,
+               port: [
+                  { hcNum:1, portName:'網代' },
+                  { hcNum:2, portName:'伊東' },
+                  { hcNum:3, portName:'川奈' },
+                  { hcNum:4, portName:'白浜' },
+                  { hcNum:5, portName:'下田' },
+                  { hcNum:6, portName:'南伊豆' },
+                  { hcNum:7, portName:'妻良子浦' },
+                  { hcNum:8, portName:'田子' },
+                  { hcNum:9, portName:'宇久須' },
+                  { hcNum:10, portName:'三津' },
+                  { hcNum:11, portName:'田子の浦' },
+                  { hcNum:12, portName:'興津' },
+                  { hcNum:13, portName:'清水' },
+                  { hcNum:14, portName:'三保' },
+                  { hcNum:15, portName:'焼津' },
+                  { hcNum:16, portName:'相良' },
+                  { hcNum:17, portName:'御前崎' },
+                  { hcNum:18, portName:'舞阪' },
+                  { hcNum:19, portName:'熱海' },
+               ]
+            },
+            {
+               name: '愛知県',
+               pcNum: 23,
+               port: [
+                  { hcNum:1, portName:'伊良湖' },
+                  { hcNum:2, portName:'神島' },
+                  { hcNum:3, portName:'篠島' },
+                  { hcNum:4, portName:'佐久島' },
+                  { hcNum:5, portName:'立馬埼' },
+                  { hcNum:6, portName:'福江' },
+                  { hcNum:7, portName:'豊橋' },
+                  { hcNum:8, portName:'三谷' },
+                  { hcNum:9, portName:'蒲郡' },
+                  { hcNum:10, portName:'形原' },
+                  { hcNum:11, portName:'洲崎' },
+                  { hcNum:12, portName:'寺津' },
+                  { hcNum:13, portName:'武豊' },
+                  { hcNum:14, portName:'師崎' },
+                  { hcNum:15, portName:'常滑' },
+                  { hcNum:16, portName:'鬼崎' },
+                  { hcNum:17, portName:'名古屋' },
+                  { hcNum:18, portName:'赤羽根' },
+               ]
+            },
+            {
+               name: '三重県',
+               pcNum: 24,
+               port: [
+                  { hcNum:1, portName:'四日市' },
+                  { hcNum:2, portName:'津' },
+                  { hcNum:3, portName:'松阪' },
+                  { hcNum:4, portName:'宇治山田' },
+                  { hcNum:5, portName:'鳥羽' },
+                  { hcNum:6, portName:'的矢' },
+                  { hcNum:7, portName:'浜島' },
+                  { hcNum:8, portName:'五ヶ所' },
+                  { hcNum:9, portName:'吉津' },
+                  { hcNum:10, portName:'長島' },
+                  { hcNum:11, portName:'尾鷲' },
+                  { hcNum:12, portName:'古江' },
+                  { hcNum:13, portName:'二木島' },
+                  { hcNum:14, portName:'鵜殿' },
+                  { hcNum:15, portName:'錦' },
+               ]
+            },
+            {
+               name: '京都府',
+               pcNum: 26,
+               port: [
+                  { hcNum:1, portName:'伊根' },
+                  { hcNum:2, portName:'島埼' },
+                  { hcNum:3, portName:'獅子崎' },
+                  { hcNum:4, portName:'田井' },
+                  { hcNum:5, portName:'舞鶴東港' },
+                  { hcNum:6, portName:'舞鶴西港' },
+               ]
+            },
+            {
+               name:'大阪府',
+               pcNum:27,
+               port: [
+                  { hcNum:1, portName:'深日' },
+                  { hcNum:2, portName:'淡輪' },
+                  { hcNum:3, portName:'岸和田' },
+                  { hcNum:4, portName:'泉大津' },
+                  { hcNum:5, portName:'堺' },
+                  { hcNum:6, portName:'大阪' },
+               ]
+            },
+            {
+               name: '兵庫県',
+               pcNum: 28,
+               port: [
+                  { hcNum:1, portName:'福良' },
+                  { hcNum:2, portName:'阿那賀浦' },
+                  { hcNum:3, portName:'由良' },
+                  { hcNum:4, portName:'洲本' },
+                  { hcNum:5, portName:'仮屋' },
+                  { hcNum:6, portName:'尼崎' },
+                  { hcNum:7, portName:'神戸' },
+                  { hcNum:8, portName:'苅藻島' },
+                  { hcNum:9, portName:'明石' },
+                  { hcNum:10, portName:'岩屋' },
+                  { hcNum:11, portName:'江崎' },
+                  { hcNum:12, portName:'室津' },
+                  { hcNum:13, portName:'江井' },
+                  { hcNum:14, portName:'家島' },
+                  { hcNum:15, portName:'二見' },
+                  { hcNum:16, portName:'高砂' },
+                  { hcNum:17, portName:'飾磨' },
+                  { hcNum:18, portName:'広畑' },
+                  { hcNum:19, portName:'相生' },
+                  { hcNum:20, portName:'赤穂' },
+                  { hcNum:21, portName:'香住' },
+                  { hcNum:22, portName:'柴山' },
+                  { hcNum:23, portName:'津居山' },
+                  { hcNum:24, portName:'垂水' },
+               ]
+            },
+            {
+               name: '和歌山県',
+               pcNum: 30,
+               port: [
+                  { hcNum:1, portName:'紀伊勝浦' },
+                  { hcNum:2, portName:'浦神' },
+                  { hcNum:3, portName:'串本' },
+                  { hcNum:4, portName:'周参見' },
+                  { hcNum:5, portName:'田辺（旧）' },
+                  { hcNum:6, portName:'三尾' },
+                  { hcNum:7, portName:'比井湾' },
+                  { hcNum:8, portName:'由良' },
+                  { hcNum:9, portName:'下津' },
+                  { hcNum:10, portName:'海南' },
+                  { hcNum:11, portName:'和歌山' },
+                  { hcNum:12, portName:'沖ノ島' },
+                  { hcNum:13, portName:'田辺' },
+               ]
+            },
+            {
+               name: '鳥取県',
+               pcNum: 31,
+               port: [
+                  { hcNum:1, portName:'米子' },
+                  { hcNum:2, portName:'境' },
+                  { hcNum:3, portName:'淀江' },
+                  { hcNum:4, portName:'赤碕' },
+                  { hcNum:5, portName:'因幡網代' },
+                  { hcNum:6, portName:'田後' },
+               ]
+            },
+            {
+               name: '島根県',
+               pcNum: 32,
+               port: [
+                  { hcNum:1, portName:'外ノ浦' },
+                  { hcNum:2, portName:'江津' },
+                  { hcNum:3, portName:'温泉津' },
+                  { hcNum:4, portName:'大社' },
+                  { hcNum:5, portName:'鷺' },
+                  { hcNum:6, portName:'河下' },
+                  { hcNum:7, portName:'恵曇' },
+                  { hcNum:8, portName:'加賀' },
+                  { hcNum:9, portName:'七類' },
+                  { hcNum:10, portName:'大根島' },
+                  { hcNum:11, portName:'安来' },
+                  { hcNum:12, portName:'浦郷' },
+                  { hcNum:13, portName:'日ノ津浦' },
+                  { hcNum:14, portName:'菱浦' },
+                  { hcNum:15, portName:'知々井' },
+                  { hcNum:16, portName:'西郷' },
+                  { hcNum:17, portName:'松江' },
+               ]
+            },
+            {
+               name: '岡山県',
+               pcNum: 33,
+               port: [
+                  { hcNum:1, portName:'片上' },
+                  { hcNum:2, portName:'大多府島' },
+                  { hcNum:3, portName:'牛窓' },
+                  { hcNum:4, portName:'宝伝' },
+                  { hcNum:5, portName:'小串' },
+                  { hcNum:6, portName:'宇野' },
+                  { hcNum:7, portName:'下津井' },
+                  { hcNum:8, portName:'水島' },
+                  { hcNum:9, portName:'笠岡' },
+                  { hcNum:10, portName:'玉島' },
+               ]
+            },
+            {
+               name: '広島県',
+               pcNum: 34,
+               port: [
+                  { hcNum:1, portName:'福山' },
+                  { hcNum:2, portName:'鞆' },
+                  { hcNum:3, portName:'常石' },
+                  { hcNum:4, portName:'尾道' },
+                  { hcNum:5, portName:'糸崎' },
+                  { hcNum:6, portName:'江之浦' },
+                  { hcNum:7, portName:'小佐木島' },
+                  { hcNum:8, portName:'忠海' },
+                  { hcNum:9, portName:'土生' },
+                  { hcNum:10, portName:'瀬戸田' },
+                  { hcNum:11, portName:'御手洗' },
+                  { hcNum:12, portName:'小用' },
+                  { hcNum:13, portName:'長浜' },
+                  { hcNum:14, portName:'奥ノ内' },
+                  { hcNum:15, portName:'鹿老渡小瀬戸' },
+                  { hcNum:16, portName:'室尾' },
+                  { hcNum:17, portName:'美能' },
+                  { hcNum:18, portName:'江田内' },
+                  { hcNum:19, portName:'広島' },
+                  { hcNum:20, portName:'呉' },
+                  { hcNum:21, portName:'音戸瀬戸' },
+                  { hcNum:22, portName:'早瀬瀬戸' },
+                  { hcNum:23, portName:'厳島' },
+                  { hcNum:24, portName:'大野瀬戸' },
+                  { hcNum:25, portName:'竹原' },
+               ]
+            },
+            {
+               name: '山口県',
+               pcNum: 35,
+               port: [
+                  { hcNum:1, portName:'岩国' },
+                  { hcNum:2, portName:'土居' },
+                  { hcNum:3, portName:'情島' },
+                  { hcNum:4, portName:'大畠' },
+                  { hcNum:5, portName:'東安下庄' },
+                  { hcNum:6, portName:'沖家室島' },
+                  { hcNum:7, portName:'室津' },
+                  { hcNum:8, portName:'平生' },
+                  { hcNum:9, portName:'下松' },
+                  { hcNum:10, portName:'徳山' },
+                  { hcNum:11, portName:'三田尻' },
+                  { hcNum:12, portName:'宇部' },
+                  { hcNum:13, portName:'苅屋' },
+                  { hcNum:14, portName:'小野田' },
+                  { hcNum:15, portName:'長府' },
+                  { hcNum:16, portName:'岩黒' },
+                  { hcNum:17, portName:'前田' },
+                  { hcNum:18, portName:'壇之浦' },
+                  { hcNum:19, portName:'下関第１突堤' },
+                  { hcNum:20, portName:'弟子待' },
+                  { hcNum:21, portName:'田の首' },
+                  { hcNum:22, portName:'南風泊' },
+                  { hcNum:23, portName:'伊崎' },
+                  { hcNum:24, portName:'吉母' },
+                  { hcNum:25, portName:'特牛' },
+                  { hcNum:26, portName:'油谷' },
+                  { hcNum:27, portName:'宇津' },
+                  { hcNum:28, portName:'大泊' },
+                  { hcNum:29, portName:'萩' },
+                  { hcNum:30, portName:'江崎' },
+                  { hcNum:31, portName:'大山ノ鼻' },
+               ]
+            },
+            {
+               name: '徳島県',
+               pcNum: 36,
+               port: [
+                  { hcNum:1, portName:'日和佐' },
+                  { hcNum:2, portName:'橘' },
+                  { hcNum:3, portName:'富岡' },
+                  { hcNum:4, portName:'小松島' },
+                  { hcNum:5, portName:'土佐泊' },
+                  { hcNum:6, portName:'堂ノ浦' },
+                  { hcNum:7, portName:'北泊' },
+                  { hcNum:8, portName:'孫埼' },
+                  { hcNum:9, portName:'網代' },
+                  { hcNum:10, portName:'粟津' },
+               ]
+            },
+            {
+               name: '香川県',
+               pcNum: 37,
+               port: [
+                  { hcNum:1, portName:'引田' },
+                  { hcNum:2, portName:'坂手' },
+                  { hcNum:3, portName:'大部' },
+                  { hcNum:4, portName:'地蔵埼' },
+                  { hcNum:5, portName:'入部' },
+                  { hcNum:6, portName:'宮ノ浦' },
+                  { hcNum:7, portName:'男木島' },
+                  { hcNum:8, portName:'高松' },
+                  { hcNum:9, portName:'坂出' },
+                  { hcNum:10, portName:'丸亀' },
+                  { hcNum:11, portName:'鍋島' },
+                  { hcNum:12, portName:'与島' },
+                  { hcNum:13, portName:'青木' },
+                  { hcNum:14, portName:'佐柳' },
+                  { hcNum:15, portName:'粟島' },
+                  { hcNum:16, portName:'観音寺' },
+               ]
+            },
+            {
+               name: '愛媛県',
+               pcNum: 38,
+               port: [
+                  { hcNum:1, portName:'三島' },
+                  { hcNum:2, portName:'多喜浜' },
+                  { hcNum:3, portName:'新居浜' },
+                  { hcNum:4, portName:'西条' },
+                  { hcNum:5, portName:'家ノ島' },
+                  { hcNum:6, portName:'今治' },
+                  { hcNum:7, portName:'来島' },
+                  { hcNum:8, portName:'波止浜' },
+                  { hcNum:9, portName:'菊間' },
+                  { hcNum:10, portName:'宇和間' },
+                  { hcNum:11, portName:'大浦' },
+                  { hcNum:12, portName:'興居島' },
+                  { hcNum:13, portName:'松山' },
+                  { hcNum:14, portName:'青島' },
+                  { hcNum:15, portName:'長浜' },
+                  { hcNum:16, portName:'三机' },
+                  { hcNum:17, portName:'与侈' },
+                  { hcNum:18, portName:'内ノ浦' },
+                  { hcNum:19, portName:'八幡浜' },
+                  { hcNum:20, portName:'奥地湾' },
+                  { hcNum:21, portName:'宇和島' },
+                  { hcNum:22, portName:'能登' },
+                  { hcNum:23, portName:'柏崎' },
+                  { hcNum:24, portName:'小島' },
+                  { hcNum:25, portName:'鼻栗瀬戸' },
+               ]
+            },
+            {
+               name: '高知県',
+               pcNum: 39,
+               port: [
+                  { hcNum:1, portName:'甲浦' },
+                  { hcNum:2, portName:'室戸岬' },
+                  { hcNum:3, portName:'室津' },
+                  { hcNum:4, portName:'高知' },
+                  { hcNum:5, portName:'須崎' },
+                  { hcNum:6, portName:'土佐清水' },
+                  { hcNum:7, portName:'片島' },
+               ]
+            },
+            {
+               name: '福岡県',
+               pcNum: 40,
+               port: [
+                  { hcNum:1, portName:'宇島' },
+                  { hcNum:2, portName:'苅田' },
+                  { hcNum:3, portName:'新門司' },
+                  { hcNum:4, portName:'青浜' },
+                  { hcNum:5, portName:'田野浦' },
+                  { hcNum:6, portName:'旧門司' },
+                  { hcNum:7, portName:'西海岸' },
+                  { hcNum:8, portName:'砂津' },
+                  { hcNum:9, portName:'製鉄戸畑泊地' },
+                  { hcNum:10, portName:'若松' },
+                  { hcNum:11, portName:'戸畑' },
+                  { hcNum:12, portName:'八幡' },
+                  { hcNum:13, portName:'沖' },
+                  { hcNum:14, portName:'白島' },
+                  { hcNum:15, portName:'岩屋' },
+                  { hcNum:16, portName:'鐘崎' },
+                  { hcNum:17, portName:'神湊' },
+                  { hcNum:18, portName:'津屋崎' },
+                  { hcNum:19, portName:'西戸埼' },
+                  { hcNum:20, portName:'博多船だまり' },
+                  { hcNum:21, portName:'福岡船だまり' },
+                  { hcNum:22, portName:'若松（響灘）' },
+                  { hcNum:23, portName:'三池' },
+                  { hcNum:24, portName:'筑前大島' },
+                  { hcNum:25, portName:'柏原' },
+                  { hcNum:26, portName:'脇田' },
+                  { hcNum:27, portName:'日明' },
+                  { hcNum:28, portName:'小呂島' },
+               ]
+            },
+            {
+               name: '佐賀県',
+               pcNum: 41,
+               port: [
+                  { hcNum:1, portName:'唐津' },
+                  { hcNum:2, portName:'呼子' },
+                  { hcNum:3, portName:'名護屋浦' },
+                  { hcNum:4, portName:'仮屋' },
+                  { hcNum:5, portName:'波瀬' },
+                  { hcNum:6, portName:'竹崎島' },
+                  { hcNum:7, portName:'住ノ江' },
+                  { hcNum:8, portName:'若津' },
+               ]
+            },
+            {
+               name: '長崎県',
+               pcNum: 42,
+               port: [
+                  { hcNum:1, portName:'新御厨' },
+                  { hcNum:2, portName:'大飛島' },
+                  { hcNum:3, portName:'郷ノ浦' },
+                  { hcNum:4, portName:'勝本' },
+                  { hcNum:5, portName:'芦辺' },
+                  { hcNum:6, portName:'厳原' },
+                  { hcNum:7, portName:'高浜' },
+                  { hcNum:8, portName:'大船越' },
+                  { hcNum:9, portName:'茂土浦' },
+                  { hcNum:10, portName:'鴨居瀬' },
+                  { hcNum:11, portName:'千尋藻' },
+                  { hcNum:12, portName:'佐賀' },
+                  { hcNum:13, portName:'小鹿湾' },
+                  { hcNum:14, portName:'網代' },
+                  { hcNum:15, portName:'泉' },
+                  { hcNum:16, portName:'大河内湾' },
+                  { hcNum:17, portName:'佐須奈' },
+                  { hcNum:18, portName:'伊奈' },
+                  { hcNum:19, portName:'狩尾' },
+                  { hcNum:20, portName:'綱湾' },
+                  { hcNum:21, portName:'廻' },
+                  { hcNum:22, portName:'尾崎浦' },
+                  { hcNum:23, portName:'箕形' },
+                  { hcNum:24, portName:'昼ヶ浦' },
+                  { hcNum:25, portName:'竹敷' },
+                  { hcNum:26, portName:'島山' },
+                  { hcNum:27, portName:'大山浦' },
+                  { hcNum:28, portName:'万関瀬戸東口' },
+                  { hcNum:29, portName:'万関瀬戸西口' },
+                  { hcNum:30, portName:'小茂田' },
+                  { hcNum:31, portName:'久根浜' },
+                  { hcNum:32, portName:'豆酘' },
+                  { hcNum:33, portName:'黒子島' },
+                  { hcNum:34, portName:'薄香湾' },
+                  { hcNum:35, portName:'志々伎湾' },
+                  { hcNum:36, portName:'楠泊' },
+                  { hcNum:37, portName:'相ノ浦' },
+                  { hcNum:38, portName:'高後埼' },
+                  { hcNum:39, portName:'俵ヶ浦' },
+                  { hcNum:40, portName:'佐世保' },
+                  { hcNum:41, portName:'巣喰ノ浦' },
+                  { hcNum:42, portName:'鯛ノ浦' },
+                  { hcNum:43, portName:'小鯛' },
+                  { hcNum:44, portName:'畑下' },
+                  { hcNum:45, portName:'名倉' },
+                  { hcNum:46, portName:'伊ノ浦' },
+                  { hcNum:47, portName:'早岐突堤（北側）' },
+                  { hcNum:48, portName:'早岐突堤（南側）' },
+                  { hcNum:49, portName:'小串湾' },
+                  { hcNum:50, portName:'大村' },
+                  { hcNum:51, portName:'面高湾' },
+                  { hcNum:52, portName:'肥前大島' },
+                  { hcNum:53, portName:'崎戸' },
+                  { hcNum:54, portName:'松島' },
+                  { hcNum:55, portName:'小江' },
+                  { hcNum:56, portName:'伊王島' },
+                  { hcNum:57, portName:'鼠島' },
+                  { hcNum:58, portName:'女神' },
+                  { hcNum:59, portName:'松ケ枝' },
+                  { hcNum:60, portName:'水ノ浦' },
+                  { hcNum:61, portName:'深堀' },
+                  { hcNum:62, portName:'高島' },
+                  { hcNum:63, portName:'樺島水道' },
+                  { hcNum:64, portName:'神ノ浦' },
+                  { hcNum:65, portName:'笛吹' },
+                  { hcNum:66, portName:'有川' },
+                  { hcNum:67, portName:'鯛之浦' },
+                  { hcNum:68, portName:'荒川' },
+                  { hcNum:69, portName:'若松' },
+                  { hcNum:70, portName:'船廻湾' },
+                  { hcNum:71, portName:'戸岐浦' },
+                  { hcNum:72, portName:'福江' },
+                  { hcNum:73, portName:'富江' },
+                  { hcNum:74, portName:'玉之浦' },
+                  { hcNum:75, portName:'三井楽' },
+                  { hcNum:76, portName:'水之浦' },
+                  { hcNum:77, portName:'女島' },
+                  { hcNum:78, portName:'網場' },
+                  { hcNum:79, portName:'口之津' },
+                  { hcNum:80, portName:'須川' },
+                  { hcNum:81, portName:'島原' },
+                  { hcNum:82, portName:'荒川' },
+                  { hcNum:83, portName:'飯ノ瀬戸' },
+                  { hcNum:84, portName:'神部' },
+                  { hcNum:85, portName:'島原新港' },
+                  { hcNum:86, portName:'万関瀬戸中央部' },
+                  { hcNum:87, portName:'青方' },
+                  { hcNum:88, portName:'松浦' },
+               ]
+            },
+            {
+               name: '熊本県',
+               pcNum: 43,
+               port: [
+                  { hcNum:1, portName:'本渡' },
+                  { hcNum:2, portName:'長洲' },
+                  { hcNum:3, portName:'熊本' },
+                  { hcNum:4, portName:'三角' },
+                  { hcNum:5, portName:'蔵々ノ瀬戸' },
+                  { hcNum:6, portName:'柳ノ瀬戸' },
+                  { hcNum:7, portName:'八代' },
+                  { hcNum:8, portName:'加賀島' },
+                  { hcNum:9, portName:'池ノ浦' },
+                  { hcNum:10, portName:'水俣' },
+                  { hcNum:11, portName:'袋浦' },
+                  { hcNum:12, portName:'富岡' },
+                  { hcNum:13, portName:'崎津湾' },
+                  { hcNum:14, portName:'牛深' },
+                  { hcNum:15, portName:'大門' },
+               ]
+            },
+            {
+               name: '大分県',
+               pcNum: 44,
+               port: [
+                  { hcNum:1, portName:'佐賀関' },
+                  { hcNum:2, portName:'鶴崎' },
+                  { hcNum:3, portName:'西大分' },
+                  { hcNum:4, portName:'亀川' },
+                  { hcNum:5, portName:'日出' },
+                  { hcNum:6, portName:'姫島' },
+                  { hcNum:7, portName:'香々地' },
+                  { hcNum:8, portName:'高田' },
+                  { hcNum:9, portName:'中津' },
+                  { hcNum:10, portName:'下浦' },
+                  { hcNum:11, portName:'泊ヶ内' },
+                  { hcNum:12, portName:'津久見' },
+                  { hcNum:13, portName:'葛' },
+                  { hcNum:14, portName:'長島' },
+                  { hcNum:15, portName:'大島' },
+                  { hcNum:16, portName:'猪串' },
+                  { hcNum:17, portName:'蒲江' },
+                  { hcNum:18, portName:'米水津泊地' },
+               ]
+            },
+            {
+               name: '宮崎県',
+               pcNum: 45,
+               port: [
+                  { hcNum:1, portName:'福島' },
+                  { hcNum:2, portName:'外浦' },
+                  { hcNum:3, portName:'油津' },
+                  { hcNum:4, portName:'内海' },
+                  { hcNum:5, portName:'折生迫' },
+                  { hcNum:6, portName:'細島' },
+                  { hcNum:7, portName:'美々津' },
+                  { hcNum:8, portName:'土々呂' },
+                  { hcNum:9, portName:'宮崎' },
+               ]
+            },
+            {
+               name: '鹿児島県',
+               pcNum: 46,
+               port: [
+                  { hcNum:1, portName:'阿久根' },
+                  { hcNum:2, portName:'川内' },
+                  { hcNum:3, portName:'浦内湾' },
+                  { hcNum:4, portName:'串木野' },
+                  { hcNum:5, portName:'戸崎' },
+                  { hcNum:6, portName:'坊泊' },
+                  { hcNum:7, portName:'枕崎' },
+                  { hcNum:8, portName:'山川' },
+                  { hcNum:9, portName:'喜入' },
+                  { hcNum:10, portName:'鹿児島' },
+                  { hcNum:11, portName:'麓' },
+                  { hcNum:12, portName:'園山' },
+                  { hcNum:13, portName:'垂水' },
+                  { hcNum:14, portName:'鹿屋' },
+                  { hcNum:15, portName:'伊座敷' },
+                  { hcNum:16, portName:'大泊' },
+                  { hcNum:17, portName:'志布志' },
+                  { hcNum:18, portName:'硫黄島' },
+                  { hcNum:19, portName:'西之表' },
+                  { hcNum:20, portName:'田ノ脇' },
+                  { hcNum:21, portName:'大浦' },
+                  { hcNum:22, portName:'一湊' },
+                  { hcNum:23, portName:'口永良部島' },
+                  { hcNum:24, portName:'臥蛇島' },
+                  { hcNum:25, portName:'中之島' },
+                  { hcNum:26, portName:'宝島' },
+                  { hcNum:27, portName:'笠利湾' },
+                  { hcNum:28, portName:'名瀬' },
+                  { hcNum:29, portName:'宇検' },
+                  { hcNum:30, portName:'西古見湾' },
+                  { hcNum:31, portName:'久慈湾' },
+                  { hcNum:32, portName:'古仁屋' },
+                  { hcNum:33, portName:'住用湾' },
+                  { hcNum:34, portName:'請島' },
+                  { hcNum:35, portName:'山村湾' },
+                  { hcNum:36, portName:'和泊' },
+                  { hcNum:37, portName:'茶花' },
+                  { hcNum:38, portName:'波見' },
+               ]
+            },
+            {
+               name: '沖縄県',
+               pcNum: 47,
+               port: [
+                  { hcNum:1, portName:'我喜屋' },
+                  { hcNum:2, portName:'伊江' },
+                  { hcNum:3, portName:'運天' },
+                  { hcNum:4, portName:'渡久地' },
+                  { hcNum:5, portName:'那覇' },
+                  { hcNum:6, portName:'糸満' },
+                  { hcNum:7, portName:'石川' },
+                  { hcNum:8, portName:'馬天' },
+                  { hcNum:9, portName:'楚久' },
+                  { hcNum:10, portName:'座間味' },
+                  { hcNum:11, portName:'儀間' },
+                  { hcNum:12, portName:'南大東島' },
+                  { hcNum:13, portName:'平良' },
+                  { hcNum:14, portName:'長山' },
+                  { hcNum:15, portName:'石垣' },
+                  { hcNum:16, portName:'船浮' },
+                  { hcNum:17, portName:'比川' },
+                  { hcNum:18, portName:'黄尾嶼' },
+                  { hcNum:19, portName:'魚釣島' },
+                  { hcNum:20, portName:'白浜' },
+                  { hcNum:21, portName:'安田' },
+                  { hcNum:22, portName:'辺土名' },
+                  { hcNum:23, portName:'都屋' },
+                  { hcNum:24, portName:'平敷屋' },
+                  { hcNum:25, portName:'奥武島' },
+                  { hcNum:26, portName:'仲里' },
+                  { hcNum:27, portName:'池間' },
+                  { hcNum:28, portName:'佐良浜' },
+                  { hcNum:29, portName:'波照間' },
+                  { hcNum:30, portName:'久部良' },
+                  { hcNum:31, portName:'渡嘉敷' },
+                  { hcNum:32, portName:'泡瀬' },
+                  { hcNum:33, portName:'東' },
+                  { hcNum:34, portName:'宜名真' },
+                  { hcNum:35, portName:'兼城' },
+               ]
+            },
          ],
-
-         hcNames: [
-                     {
-                        name: '千島列島',
-                        data: [
-                           ['pc=0', 'hc=1', '千島列島', '小泊'],
-                           ['pc=0', 'hc=2', '千島列島', '中川湾'],
-                           ['pc=0', 'hc=3', '千島列島', '片岡湾'],
-                           ['pc=0', 'hc=4', '千島列島', '阿頼度島'],
-                           ['pc=0', 'hc=5', '千島列島', '磐城埼'],
-                           ['pc=0', 'hc=6', '千島列島', '加熊別湾'],
-                           ['pc=0', 'hc=7', '千島列島', '鯨湾'],
-                           ['pc=0', 'hc=8', '千島列島', '四岩'],
-                           ['pc=0', 'hc=9', '千島列島', '乙前湾'],
-                           ['pc=0', 'hc=10', '千島列島', '樺里埼'],
-                           ['pc=0', 'hc=11', '千島列島', '潮見浦'],
-                           ['pc=0', 'hc=12', '千島列島', '黒石湾'],
-                           ['pc=0', 'hc=13', '千島列島', '春牟古丹島'],
-                           ['pc=0', 'hc=14', '千島列島', '乙女湾'],
-                           ['pc=0', 'hc=15', '千島列島', '東浦'],
-                           ['pc=0', 'hc=16', '千島列島', '松輪島'],
-                           ['pc=0', 'hc=17', '千島列島', '宇志知島'],
-                           ['pc=0', 'hc=18', '千島列島', '武魯頓湾'],
-                           ['pc=0', 'hc=19', '千島列島', '新知湾'],
-                           ['pc=0', 'hc=20', '千島列島', '沙湾'],
-                           ['pc=0', 'hc=21', '千島列島', '鐘湾'],
-                           ['pc=0', 'hc=22', '千島列島', '床丹島'],
-                           ['pc=0', 'hc=23', '千島列島', '吉野浜'],
-                           ['pc=0', 'hc=24', '千島列島', '伽藍埼'],
-                        ]
-                     },
-                     {
-                        name: '北海道',
-                        data: [
-                           ['pc=1', 'hc=1', '北海道', '蘂取'],
-                           ['pc=1', 'hc=2', '北海道', '紗万部'],
-                           ['pc=1', 'hc=3', '北海道', '内岡'],
-                           ['pc=1', 'hc=4', '北海道', '内保湾'],
-                           ['pc=1', 'hc=5', '北海道', '茂世路湾'],
-                           ['pc=1', 'hc=6', '北海道', '単冠湾'],
-                           ['pc=1', 'hc=7', '北海道', '入里節'],
-                           ['pc=1', 'hc=8', '北海道', 'ニキシヨロ'],
-                           ['pc=1', 'hc=9', '北海道', '古釜府湾'],
-                           ['pc=1', 'hc=10', '北海道', '泊湾'],
-                           ['pc=1', 'hc=11', '北海道', '水晶島'],
-                           ['pc=1', 'hc=12', '北海道', '多楽島'],
-                           ['pc=1', 'hc=13', '北海道', '斜古丹'],
-                           ['pc=1', 'hc=14', '北海道', '根室'],
-                           ['pc=1', 'hc=15', '北海道', '尾岱沼'],
-                           ['pc=1', 'hc=16', '北海道', '羅臼'],
-                           ['pc=1', 'hc=17', '北海道', 'コイセボイ'],
-                           ['pc=1', 'hc=18', '北海道', '網走'],
-                           ['pc=1', 'hc=19', '北海道', '紋別'],
-                           ['pc=1', 'hc=20', '北海道', '雄武'],
-                           ['pc=1', 'hc=21', '北海道', '枝幸'],
-                           ['pc=1', 'hc=22', '北海道', '浜鬼志別'],
-                           ['pc=1', 'hc=23', '北海道', '宗谷岬'],
-                           ['pc=1', 'hc=24', '北海道', '稚内'],
-                           ['pc=1', 'hc=25', '北海道', '抜海'],
-                           ['pc=1', 'hc=26', '北海道', '鴛泊'],
-                           ['pc=1', 'hc=27', '北海道', '沓形'],
-                           ['pc=1', 'hc=28', '北海道', '船泊'],
-                           ['pc=1', 'hc=29', '北海道', '苫前'],
-                           ['pc=1', 'hc=30', '北海道', '留萌'],
-                           ['pc=1', 'hc=31', '北海道', '浜益'],
-                           ['pc=1', 'hc=32', '北海道', '小樽'],
-                           ['pc=1', 'hc=33', '北海道', '忍路'],
-                           ['pc=1', 'hc=34', '北海道', '神威岬'],
-                           ['pc=1', 'hc=35', '北海道', '岩内'],
-                           ['pc=1', 'hc=36', '北海道', '寿都'],
-                           ['pc=1', 'hc=37', '北海道', '瀬棚'],
-                           ['pc=1', 'hc=38', '北海道', '奥尻'],
-                           ['pc=1', 'hc=39', '北海道', '青苗'],
-                           ['pc=1', 'hc=40', '北海道', '江差'],
-                           ['pc=1', 'hc=41', '北海道', '清部'],
-                           ['pc=1', 'hc=42', '北海道', '松前'],
-                           ['pc=1', 'hc=43', '北海道', '吉岡'],
-                           ['pc=1', 'hc=44', '北海道', '湧元'],
-                           ['pc=1', 'hc=45', '北海道', '函館'],
-                           ['pc=1', 'hc=46', '北海道', '汐首岬'],
-                           ['pc=1', 'hc=47', '北海道', '戸井'],
-                           ['pc=1', 'hc=48', '北海道', '古武井'],
-                           ['pc=1', 'hc=49', '北海道', '臼尻'],
-                           ['pc=1', 'hc=50', '北海道', '森'],
-                           ['pc=1', 'hc=51', '北海道', '有珠湾'],
-                           ['pc=1', 'hc=52', '北海道', '室蘭'],
-                           ['pc=1', 'hc=53', '北海道', '苫小牧'],
-                           ['pc=1', 'hc=54', '北海道', '東静内'],
-                           ['pc=1', 'hc=55', '北海道', '三石'],
-                           ['pc=1', 'hc=56', '北海道', '浦河'],
-                           ['pc=1', 'hc=57', '北海道', 'えりも'],
-                           ['pc=1', 'hc=58', '北海道', '歌露'],
-                           ['pc=1', 'hc=59', '北海道', '襟裳岬'],
-                           ['pc=1', 'hc=60', '北海道', '庶野'],
-                           ['pc=1', 'hc=61', '北海道', 'ルベシベツ'],
-                           ['pc=1', 'hc=62', '北海道', '音調津'],
-                           ['pc=1', 'hc=63', '北海道', '十勝'],
-                           ['pc=1', 'hc=64', '北海道', '釧路'],
-                           ['pc=1', 'hc=65', '北海道', '厚岸'],
-                           ['pc=1', 'hc=66', '北海道', '厚岸湖'],
-                           ['pc=1', 'hc=67', '北海道', '霧多布'],
-                           ['pc=1', 'hc=68', '北海道', '落石'],
-                           ['pc=1', 'hc=69', '北海道', '花咲'],
-                           ['pc=1', 'hc=70', '北海道', '香深'],
-                           ['pc=1', 'hc=71', '北海道', '常呂'],
-                           ['pc=1', 'hc=72', '北海道', '湧別'],
-                           ['pc=1', 'hc=73', '北海道', '利尻'],
-                        ]
-                     },
-                     {
-                        name: '青森県',
-                        data: [
-                           ['pc=2', 'hc=1', '青森県', '竜飛埼'],
-                           ['pc=2', 'hc=2', '青森県', '三厩'],
-                           ['pc=2', 'hc=3', '青森県', '袰月'],
-                           ['pc=2', 'hc=4', '青森県', '青森'],
-                           ['pc=2', 'hc=5', '青森県', '茂浦'],
-                           ['pc=2', 'hc=6', '青森県', '小湊'],
-                           ['pc=2', 'hc=7', '青森県', '野辺地'],
-                           ['pc=2', 'hc=8', '青森県', '大湊'],
-                           ['pc=2', 'hc=9', '青森県', '大間'],
-                           ['pc=2', 'hc=10', '青森県', '大畑'],
-                           ['pc=2', 'hc=11', '青森県', '尻屋岬'],
-                           ['pc=2', 'hc=12', '青森県', '尻屋'],
-                           ['pc=2', 'hc=13', '青森県', '白糠'],
-                           ['pc=2', 'hc=14', '青森県', '泊'],
-                           ['pc=2', 'hc=15', '青森県', '八戸'],
-                           ['pc=2', 'hc=16', '青森県', '岩崎'],
-                           ['pc=2', 'hc=17', '青森県', '深浦'],
-                           ['pc=2', 'hc=18', '青森県', '鯵ヶ沢'],
-                           ['pc=2', 'hc=19', '青森県', '小泊'],
-                           ['pc=2', 'hc=20', '青森県', '関根浜'],
-                           ['pc=2', 'hc=21', '青森県', '浅虫'],
-                           ['pc=2', 'hc=22', '青森県', '竜飛'],    
-                        ]
-                     },
-                     {
-                        name: '岩手県',
-                        data: [
-                           ['pc=3', 'hc=1', '岩手県', '久慈'],
-                           ['pc=3', 'hc=2', '岩手県', '宮古'],
-                           ['pc=3', 'hc=3', '岩手県', '山田'],
-                           ['pc=3', 'hc=4', '岩手県', '釜石'],
-                           ['pc=3', 'hc=5', '岩手県', '大船渡'],
-                           ['pc=3', 'hc=6', '岩手県', '八木'],
-                           ['pc=3', 'hc=7', '岩手県', '茂師'],
-                        ]
-                     },
-                     {
-                        name: '宮城県',
-                        data: [
-                           ['pc=4', 'hc=1', '宮城県', '気仙沼'],
-                           ['pc=4', 'hc=2', '宮城県', '船越湾'],
-                           ['pc=4', 'hc=3', '宮城県', '女川'],
-                           ['pc=4', 'hc=4', '宮城県', '鮎川'],
-                           ['pc=4', 'hc=5', '宮城県', '荻浜'],
-                           ['pc=4', 'hc=6', '宮城県', '石巻'],
-                           ['pc=4', 'hc=7', '宮城県', '野蒜湾'],
-                           ['pc=4', 'hc=8', '宮城県', '石浜'],
-                           ['pc=4', 'hc=9', '宮城県', '港橋'],
-                           ['pc=4', 'hc=10', '宮城県', '花淵浜'],
-                           ['pc=4', 'hc=11', '宮城県', '仙台'],
-                           ['pc=4', 'hc=12', '宮城県', '閖上'],
-                           ['pc=4', 'hc=13', '宮城県', '志津川'],
-                        ]
-                     },
-                     {
-                        name: '秋田県',
-                        data: [
-                           ['pc=5', 'hc=1', '秋田県', '金浦'],
-                           ['pc=5', 'hc=2', '秋田県', '秋田'],
-                           ['pc=5', 'hc=3', '秋田県', '船川'],
-                           ['pc=5', 'hc=4', '秋田県', '能代'],
-                           ['pc=5', 'hc=5', '秋田県', '岩館'],
-                           ['pc=5', 'hc=6', '秋田県', '男鹿'],
-                        ]
-                     },
-                     {
-                        name: '山形県',
-                        data: [
-                           ['pc=6', 'hc=1', '山形県', '鼠ヶ関'],
-                           ['pc=6', 'hc=2', '山形県', '由良'],
-                           ['pc=6', 'hc=3', '山形県', '加茂'],
-                           ['pc=6', 'hc=4', '山形県', '酒田'],
-                        ]
-                     },
-                     {
-                        name: '福島県',
-                        data: [
-                           ['pc=7', 'hc=1', '福島県', '相馬'],
-                           ['pc=7', 'hc=2', '福島県', '松川浦'],
-                           ['pc=7', 'hc=3', '福島県', '夫沢'],
-                           ['pc=7', 'hc=4', '福島県', '富岡'],
-                           ['pc=7', 'hc=5', '福島県', '四倉'],
-                           ['pc=7', 'hc=6', '福島県', '小名浜'],
-                        ]
-                     },
-                     {
-                        name: '茨城県',
-                        data: [
-                           ['pc=8', 'hc=1', '茨城県', '大津'],
-                           ['pc=8', 'hc=2', '茨城県', '日立'],
-                           ['pc=8', 'hc=3', '茨城県', '那珂湊'],
-                           ['pc=8', 'hc=4', '茨城県', '鹿島'],
-                           ['pc=8', 'hc=5', '茨城県', '大洗'],
-                        ]
-                     },
-                     {
-                        name: '千葉県',
-                        data: [
-                           ['pc=12', 'hc=1', '千葉県', '新地'],
-                           ['pc=12', 'hc=2', '千葉県', '銚子漁港'],
-                           ['pc=12', 'hc=3', '千葉県', '犬吠埼'],
-                           ['pc=12', 'hc=4', '千葉県', '名洗'],
-                           ['pc=12', 'hc=5', '千葉県', '上総勝浦'],
-                           ['pc=12', 'hc=6', '千葉県', '鴨川'],
-                           ['pc=12', 'hc=7', '千葉県', '白浜'],
-                           ['pc=12', 'hc=8', '千葉県', '布良'],
-                           ['pc=12', 'hc=9', '千葉県', '船形'],
-                           ['pc=12', 'hc=10', '千葉県', '岩井袋'],
-                           ['pc=12', 'hc=11', '千葉県', '第１海堡'],
-                           ['pc=12', 'hc=12', '千葉県', '君津'],
-                           ['pc=12', 'hc=13', '千葉県', '姉崎'],
-                           ['pc=12', 'hc=14', '千葉県', '市原'],
-                           ['pc=12', 'hc=15', '千葉県', '寒川'],
-                           ['pc=12', 'hc=16', '千葉県', '千葉灯標'],
-                           ['pc=12', 'hc=17', '千葉県', '市川'],
-                           ['pc=12', 'hc=18', '千葉県', '船橋'],
-                           ['pc=12', 'hc=19', '千葉県', '館山'],
-                        ]
-                     },
-                     {
-                        name: '東京都',
-                        data: [
-                           ['pc=13', 'hc=1', '東京都', '築地'],
-                           ['pc=13', 'hc=2', '東京都', '芝浦'],
-                           ['pc=13', 'hc=3', '東京都', '羽田'],
-                           ['pc=13', 'hc=4', '東京都', '岡田'],
-                           ['pc=13', 'hc=5', '東京都', '波浮'],
-                           ['pc=13', 'hc=6', '東京都', '式根島'],
-                           ['pc=13', 'hc=7', '東京都', '神津島'],
-                           ['pc=13', 'hc=8', '東京都', '阿古'],
-                           ['pc=13', 'hc=9', '東京都', '神湊'],
-                           ['pc=13', 'hc=10', '東京都', '鳥島'],
-                           ['pc=13', 'hc=11', '東京都', '二見'],
-                           ['pc=13', 'hc=12', '東京都', '沖'],
-                           ['pc=13', 'hc=13', '東京都', '西'],
-                           ['pc=13', 'hc=14', '東京都', '晴海'],
-                           ['pc=13', 'hc=15', '東京都', '八重根'],
-                           ['pc=13', 'hc=16', '東京都', '沖ノ鳥島'],
-                        ]
-                     },
-                     {
-                        name: '神奈川県',
-                        data: [
-                           ['pc=14', 'hc=1', '神奈川県', '塩浜運河'],
-                           ['pc=14', 'hc=2', '神奈川県', '末広'],
-                           ['pc=14', 'hc=3', '神奈川県', '新港'],
-                           ['pc=14', 'hc=4', '神奈川県', '新山下'],
-                           ['pc=14', 'hc=5', '神奈川県', '根岸'],
-                           ['pc=14', 'hc=6', '神奈川県', '長浦'],
-                           ['pc=14', 'hc=7', '神奈川県', '横須賀'],
-                           ['pc=14', 'hc=8', '神奈川県', '走水'],
-                           ['pc=14', 'hc=9', '神奈川県', '浦賀'],
-                           ['pc=14', 'hc=10', '神奈川県', '久里浜'],
-                           ['pc=14', 'hc=11', '神奈川県', '金田湾'],
-                           ['pc=14', 'hc=12', '神奈川県', '間口'],
-                           ['pc=14', 'hc=13', '神奈川県', '城ヶ島'],
-                           ['pc=14', 'hc=14', '神奈川県', '向ヶ崎'],
-                           ['pc=14', 'hc=15', '神奈川県', '諸磯'],
-                           ['pc=14', 'hc=16', '神奈川県', '油壷'],
-                           ['pc=14', 'hc=17', '神奈川県', '小田和湾'],
-                           ['pc=14', 'hc=18', '神奈川県', '新宿湾'],
-                           ['pc=14', 'hc=19', '神奈川県', '江ノ島'],
-                           ['pc=14', 'hc=20', '神奈川県', '真鶴'],
-                        ]
-                     },
-                     {
-                        name: '新潟県',
-                        data: [
-                           ['pc=15', 'hc=1', '新潟県', '能生'],
-                           ['pc=15', 'hc=2', '新潟県', '直江津'],
-                           ['pc=15', 'hc=3', '新潟県', '柏崎'],
-                           ['pc=15', 'hc=4', '新潟県', '出雲崎'],
-                           ['pc=15', 'hc=5', '新潟県', '寺泊'],
-                           ['pc=15', 'hc=6', '新潟県', '新潟西港'],
-                           ['pc=15', 'hc=7', '新潟県', '二見'],
-                           ['pc=15', 'hc=8', '新潟県', '小木'],
-                           ['pc=15', 'hc=9', '新潟県', '両津'],
-                           ['pc=15', 'hc=10', '新潟県', '鷲崎'],
-                           ['pc=15', 'hc=11', '新潟県', '岩船'],
-                           ['pc=15', 'hc=12', '新潟県', '粟島'],
-                           ['pc=15', 'hc=13', '新潟県', '新潟東港'],
-                        ]
-                     },
-                     {
-                        name: '富山県',
-                        data: [
-                           ['pc=16', 'hc=1', '富山県', '阿尾'],
-                           ['pc=16', 'hc=2', '富山県', '伏木'],
-                           ['pc=16', 'hc=3', '富山県', '富山'],
-                           ['pc=16', 'hc=4', '富山県', '生地'],
-                           ['pc=16', 'hc=5', '富山県', '宮崎'],
-                        ]
-                     },
-                     {
-                        name: '石川県',
-                        data: [
-                           ['pc=17', 'hc=1', '石川県', '金沢'],
-                           ['pc=17', 'hc=2', '石川県', '滝'],
-                           ['pc=17', 'hc=3', '石川県', '寺家'],
-                           ['pc=17', 'hc=4', '石川県', '輪島'],
-                           ['pc=17', 'hc=5', '石川県', '松波'],
-                           ['pc=17', 'hc=6', '石川県', '曾良'],
-                           ['pc=17', 'hc=7', '石川県', '中居入'],
-                           ['pc=17', 'hc=8', '石川県', '七尾'],
-                           ['pc=17', 'hc=9', '石川県', '穴水'],
-                        ]
-                     },
-                     {
-                        name: '福井県',
-                        data: [
-                           ['pc=18', 'hc=1', '福井県', '内浦湾'],
-                           ['pc=18', 'hc=2', '福井県', '和田'],
-                           ['pc=18', 'hc=3', '福井県', '小浜'],
-                           ['pc=18', 'hc=4', '福井県', '丹生'],
-                           ['pc=18', 'hc=5', '福井県', '敦賀'],
-                           ['pc=18', 'hc=6', '福井県', '福井'],
-                           ['pc=18', 'hc=7', '福井県', '三国'],
-                        ]
-                     },
-                     {
-                        name: '静岡県',
-                        data: [
-                           ['pc=22', 'hc=1', '静岡県', '網代'],
-                           ['pc=22', 'hc=2', '静岡県', '伊東'],
-                           ['pc=22', 'hc=3', '静岡県', '川奈'],
-                           ['pc=22', 'hc=4', '静岡県', '白浜'],
-                           ['pc=22', 'hc=5', '静岡県', '下田'],
-                           ['pc=22', 'hc=6', '静岡県', '南伊豆'],
-                           ['pc=22', 'hc=7', '静岡県', '妻良子浦'],
-                           ['pc=22', 'hc=8', '静岡県', '田子'],
-                           ['pc=22', 'hc=9', '静岡県', '宇久須'],
-                           ['pc=22', 'hc=10', '静岡県', '三津'],
-                           ['pc=22', 'hc=11', '静岡県', '田子の浦'],
-                           ['pc=22', 'hc=12', '静岡県', '興津'],
-                           ['pc=22', 'hc=13', '静岡県', '清水'],
-                           ['pc=22', 'hc=14', '静岡県', '三保'],
-                           ['pc=22', 'hc=15', '静岡県', '焼津'],
-                           ['pc=22', 'hc=16', '静岡県', '相良'],
-                           ['pc=22', 'hc=17', '静岡県', '御前崎'],
-                           ['pc=22', 'hc=18', '静岡県', '舞阪'],
-                           ['pc=22', 'hc=19', '静岡県', '熱海'],
-                        ]
-                     },
-                     {
-                        name: '愛知県',
-                        data: [
-                           ['pc=23', 'hc=1', '愛知県', '伊良湖'],
-                           ['pc=23', 'hc=2', '愛知県', '神島'],
-                           ['pc=23', 'hc=3', '愛知県', '篠島'],
-                           ['pc=23', 'hc=4', '愛知県', '佐久島'],
-                           ['pc=23', 'hc=5', '愛知県', '立馬埼'],
-                           ['pc=23', 'hc=6', '愛知県', '福江'],
-                           ['pc=23', 'hc=7', '愛知県', '豊橋'],
-                           ['pc=23', 'hc=8', '愛知県', '三谷'],
-                           ['pc=23', 'hc=9', '愛知県', '蒲郡'],
-                           ['pc=23', 'hc=10', '愛知県', '形原'],
-                           ['pc=23', 'hc=11', '愛知県', '洲崎'],
-                           ['pc=23', 'hc=12', '愛知県', '寺津'],
-                           ['pc=23', 'hc=13', '愛知県', '武豊'],
-                           ['pc=23', 'hc=14', '愛知県', '師崎'],
-                           ['pc=23', 'hc=15', '愛知県', '常滑'],
-                           ['pc=23', 'hc=16', '愛知県', '鬼崎'],
-                           ['pc=23', 'hc=17', '愛知県', '名古屋'],
-                           ['pc=23', 'hc=18', '愛知県', '赤羽根'],
-                        ]
-                     },
-                     {
-                        name: '三重県',
-                        data: [
-                           ['pc=24', 'hc=1', '三重県', '四日市'],
-                           ['pc=24', 'hc=2', '三重県', '津'],
-                           ['pc=24', 'hc=3', '三重県', '松阪'],
-                           ['pc=24', 'hc=4', '三重県', '宇治山田'],
-                           ['pc=24', 'hc=5', '三重県', '鳥羽'],
-                           ['pc=24', 'hc=6', '三重県', '的矢'],
-                           ['pc=24', 'hc=7', '三重県', '浜島'],
-                           ['pc=24', 'hc=8', '三重県', '五ヶ所'],
-                           ['pc=24', 'hc=9', '三重県', '吉津'],
-                           ['pc=24', 'hc=10', '三重県', '長島'],
-                           ['pc=24', 'hc=11', '三重県', '尾鷲'],
-                           ['pc=24', 'hc=12', '三重県', '古江'],
-                           ['pc=24', 'hc=13', '三重県', '二木島'],
-                           ['pc=24', 'hc=14', '三重県', '鵜殿'],
-                           ['pc=24', 'hc=15', '三重県', '錦'],
-                        ]
-                     },
-                     {
-                        name: '京都府',
-                        data: [
-                           ['pc=26', 'hc=1', '京都府', '伊根'],
-                           ['pc=26', 'hc=2', '京都府', '島埼'],
-                           ['pc=26', 'hc=3', '京都府', '獅子崎'],
-                           ['pc=26', 'hc=4', '京都府', '田井'],
-                           ['pc=26', 'hc=5', '京都府', '舞鶴東港'],
-                           ['pc=26', 'hc=6', '京都府', '舞鶴西港'],
-                        ]
-                     },
-                     {
-                        name: '大阪府',
-                        data: [
-                           ['pc=27', 'hc=1', '大阪府', '深日'],
-                           ['pc=27', 'hc=2', '大阪府', '淡輪'],
-                           ['pc=27', 'hc=3', '大阪府', '岸和田'],
-                           ['pc=27', 'hc=4', '大阪府', '泉大津'],
-                           ['pc=27', 'hc=5', '大阪府', '堺'],
-                           ['pc=27', 'hc=6', '大阪府', '大阪'],
-                        ]
-                     },
-                     {
-                        name: '兵庫県',
-                        data: [
-                           ['pc=28', 'hc=1', '兵庫県', '福良'],
-                           ['pc=28', 'hc=2', '兵庫県', '阿那賀浦'],
-                           ['pc=28', 'hc=3', '兵庫県', '由良'],
-                           ['pc=28', 'hc=4', '兵庫県', '洲本'],
-                           ['pc=28', 'hc=5', '兵庫県', '仮屋'],
-                           ['pc=28', 'hc=6', '兵庫県', '尼崎'],
-                           ['pc=28', 'hc=7', '兵庫県', '神戸'],
-                           ['pc=28', 'hc=8', '兵庫県', '苅藻島'],
-                           ['pc=28', 'hc=9', '兵庫県', '明石'],
-                           ['pc=28', 'hc=10', '兵庫県', '岩屋'],
-                           ['pc=28', 'hc=11', '兵庫県', '江崎'],
-                           ['pc=28', 'hc=12', '兵庫県', '室津'],
-                           ['pc=28', 'hc=13', '兵庫県', '江井'],
-                           ['pc=28', 'hc=14', '兵庫県', '家島'],
-                           ['pc=28', 'hc=15', '兵庫県', '二見'],
-                           ['pc=28', 'hc=16', '兵庫県', '高砂'],
-                           ['pc=28', 'hc=17', '兵庫県', '飾磨'],
-                           ['pc=28', 'hc=18', '兵庫県', '広畑'],
-                           ['pc=28', 'hc=19', '兵庫県', '相生'],
-                           ['pc=28', 'hc=20', '兵庫県', '赤穂'],
-                           ['pc=28', 'hc=21', '兵庫県', '香住'],
-                           ['pc=28', 'hc=22', '兵庫県', '柴山'],
-                           ['pc=28', 'hc=23', '兵庫県', '津居山'],
-                           ['pc=28', 'hc=24', '兵庫県', '垂水'],
-                        ]
-                     },
-                     {
-                        name: '和歌山県',
-                        data: [
-                           ['pc=30', 'hc=1', '和歌山県', '紀伊勝浦'],
-                           ['pc=30', 'hc=2', '和歌山県', '浦神'],
-                           ['pc=30', 'hc=3', '和歌山県', '串本'],
-                           ['pc=30', 'hc=4', '和歌山県', '周参見'],
-                           ['pc=30', 'hc=5', '和歌山県', '田辺（旧）'],
-                           ['pc=30', 'hc=6', '和歌山県', '三尾'],
-                           ['pc=30', 'hc=7', '和歌山県', '比井湾'],
-                           ['pc=30', 'hc=8', '和歌山県', '由良'],
-                           ['pc=30', 'hc=9', '和歌山県', '下津'],
-                           ['pc=30', 'hc=10', '和歌山県', '海南'],
-                           ['pc=30', 'hc=11', '和歌山県', '和歌山'],
-                           ['pc=30', 'hc=12', '和歌山県', '沖ノ島'],
-                           ['pc=30', 'hc=13', '和歌山県', '田辺'],
-                        ]
-                     },
-                     {
-                        name: '鳥取県',
-                        data: [
-                           ['pc=31', 'hc=1', '鳥取県', '米子'],
-                           ['pc=31', 'hc=2', '鳥取県', '境'],
-                           ['pc=31', 'hc=3', '鳥取県', '淀江'],
-                           ['pc=31', 'hc=4', '鳥取県', '赤碕'],
-                           ['pc=31', 'hc=5', '鳥取県', '因幡網代'],
-                           ['pc=31', 'hc=6', '鳥取県', '田後'],
-                        ]
-                     },
-                     {
-                        name: '島根県',
-                        data: [
-                           ['pc=32', 'hc=1', '島根県', '外ノ浦'],
-                           ['pc=32', 'hc=2', '島根県', '江津'],
-                           ['pc=32', 'hc=3', '島根県', '温泉津'],
-                           ['pc=32', 'hc=4', '島根県', '大社'],
-                           ['pc=32', 'hc=5', '島根県', '鷺'],
-                           ['pc=32', 'hc=6', '島根県', '河下'],
-                           ['pc=32', 'hc=7', '島根県', '恵曇'],
-                           ['pc=32', 'hc=8', '島根県', '加賀'],
-                           ['pc=32', 'hc=9', '島根県', '七類'],
-                           ['pc=32', 'hc=10', '島根県', '大根島'],
-                           ['pc=32', 'hc=11', '島根県', '安来'],
-                           ['pc=32', 'hc=12', '島根県', '浦郷'],
-                           ['pc=32', 'hc=13', '島根県', '日ノ津浦'],
-                           ['pc=32', 'hc=14', '島根県', '菱浦'],
-                           ['pc=32', 'hc=15', '島根県', '知々井'],
-                           ['pc=32', 'hc=16', '島根県', '西郷'],
-                           ['pc=32', 'hc=17', '島根県', '松江'],
-                        ]
-                     },
-            ],
-            choicePorts: [],
-            choicePort: '',
-            choicePc:'',
+         isShow: false,
+         ports: [],
+         choicePc: '',
+         choiceHc: '',
          }
    },
 
@@ -613,49 +1047,40 @@ export default {
 
    methods: {
       //都道府県選択からの港表示まで
-      pcName:function(prefecture, index){
-         // numが0の時は選択した都道府県の港を返し、港を表示する
-         if(num == 0){
-            for(let i = 0; i < this.hcNames[index].data.length; i++){
-               this.choicePorts.push(this.hcNames[index].data[i][3]);
-            }
+      pcChoice:function(prefecture){
+            if(num == 0){
+            pcNum = prefecture.pcNum;
+            this.ports = prefecture.port;
+            this.choicePc = prefecture.name;
             num++;
             this.isShow = true;
-            this.index = index;
-            this.choicePc = prefecture;
-            return this.choicePorts, this.choicePc, num, index;
+            return this.ports, this.choicePc, num;
          } else {
-            // numが1以上の場合は選択した都道府県のデータを削除し、港を非表示にする
+            pcNum = '';
+            this.choicePc = '',
+            this.choiceHc = '',
             num = 0;
-            this.choicePort = '';
-            this.choicePorts.splice(0, this.choicePorts.length);
             this.isShow = false;
-            return this.choicePorts, this.choicePort, num;
+            return this.ports, num;
          }
       },
 
       //PCとHCのparameterを代入
-      pchcParames:function(portName, index2){
-            pc = this.hcNames[this.index].data[index2][0];  // 都道府県番号
-            hc = this.hcNames[this.index].data[index2][1]; // 港番号
-            this.choicePort = portName;
-            return pc, hc, this.choicePort;
+      hcChoice:function(port){
+            hcNum = port.hcNum;
+            this.choiceHc = port.portName;
+            return this.choiceHc;
       },
 
       // パラメータに現在日時を入力してAPI取得
       async asyncData() {
-         this.year = date.getFullYear();
-         this.month = date.getMonth() + 1;
-         this.actualDay = date.getDate();
-         yr = 'yr=' + this.year;
-         mn = 'mn=' + this.month;
-         dy = 'dy=' + this.actualDay;
-         let items = await this.$axios.$get('/api/' + '?' + pc + '&' + hc + '&'+ yr + '&' + mn + '&' + dy + '&' + rg);
+         yr = date.getFullYear();
+         mn = date.getMonth() + 1;
+         dy = date.getDate();
+         let items = await this.$axios.$get('/api/' + '?' + 'pc=' + pcNum + '&' + 'hc=' + hcNum + '&'+ 'yr=' + yr + '&' + 'mn=' + mn + '&' + 'dy=' + dy + '&' + rg);
          console.log(items);
          tideDatas = items;
-         return {
-            tideDatas,
-         }
+         return tideDatas;
       },
    },
 
