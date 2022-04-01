@@ -1,7 +1,7 @@
 <template>
     <div class="container m-auto">
        <h1 class="text-2xl">みちひき</h1>
-         <p class="text-2xl">{{ yearMonth }}</p>
+         <p class="text-2xl">{{ timeDatas.yr }}年{{ timeDatas.mn }}月</p>
 
        <div class="m-10">
           <!-- 都道府県を表示 -->
@@ -31,9 +31,7 @@
  
 <script>
 import { prefectures } from '~/datas/prefecturesData.js';
-
-   // 時間取得
-   let date = new Date();
+import { timeDatas } from '~/datas/timeData.js';
 
    // JSON代入用
    let tideDatas = [];
@@ -41,9 +39,6 @@ import { prefectures } from '~/datas/prefecturesData.js';
    // APIパラメータ
    let pcNum = '';  // 都道府県番号
    let hcNum = ''; // 港番号
-   let yr = ''; // 年
-   let mn = ''; // 月
-   let dy = ''; // 日
    let rg = 'rg=day'; // 取得期間
 
    let num = 0; // port取得用管理変数
@@ -51,6 +46,7 @@ import { prefectures } from '~/datas/prefecturesData.js';
 export default {
    data() {
       return {
+         timeDatas: timeDatas,
          prefectures: prefectures,
          isShow: false,
          ports: [],
@@ -60,14 +56,7 @@ export default {
    },
 
    computed:{
-      // テンプレートで使う現在時刻を代入
-      yearMonth:function(){
-         this.year = date.getFullYear();
-         this.month = date.getMonth() + 1;
-         this.actualDay = date.getDate();
-         let yearMonth = this.year + '年' +  this.month + '月';
-         return yearMonth;
-      },
+      
    },
 
    methods: {
@@ -99,19 +88,12 @@ export default {
 
       // パラメータに現在日時を入力してAPI取得
       async asyncData() {
-         yr = date.getFullYear();
-         mn = date.getMonth() + 1;
-         dy = date.getDate();
-         let items = await this.$axios.$get('/api/' + '?' + 'pc=' + pcNum + '&' + 'hc=' + hcNum + '&'+ 'yr=' + yr + '&' + 'mn=' + mn + '&' + 'dy=' + dy + '&' + rg);
+         let items = await this.$axios.$get('/api/' + '?' + 'pc=' + pcNum + '&' + 'hc=' + hcNum + '&'+ 'yr=' + timeDatas.yr + '&' + 'mn=' + timeDatas.mn + '&' + 'dy=' + timeDatas.dy + '&' + rg);
          console.log(items);
          tideDatas = items;
          return tideDatas;
       },
    },
-
-   
-
-   
 
    mounted() {
 
@@ -121,10 +103,4 @@ export default {
 </script>
 
 <style>
-
 </style>
-
-// https://zenn.dev/mouse_484/artizcles/nuxt-axios-cors
-
-// https://zenn.dev/code_diver/articles/dcf0ec9803cb55
-
