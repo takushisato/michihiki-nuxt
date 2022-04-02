@@ -821,7 +821,7 @@ export const prefectures = [
          { hcNum:79, portName:'口之津' },
          { hcNum:80, portName:'須川' },
          { hcNum:81, portName:'島原' },
-         { hcNum:82, portName:'荒川' },
+         // { hcNum:82, portName:'荒川' }, 重複のため削除
          { hcNum:83, portName:'飯ノ瀬戸' },
          { hcNum:84, portName:'神部' },
          { hcNum:85, portName:'島原新港' },
