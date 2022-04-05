@@ -1,7 +1,42 @@
 <template>
-   <div class="container m-auto">
-      <h1 class="text-2xl">みちひき</h1>
-      <p class="text-2xl">{{ timeDatas.yr }}年{{ timeDatas.mn }}月</p>
+   <div class="container m-auto text-center">
+
+      <table class="local">
+         <tbody>
+            <tr>
+               <th>北海道</th>
+               <td v-for="prefecture in prefectures" :key="prefecture.name" @click="pcChoice(prefecture)"><span v-if="prefecture.localNumber == 1">{{ prefecture.name }}</span></td>
+            </tr>
+            <tr>
+               <th>東北</th> 
+               <td v-for="prefecture in prefectures" :key="prefecture.name" @click="pcChoice(prefecture)"><span v-if="prefecture.localNumber == 2">{{ prefecture.name }}</span></td>
+            </tr>
+            <tr>
+               <th>関東</th>
+               <td v-for="prefecture in prefectures" :key="prefecture.name" @click="pcChoice(prefecture)"><span v-if="prefecture.localNumber == 3">{{ prefecture.name }}</span></td>
+            </tr>
+            <tr>
+               <th>中部</th>
+               <td v-for="prefecture in prefectures" :key="prefecture.name" @click="pcChoice(prefecture)"><span v-if="prefecture.localNumber == 4">{{ prefecture.name }}</span></td>
+            </tr>
+            <tr>
+               <th>近畿</th>
+               <td v-for="prefecture in prefectures" :key="prefecture.name" @click="pcChoice(prefecture)"><span v-if="prefecture.localNumber == 5">{{ prefecture.name }}</span></td>
+            </tr>
+            <tr>
+               <th>中国</th>
+               <td v-for="prefecture in prefectures" :key="prefecture.name" @click="pcChoice(prefecture)"><span v-if="prefecture.localNumber == 6">{{ prefecture.name }}</span></td>
+            </tr>
+            <tr>
+               <th>四国</th>
+               <td v-for="prefecture in prefectures" :key="prefecture.name" @click="pcChoice(prefecture)"><span v-if="prefecture.localNumber == 7">{{ prefecture.name }}</span></td>
+            </tr>
+            <tr>
+               <th>九州・沖縄</th>
+               <td v-for="prefecture in prefectures" :key="prefecture.name" @click="pcChoice(prefecture)"><span v-if="prefecture.localNumber == 8">{{ prefecture.name }}</span></td>
+            </tr>
+         </tbody>
+      </table>
 
       <div class="m-10">
          <!-- 都道府県を表示 -->
@@ -11,6 +46,7 @@
             </li>
          </ul>
       </div>
+
 
       <div v-if="isShow"  class="m-10">
          <!-- 選択した都道府県に一致した港を表示 -->
@@ -26,16 +62,16 @@
       <button @click="asyncData()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">click!</button>
       
       <!-- カレンダー -->
-      <div class="container m-auto mt-10 mb-10">
+      <div class="m-auto mt-10 p-10 pb-10">
          <div class="text-2xl">
             <span class="">{{ timeDatas.yr }}年{{ timeDatas.mn }}月</span>
             <table class="min-w-full text-center border-2">
-               <thead class="bg-blue-300 border-2">
-                     <th v-for="(weekDay, weekDayIndex) in weekDays" :key="weekDayIndex" class="align-middle">{{weekDay}}</th>
+               <thead class="bg-blue-300 border-2 border-gray-500">
+                     <th v-for="(weekDay, weekDayIndex) in weekDays" :key="weekDayIndex" class="align-middle border-2 border-gray-500">{{weekDay}}</th>
                </thead>
                <tbody>
-                     <tr v-for="(weekData,weekDataIndex) in calendar" :key="weekDataIndex" class="border-2">
-                        <td v-for="(dayNumber,dayNumberIndex) in weekData" :key="dayNumberIndex" :class="{'today':isToday(dayNumber)}" class="border-2">
+                     <tr v-for="(weekData,weekDataIndex) in calendar" :key="weekDataIndex" class="border-2 border-gray-500">
+                        <td v-for="(dayNumber,dayNumberIndex) in weekData" :key="dayNumberIndex" :class="{'today':isToday(dayNumber)}" class="border-2 border-gray-500">
                            <span v-if="isToday(dayNumber)" class="bg-blue-200 text-white">今日</span>
                            <span v-else>{{ dayNumber }}</span>           
                         <p>大潮</p>
@@ -64,6 +100,7 @@ let hcNum = ''; // 港番号
 let num = 0; // port取得用管理変数
 
 export default {
+   layout:'default',
    data() {
       return {
          timeDatas: timeDatas,
@@ -159,6 +196,3 @@ export default {
    
 }
 </script>
-
-<style>
-</style>

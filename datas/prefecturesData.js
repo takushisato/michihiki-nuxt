@@ -1,6 +1,7 @@
 export const prefectures = [
    {
       name: '千島列島',
+      localNumber: '1',
       pcNum: 0,
       port: [
          { hcNum:1, portName:'小泊' },
@@ -31,6 +32,7 @@ export const prefectures = [
    },
    {
       name: '北海道',
+      localNumber: '1',
       pcNum: 1,
       port: [
          { hcNum:1, portNmae:'蘂取' },
@@ -110,6 +112,7 @@ export const prefectures = [
    },
    {
       name: '青森県',
+      localNumber: '2',
       pcNum: 2,
       port: [
          { hcNum:1, portName:'竜飛埼' },
@@ -138,6 +141,7 @@ export const prefectures = [
    },
    {
       name: '岩手県',
+      localNumber: '2',
       pcNum: 3,
       port: [
          { hcNum:1, portName:'久慈' },
@@ -151,6 +155,7 @@ export const prefectures = [
    },
    {
       name: '宮城県',
+      localNumber: '2',
       pcNum: 4,
       port: [
          { hcNum:1, portName:'気仙沼' },
@@ -170,6 +175,7 @@ export const prefectures = [
    },
    {
       name: '秋田県',
+      localNumber: '2',
       pcNum: 5,
       port: [
          { hcNum:1, portName:'金浦' },
@@ -182,6 +188,7 @@ export const prefectures = [
    },
    {
       name: '山形県',
+      localNumber: '2',
       pcNum: 6,
       port: [
          { hcNum:1, portName:'鼠ヶ関' },
@@ -192,6 +199,7 @@ export const prefectures = [
    },
    {
       name:'福島県',
+      localNumber: '2',
       pcNum: 7,
       port: [
          { hcNum:1, portName:'相馬' },
@@ -204,6 +212,7 @@ export const prefectures = [
    },
    {
       name: '茨城県',
+      localNumber: '3',
       pcNum: 8,
       port: [
          { hcNum:1, portName:'大津' },
@@ -215,6 +224,7 @@ export const prefectures = [
    },
    {
       name: '千葉県',
+      localNumber: '3',
       pcNum: 12,
       port: [
          { hcNum:1, portName:'新地' },
@@ -240,6 +250,7 @@ export const prefectures = [
    },
    {
       name: '東京都',
+      localNumber: '3',
       pcNum: 13,
       port: [
          { hcNum:1, portName:'築地' },
@@ -262,6 +273,7 @@ export const prefectures = [
    },
    {
       name: '神奈川県',
+      localNumber: '3',
       pcNum: 14,
       port: [
          { hcNum:1, portName:'塩浜運河' },
@@ -288,6 +300,7 @@ export const prefectures = [
    },
    {
       name: '新潟県',
+      localNumber: '4',
       pcNum: 15,
       port: [
          { hcNum:1, portName:'能生' },
@@ -307,6 +320,7 @@ export const prefectures = [
    },
    {
       name: '富山県',
+      localNumber: '4',
       pcNum: 16,
       port: [
          { hcNum:1, portName:'阿尾' },
@@ -318,6 +332,7 @@ export const prefectures = [
    },
    {
       name: '石川県',
+      localNumber: '4',
       pcNum: 17,
       port: [
          { hcNum:1, portName:'金沢' },
@@ -333,6 +348,7 @@ export const prefectures = [
    },
    {
       name: '福井県',
+      localNumber: '4',
       pcNum: 18,
       port: [
          { hcNum:1, portName:'内浦湾' },
@@ -346,6 +362,7 @@ export const prefectures = [
    },
    {
       name: '静岡県',
+      localNumber: '4',
       pcNum: 22,
       port: [
          { hcNum:1, portName:'網代' },
@@ -371,6 +388,7 @@ export const prefectures = [
    },
    {
       name: '愛知県',
+      localNumber: '4',
       pcNum: 23,
       port: [
          { hcNum:1, portName:'伊良湖' },
@@ -395,6 +413,7 @@ export const prefectures = [
    },
    {
       name: '三重県',
+      localNumber: '5',
       pcNum: 24,
       port: [
          { hcNum:1, portName:'四日市' },
@@ -416,6 +435,7 @@ export const prefectures = [
    },
    {
       name: '京都府',
+      localNumber: '5',
       pcNum: 26,
       port: [
          { hcNum:1, portName:'伊根' },
@@ -428,6 +448,7 @@ export const prefectures = [
    },
    {
       name:'大阪府',
+      localNumber: '5',
       pcNum:27,
       port: [
          { hcNum:1, portName:'深日' },
@@ -440,6 +461,7 @@ export const prefectures = [
    },
    {
       name: '兵庫県',
+      localNumber: '5',
       pcNum: 28,
       port: [
          { hcNum:1, portName:'福良' },
@@ -470,6 +492,7 @@ export const prefectures = [
    },
    {
       name: '和歌山県',
+      localNumber: '5',
       pcNum: 30,
       port: [
          { hcNum:1, portName:'紀伊勝浦' },
@@ -489,6 +512,7 @@ export const prefectures = [
    },
    {
       name: '鳥取県',
+      localNumber: '6',
       pcNum: 31,
       port: [
          { hcNum:1, portName:'米子' },
@@ -501,6 +525,7 @@ export const prefectures = [
    },
    {
       name: '島根県',
+      localNumber: '6',
       pcNum: 32,
       port: [
          { hcNum:1, portName:'外ノ浦' },
@@ -524,6 +549,7 @@ export const prefectures = [
    },
    {
       name: '岡山県',
+      localNumber: '6',
       pcNum: 33,
       port: [
          { hcNum:1, portName:'片上' },
@@ -540,6 +566,7 @@ export const prefectures = [
    },
    {
       name: '広島県',
+      localNumber: '6',
       pcNum: 34,
       port: [
          { hcNum:1, portName:'福山' },
@@ -571,6 +598,7 @@ export const prefectures = [
    },
    {
       name: '山口県',
+      localNumber: '6',
       pcNum: 35,
       port: [
          { hcNum:1, portName:'岩国' },
@@ -608,6 +636,7 @@ export const prefectures = [
    },
    {
       name: '徳島県',
+      localNumber: '7',
       pcNum: 36,
       port: [
          { hcNum:1, portName:'日和佐' },
@@ -624,6 +653,7 @@ export const prefectures = [
    },
    {
       name: '香川県',
+      localNumber: '7',
       pcNum: 37,
       port: [
          { hcNum:1, portName:'引田' },
@@ -646,6 +676,7 @@ export const prefectures = [
    },
    {
       name: '愛媛県',
+      localNumber: '7',
       pcNum: 38,
       port: [
          { hcNum:1, portName:'三島' },
@@ -677,6 +708,7 @@ export const prefectures = [
    },
    {
       name: '高知県',
+      localNumber: '7',
       pcNum: 39,
       port: [
          { hcNum:1, portName:'甲浦' },
@@ -690,6 +722,7 @@ export const prefectures = [
    },
    {
       name: '福岡県',
+      localNumber: '8',
       pcNum: 40,
       port: [
          { hcNum:1, portName:'宇島' },
@@ -724,6 +757,7 @@ export const prefectures = [
    },
    {
       name: '佐賀県',
+      localNumber: '8',
       pcNum: 41,
       port: [
          { hcNum:1, portName:'唐津' },
@@ -738,6 +772,7 @@ export const prefectures = [
    },
    {
       name: '長崎県',
+      localNumber: '8',
       pcNum: 42,
       port: [
          { hcNum:1, portName:'新御厨' },
@@ -832,6 +867,7 @@ export const prefectures = [
    },
    {
       name: '熊本県',
+      localNumber: '8',
       pcNum: 43,
       port: [
          { hcNum:1, portName:'本渡' },
@@ -853,6 +889,7 @@ export const prefectures = [
    },
    {
       name: '大分県',
+      localNumber: '8',
       pcNum: 44,
       port: [
          { hcNum:1, portName:'佐賀関' },
@@ -877,6 +914,7 @@ export const prefectures = [
    },
    {
       name: '宮崎県',
+      localNumber: '8',
       pcNum: 45,
       port: [
          { hcNum:1, portName:'福島' },
@@ -892,6 +930,7 @@ export const prefectures = [
    },
    {
       name: '鹿児島県',
+      localNumber: '8',
       pcNum: 46,
       port: [
          { hcNum:1, portName:'阿久根' },
@@ -936,6 +975,7 @@ export const prefectures = [
    },
    {
       name: '沖縄県',
+      localNumber: '8',
       pcNum: 47,
       port: [
          { hcNum:1, portName:'我喜屋' },
