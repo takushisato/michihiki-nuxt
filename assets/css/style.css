@@ -1,6 +1,5 @@
 body {
     background-color: #00CCFF;
-    min-height: 100vh;
 }
 
 header {
@@ -11,6 +10,7 @@ header {
 }
 
 .container {
+    min-height: 100vh;
     margin-top: 30px;
     margin-bottom: 30px;
     background-color: #EEEEEE;
@@ -45,6 +45,11 @@ header {
 
 .local tbody > tr > td > p:hover {
     opacity: 0.5;
+}
+
+.calendarChange:hover {
+    opacity: 0.5;
+    cursor : pointer;
 }
 
 footer {

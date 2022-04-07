@@ -12,6 +12,7 @@ let yr = date.getFullYear(); // 年
 let mn = date.getMonth() + 1; // 月
 let dy = date.getDate(); // 日
 
+
 export let timeDatas = {
         lastDay, // 今月末日
         nextLastDay, // 来月の月末日

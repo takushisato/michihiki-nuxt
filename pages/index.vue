@@ -2,6 +2,7 @@
    <div class="container m-auto text-center">
       <h1>調べたい都道府県を選択してください</h1>
 
+      <!-- ここのテーブルはstyle.cssにてCSS記載 -->
       <table class="local bg-gray-300 text-1xl">
          <tbody>
             <tr>
@@ -81,10 +82,15 @@
       <!-- カレンダー -->
       <div class="m-auto mt-10 p-10 pb-10">
          <div class="text-1xl">
-            <span class="">{{ timeDatas.yr }}年{{ timeDatas.mn }}月</span>
+            <div class="text-3xl mb-2">
+               <span class="calendarChange" @click="lastMonth()">前月へ</span>
+               <span class="ml-20 mr-20">{{ timeDatas.yr }}年{{ timeDatas.mn }}月</span>
+               <span class="calendarChange" @click="nextMonth()">翌月へ</span>
+            </div>
+
             <table class="min-w-full text-center border-2">
                <thead class="bg-blue-300 border-2 border-gray-500">
-                     <th v-for="(weekDay, weekDayIndex) in weekDays" :key="weekDayIndex" class="align-middle border-2 border-gray-500">{{weekDay}}</th>
+                     <th v-for="(weekDay, weekDayIndex) in weekDays" :key="weekDayIndex" class="align-middle border-2 border-gray-500">{{ weekDay }}</th>
                </thead>
                <tbody>
                      <tr v-for="(weekData, weekDataIndex) in calendar" :key="weekDataIndex" class="border-2 border-gray-500">
@@ -164,7 +170,25 @@ export default {
             this.choiceHc = port.portName;
             return this.choiceHc;
       },
-         
+
+      lastMonth(){
+         timeDatas.mn --;
+         if(timeDatas.mn < 1){
+            timeDatas.yr --;
+            timeDatas.mn = 12;
+         }
+         timeDatas.lastDay = new Date(timeDatas.yr, timeDatas.mn, 0).getDate();
+      },
+
+      nextMonth(){
+         timeDatas.mn ++;
+         if(timeDatas.mn > 12){
+            timeDatas.yr ++;
+            timeDatas.mn = 1;
+         }
+         timeDatas.lastDay = new Date(timeDatas.yr, timeDatas.mn, 0).getDate();
+      },
+      
       // カレンダー日付算出
       isToday:function(day){
             let date = timeDatas.yr + "-" + timeDatas.mn + "-" + day;
