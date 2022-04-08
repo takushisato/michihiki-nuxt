@@ -1,4 +1,6 @@
 <template>
+<div>
+   <Header />
    <div class="container m-auto text-center">
       <h1>調べたい都道府県を選択してください</h1>
 
@@ -113,11 +115,15 @@
          </div>
       </div>
    </div>
+   <Footer />
+</div>
 </template>
  
 <script>
-import { prefectures } from '~/datas/prefecturesData.js';
-import { timeDatas } from '~/datas/timeData.js';
+import Header from "~/components/Header.vue"
+import Footer from "~/components/Footer.vue"
+import { prefectures } from '~/datas/prefecturesData.js'
+import { timeDatas } from '~/datas/timeData.js'
 
 // JSON代入用
 let tideDatas = [];
@@ -129,6 +135,10 @@ let hcNum = ''; // 港番号
 let num = 0; // port取得用管理変数
 
 export default {
+       components:{
+        Header,
+        Footer
+    },
    data() {
       return {
          timeDatas: timeDatas,
@@ -200,6 +210,7 @@ export default {
 
       // パラメータに現在日時を入力してAPI取得
       async asyncData() {
+         tideDatas = [];
          tideDatas[tideDatas.length] = await this.$axios.$get('/api/' + '?' + 'pc=' + pcNum + '&' + 'hc=' + hcNum + '&'+ 'yr=' + timeDatas.yr + '&' + 'mn=' + timeDatas.mn + '&' + 'dy=' + 1 + '&' + 'rg=month');
          if(timeDatas.lastDay == 31){
             tideDatas[tideDatas.length] = await this.$axios.$get('/api/' + '?' + 'pc=' + pcNum + '&' + 'hc=' + hcNum + '&'+ 'yr=' + timeDatas.yr + '&' + 'mn=' + timeDatas.mn + '&' + 'dy=' + 31 + '&' + 'rg=day');
@@ -218,18 +229,16 @@ export default {
       // カレンダー
       calendar:function(){
          let calendar = [];
-         let firstWeekDay = new Date(timeDatas.yr, timeDatas.mn - 1, 1).getDay();
-         let lastDay = new Date(timeDatas.yr, timeDatas.mn, 0).getDate();
          let dayNumber = 1;
-         while(dayNumber <= lastDay){
+         while(dayNumber <= timeDatas.lastDay){
                let weekData = [];
                for(let i = 0;i <= 6;i ++){
-                  if(calendar.length == 0 && i < firstWeekDay){
+                  if(calendar.length == 0 && i < timeDatas.firstWeekDay){
                      weekData[i] = '';
                      
-                  }else if(lastDay < dayNumber){
+                  } else if (timeDatas.lastDay < dayNumber){
                      weekData[i] = '';
-                  }else{
+                  } else {
                      weekData[i] = dayNumber;
                      dayNumber ++;
                   }

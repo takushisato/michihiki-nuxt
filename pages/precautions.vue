@@ -1,4 +1,6 @@
 <template>
+<div>
+   <Header />
    <div class="container m-auto text-left">
       <div class="m-5 mt-10">
          <h1 class="text-2xl underline">注意事項</h1>
@@ -48,4 +50,17 @@
          <a href="https://twitter.com/taku820801">制作者Twitter</a>
       </div>
    </div>
+   <Footer />
+</div>
 </template>
+<script>
+import Header from "~/components/Header.vue"
+import Footer from "~/components/Footer.vue"
+
+export default {
+       components:{
+        Header,
+        Footer
+    },
+}
+</script>
