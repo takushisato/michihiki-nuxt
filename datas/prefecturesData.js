@@ -109,7 +109,8 @@ export const prefectures = [
             { hcNum:72, portName:'湧別' },
             { hcNum:73, portName:'利尻' },
          ]
-      }],
+      }
+   ],
    // prefectures[1] 東北地方
    [
       {

@@ -12,14 +12,10 @@ let yr = date.getFullYear(); // 年
 let mn = date.getMonth() + 1; // 月
 let dy = date.getDate(); // 日
 
-let firstWeekDay = new Date(yr, mn - 1, 1).getDay(); //一週目のスペース
-
-
 export let timeDatas = {
         lastDay,
         nextLastDay,
         afterNextLastDay,
-        firstWeekDay,
         yr,
         mn,
         dy,

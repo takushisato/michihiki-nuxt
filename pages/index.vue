@@ -58,16 +58,6 @@
          </tbody>
       </table>
 
-      <!-- <div class="m-10"> -->
-         <!-- 都道府県を表示 -->
-         <!-- <ul class="text-2xl">
-            <li v-for="prefecture in prefectures[0]" :key="prefecture.name" @click="pcChoice(prefecture)">
-               {{ prefecture.name }}
-            </li>
-         </ul>
-      </div> -->
-
-
       <div v-if="isShow"  class="m-10">
          <!-- 選択した都道府県に一致した港を表示 -->
          <ul class="text-2xl">
@@ -78,42 +68,47 @@
          <br><br>
          <p>都道府県：{{ choicePc }}</p>
          <p>場所：{{ choiceHc }}</p>
-      <button @click="asyncData()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">click!</button>
+         <button @click="asyncData()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">click!</button>
       </div>
       
-      <!-- カレンダー -->
-      <div class="m-auto mt-10 p-10 pb-10">
-         <div class="text-1xl">
-            <div class="text-3xl mb-2">
-               <span class="calendarChange" @click="lastMonth()">前月へ</span>
-               <span class="ml-20 mr-20">{{ timeDatas.yr }}年{{ timeDatas.mn }}月</span>
-               <span class="calendarChange" @click="nextMonth()">翌月へ</span>
-            </div>
-
-            <table class="min-w-full text-center border-2">
-               <thead class="bg-blue-300 border-2 border-gray-500">
-                     <th v-for="(weekDay, weekDayIndex) in weekDays" :key="weekDayIndex" class="align-middle border-2 border-gray-500">{{ weekDay }}</th>
-               </thead>
-               <tbody>
-                     <tr v-for="(weekData, weekDataIndex) in calendar" :key="weekDataIndex" class="border-2 border-gray-500">
-                        <td v-for="(dayNumber, dayNumberIndex) in weekData" :key="dayNumberIndex" :class="{'today':isToday(dayNumber)}" class="border-2 border-gray-500">
-                           <span v-if="isToday(dayNumber)" class="bg-blue-200 text-white text-2xl font-bold">今日</span>
-                           <span v-else class="text-2xl">{{ dayNumber }}</span>           
-                           <p>大潮</p>
-                           <p>満月</p>
-                           <p>釣り日和</p>
-                           <p>大潮</p>
-                           <p>満月</p>
-                           <p>釣り日和</p>
-                           <p>大潮</p>
-                           <p>満月</p>
-                           <p>釣り日和</p>
-                        </td>
-                     </tr>
-               </tbody>
-            </table>
+         <!-- カレンダー -->
+      <div v-if="calendarSwich" class="m-auto mt-10 p-10 pb-10 text-1xl">
+         <div class="text-3xl mb-2">
+            <span class="calendarChange" @click="lastMonth()">前月へ</span>
+            <span class="ml-20 mr-20">{{ timeDatas.yr }}年{{ timeDatas.mn }}月</span>
+            <span class="calendarChange" @click="nextMonth()">翌月へ</span>
          </div>
-      </div>
+         <table class="min-w-full text-center border-2">
+            <thead class="bg-blue-300 border-2 border-gray-500">
+                  <th v-for="(weekDay, weekDayIndex) in weekDays" :key="weekDayIndex" class="align-middle border-2 border-gray-500">{{ weekDay }}</th>
+            </thead>
+            <tbody>
+                  <tr v-for="(weekData, weekDataIndex) in calendar" :key="weekDataIndex" class="border-2 border-gray-500">
+                     <td v-for="(dayNumber, dayNumberIndex) in weekData" :key="dayNumberIndex" :class="{'today':isToday(dayNumber)}" class="border-2 border-gray-500">
+                        <span v-if="isToday(dayNumber)" class="bg-blue-200 text-white text-2xl font-bold">今日</span>
+                        <span v-else class="text-2xl">{{ dayNumber }}</span>           
+                        <p>{{ tideDatas[0].tide.port.harbor_namej }}</p>
+                        <p>おすすめ度：</p>
+                        <p>潮名：{{ tideDatas[0].tide.chart['2022-04-01'].moon.title }}</p>
+                        <p>月齢：{{ tideDatas[0].tide.chart['2022-04-01'].moon.age}}</p>
+                        <p>日出：{{ tideDatas[0].tide.chart['2022-04-01'].sun.rise }}</p>
+                        <p>日入：{{ tideDatas[0].tide.chart['2022-04-01'].sun.set}}</p>
+                        <p>月出：{{ tideDatas[0].tide.chart['2022-04-01'].moon.rise }}</p>
+                        <p>月入：{{ tideDatas[0].tide.chart['2022-04-01'].moon.set }}</p>
+                        <p>干潮時刻①：{{ tideDatas[0].tide.chart['2022-04-01'].edd[0].time }}</p>
+                        <p>干潮時刻②：{{ tideDatas[0].tide.chart['2022-04-01'].edd[1].time }}</p>
+                        <p>水位①：{{ tideDatas[0].tide.chart['2022-04-01'].edd[0].cm }}</p>
+                        <p>水位②：{{ tideDatas[0].tide.chart['2022-04-01'].edd[1].cm }}</p>
+                        <p>満潮時刻①：{{ tideDatas[0].tide.chart['2022-04-01'].flood[0].time }}</p>
+                        <p>満潮時刻②：{{ tideDatas[0].tide.chart['2022-04-01'].flood[1].time }}</p>
+                        <p>水位①：{{ tideDatas[0].tide.chart['2022-04-01'].flood[0].cm }}</p>
+                        <p>水位②：{{ tideDatas[0].tide.chart['2022-04-01'].flood[1].cm }}</p>
+                        <!-- <p>{{ tideDatas[0].tide.chart[String(timeDatas.yr + "-" + ( '00' + timeDatas.mn ).slice( -2 ) + "-" + ( '00' + dayNumber ).slice( -2 ))] }}</p> -->
+                     </td>
+                  </tr>
+            </tbody>
+         </table>
+      </div>   
    </div>
    <Footer />
 </div>
@@ -125,60 +120,57 @@ import Footer from "~/components/Footer.vue"
 import { prefectures } from '~/datas/prefecturesData.js'
 import { timeDatas } from '~/datas/timeData.js'
 
-// JSON代入用
-let tideDatas = [];
-
-// APIパラメータ
-let pcNum = '';  // 都道府県番号
-let hcNum = ''; // 港番号
-
-let num = 0; // port取得用管理変数
-
 export default {
-       components:{
-        Header,
-        Footer
-    },
+   components:{
+         Header,
+         Footer
+      },
+
    data() {
       return {
-         timeDatas: timeDatas,
-         prefectures: prefectures,
-         isShow: false,
-         ports: [],
-         choicePc: '',
-         choiceHc: '',
-         tideDatas: [],
-         // カレンダー用
-         weekDays:['日','月','火','水','木','金','土'],
-         today:'',
+         timeDatas: timeDatas, // datasディレクトリで取得した時間
+         prefectures: prefectures, //  datasディレクトにある都道府県データ
+         pcNum: '',  // 都道府県番号
+         hcNum: '', // 港番号
+         num: 0, // port取得用管理変数
+         isShow: false, // templateの開閉と非表示用のブーリアン
+         ports: [], // ユーザーが選択した地域の港一覧を入れる配列
+         choicePc: '', // ユーザーが選択した地域
+         choiceHc: '', // ユーザーが選択した港
+         tideDatas: [], // ユーザーが選択した港から取得したAPIを入れる配列
+         calendarSwich: false,
+         locations: ['北海道', '東北', '関東', '中部', '近畿', '中国', '四国', '九州・沖縄'],
+         weekDays:['日','月','火','水','木','金','土'], // カレンダー
+         today:'', // カレンダー用
          }
       },
 
    methods: {
       //都道府県選択からの港表示まで
       pcChoice:function(prefecture){
-            if(num == 0){
-            pcNum = prefecture.pcNum;
+         if(this.num == 0){
+            this.pcNum = prefecture.pcNum;
             this.ports = prefecture.port;
             this.choicePc = prefecture.name;
-            num++;
+            this.num++;
             this.isShow = true;
-            return this.ports, this.choicePc, num;
+            return this.ports, this.choicePc, this.num, this.pcNum;
          } else {
-            pcNum = '';
+            this.pcNum = '';
             this.choicePc = '',
             this.choiceHc = '',
-            num = 0;
+            this.num = 0;
             this.isShow = false;
-            return this.ports, num;
+            return this.ports, this.num, this.pcNum;
          }
       },
 
       //PCとHCのparameterを代入
       hcChoice:function(port){
-            hcNum = port.hcNum;
-            this.choiceHc = port.portName;
-            return this.choiceHc;
+         this.hcNum = port.hcNum;
+         this.choiceHc = port.portName;
+         this.calendarSwich = false;
+         return this.choiceHc;
       },
 
       lastMonth(){
@@ -188,6 +180,7 @@ export default {
             timeDatas.mn = 12;
          }
          timeDatas.lastDay = new Date(timeDatas.yr, timeDatas.mn, 0).getDate();
+         this.asyncData();
       },
 
       nextMonth(){
@@ -197,26 +190,28 @@ export default {
             timeDatas.mn = 1;
          }
          timeDatas.lastDay = new Date(timeDatas.yr, timeDatas.mn, 0).getDate();
+         this.asyncData();
       },
       
       // カレンダー日付算出
       isToday:function(day){
-            let date = timeDatas.yr + "-" + timeDatas.mn + "-" + day;
-            if(this.today == date){
-                  return true;
-            }
-            return false;
+         let date = timeDatas.yr + "-" + timeDatas.mn + "-" + day;
+         if(this.today == date){
+               return true;
+         }
+         return false;
       },
 
       // パラメータに現在日時を入力してAPI取得
       async asyncData() {
-         tideDatas = [];
-         tideDatas[tideDatas.length] = await this.$axios.$get('/api/' + '?' + 'pc=' + pcNum + '&' + 'hc=' + hcNum + '&'+ 'yr=' + timeDatas.yr + '&' + 'mn=' + timeDatas.mn + '&' + 'dy=' + 1 + '&' + 'rg=month');
-         if(timeDatas.lastDay == 31){
-            tideDatas[tideDatas.length] = await this.$axios.$get('/api/' + '?' + 'pc=' + pcNum + '&' + 'hc=' + hcNum + '&'+ 'yr=' + timeDatas.yr + '&' + 'mn=' + timeDatas.mn + '&' + 'dy=' + 31 + '&' + 'rg=day');
+         this.tideDatas = [];
+         this.tideDatas[this.tideDatas.length] = await this.$axios.$get('/api/' + '?' + 'pc=' + this.pcNum + '&' + 'hc=' + this.hcNum + '&'+ 'yr=' + timeDatas.yr + '&' + 'mn=' + timeDatas.mn + '&' + 'dy=' + 1 + '&' + 'rg=month');
+         if(this.timeDatas.lastDay == 31){
+            this.tideDatas[this.tideDatas.length] = await this.$axios.$get('/api/' + '?' + 'pc=' + this.pcNum + '&' + 'hc=' + this.hcNum + '&'+ 'yr=' + timeDatas.yr + '&' + 'mn=' + timeDatas.mn + '&' + 'dy=' + 31 + '&' + 'rg=day');
          }
-         console.log(tideDatas);
-         return tideDatas;
+         console.log(this.tideDatas);
+         this.calendarSwich = true;
+         return this.tideDatas, this.calendarSwich;
       },
    },
 
@@ -230,10 +225,11 @@ export default {
       calendar:function(){
          let calendar = [];
          let dayNumber = 1;
+         let firstWeekDay = new Date(timeDatas.yr, timeDatas.mn - 1, 1).getDay();
          while(dayNumber <= timeDatas.lastDay){
-               let weekData = [];
-               for(let i = 0;i <= 6;i ++){
-                  if(calendar.length == 0 && i < timeDatas.firstWeekDay){
+            let weekData = [];
+            for(let i = 0;i <= 6;i ++){
+                  if(calendar.length == 0 && i < firstWeekDay){
                      weekData[i] = '';
                      
                   } else if (timeDatas.lastDay < dayNumber){
@@ -251,3 +247,8 @@ export default {
    
 }
 </script>
+
+// 使用する要素の選定
+// JSONの改造の方法
+// SPAでのFormの送信受信
+// モバイルのUIレスポンシブ
