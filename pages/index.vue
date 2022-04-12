@@ -70,8 +70,8 @@
          <p>場所：{{ choiceHc }}</p>
          <button @click="asyncData()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">click!</button>
       </div>
-      
-         <!-- カレンダー -->
+
+      <!-- カレンダー -->
       <div v-if="calendarSwich" class="m-auto mt-10 p-10 pb-10 text-1xl">
          <div class="text-3xl mb-2">
             <span class="calendarChange" @click="lastMonth()">前月へ</span>
@@ -89,7 +89,7 @@
                         <span v-else class="text-2xl">{{ dayNumber }}</span>           
                         <p>{{ tideDatas[0].tide.port.harbor_namej }}</p>
                         <p>おすすめ度：</p>
-                        <p>潮名：{{ tideDatas[0].tide.chart['2022-04-01'].moon.title }}</p>
+                        <!-- <p>潮名：{{ tideDatas[0].tide.chart['2022-04-01'].moon.title }}</p>
                         <p>月齢：{{ tideDatas[0].tide.chart['2022-04-01'].moon.age}}</p>
                         <p>日出：{{ tideDatas[0].tide.chart['2022-04-01'].sun.rise }}</p>
                         <p>日入：{{ tideDatas[0].tide.chart['2022-04-01'].sun.set}}</p>
@@ -102,8 +102,9 @@
                         <p>満潮時刻①：{{ tideDatas[0].tide.chart['2022-04-01'].flood[0].time }}</p>
                         <p>満潮時刻②：{{ tideDatas[0].tide.chart['2022-04-01'].flood[1].time }}</p>
                         <p>水位①：{{ tideDatas[0].tide.chart['2022-04-01'].flood[0].cm }}</p>
-                        <p>水位②：{{ tideDatas[0].tide.chart['2022-04-01'].flood[1].cm }}</p>
-                        <!-- <p>{{ tideDatas[0].tide.chart[String(timeDatas.yr + "-" + ( '00' + timeDatas.mn ).slice( -2 ) + "-" + ( '00' + dayNumber ).slice( -2 ))] }}</p> -->
+                        <p>水位②：{{ tideDatas[0].tide.chart['2022-04-01'].flood[1].cm }}</p> -->
+                        <a v-if="dayNumber > 0" :href=" detailView + dayNumber +  detailView2 " class="text-2xl" target=”_blank”>詳細図</a>
+                        <p v-if="dayNumber > 0">{{ tideDatas[0].tide.chart[timeDatas.yr + "-" + ( "00" + timeDatas.mn ).slice( -2 ) + "-" + ( "00" + dayNumber ).slice( -2 )].sun.rise }}</p>
                      </td>
                   </tr>
             </tbody>
@@ -142,12 +143,15 @@ export default {
          locations: ['北海道', '東北', '関東', '中部', '近畿', '中国', '四国', '九州・沖縄'],
          weekDays:['日','月','火','水','木','金','土'], // カレンダー
          today:'', // カレンダー用
+         detailView: '', // 詳細図のURLの場所を入力する変数
+         detailView2: "&rg=day&w=768&h=512&lc=blue&gcs=cyan&gcf=blue&ld=on&ttd=on&tsmd=on", // 詳細図のURLの後半（このまま使用）
          }
       },
 
    methods: {
       //都道府県選択からの港表示まで
       pcChoice:function(prefecture){
+         this.calendarSwich = false;
          if(this.num == 0){
             this.pcNum = prefecture.pcNum;
             this.ports = prefecture.port;
@@ -173,6 +177,7 @@ export default {
          return this.choiceHc;
       },
 
+      // カレンダーの前月表示用
       lastMonth(){
          timeDatas.mn --;
          if(timeDatas.mn < 1){
@@ -183,6 +188,7 @@ export default {
          this.asyncData();
       },
 
+      // カレンダーの翌月表示用
       nextMonth(){
          timeDatas.mn ++;
          if(timeDatas.mn > 12){
@@ -204,14 +210,15 @@ export default {
 
       // パラメータに現在日時を入力してAPI取得
       async asyncData() {
-         this.tideDatas = [];
+         // this.tideDatas = [];
          this.tideDatas[this.tideDatas.length] = await this.$axios.$get('/api/' + '?' + 'pc=' + this.pcNum + '&' + 'hc=' + this.hcNum + '&'+ 'yr=' + timeDatas.yr + '&' + 'mn=' + timeDatas.mn + '&' + 'dy=' + 1 + '&' + 'rg=month');
          if(this.timeDatas.lastDay == 31){
-            this.tideDatas[this.tideDatas.length] = await this.$axios.$get('/api/' + '?' + 'pc=' + this.pcNum + '&' + 'hc=' + this.hcNum + '&'+ 'yr=' + timeDatas.yr + '&' + 'mn=' + timeDatas.mn + '&' + 'dy=' + 31 + '&' + 'rg=day');
+            this.tideDatas[this.tideDatas.length] = await this.$axios.$get('/api/' + '?' + 'pc=' + this.pcNum + '&' + 'hc=' + this.hcNum + '&' + 'yr=' + timeDatas.yr + '&' + 'mn=' + timeDatas.mn + '&' + 'dy=' + 31 + '&' + 'rg=day');
          }
+         this.detailView = '/img-api/' + '?' + 'pc=' + this.pcNum + '&' + 'hc=' + this.hcNum + '&' + 'yr=' + timeDatas.yr + '&' + 'mn=' + timeDatas.mn + '&' + 'dy=';
          console.log(this.tideDatas);
          this.calendarSwich = true;
-         return this.tideDatas, this.calendarSwich;
+         return this.tideDatas, this.detailView, this.calendarSwich;
       },
    },
 
@@ -247,8 +254,3 @@ export default {
    
 }
 </script>
-
-// 使用する要素の選定
-// JSONの改造の方法
-// SPAでのFormの送信受信
-// モバイルのUIレスポンシブ
