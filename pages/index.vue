@@ -2,55 +2,60 @@
 <div>
    <Header />
    <div class="container m-auto text-center">
+      <br><br>
+      <h1>当サイトは釣り人さんに使いやすい様に作成した潮見カレンダー表示サイトです</h1>
+      <br>
+      <h1>釣りの他、磯遊びや潮干狩りなど海の遊びの検討にお使いください</h1>
+      <br><br>
       <h1>調べたい都道府県を選択してください</h1>
 
       <!-- ここのテーブルはstyle.cssにてCSS記載 -->
-      <table class="local bg-gray-300 text-1xl">
+      <table class="local bg-gray-300">
          <tbody>
             <tr>
-               <th>北海道</th>
+               <th class="bg-gray-400">北海道</th>
                <td>
                <p v-for="prefecture in prefectures[0]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</p>
                </td>
             </tr>
             <tr>
-               <th>東北</th>
+               <th class="bg-gray-400">東北</th>
                <td>
                <p v-for="prefecture in prefectures[1]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</p>
                </td>
             </tr>
             <tr>
-               <th>関東</th>
+               <th class="bg-gray-400">関東</th>
                <td>
                <p v-for="prefecture in prefectures[2]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</p>
                </td>
             </tr>
             <tr>
-               <th>中部</th>
+               <th class="bg-gray-400">中部</th>
                <td>
                <p v-for="prefecture in prefectures[3]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</p>
                </td>
             </tr>
             <tr>
-               <th>近畿</th>
+               <th class="bg-gray-400">近畿</th>
                <td>
                <p v-for="prefecture in prefectures[4]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</p>
                </td>
             </tr>
             <tr>
-               <th>中国</th>
+               <th class="bg-gray-400">中国</th>
                <td>
                <p v-for="prefecture in prefectures[5]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</p>
                </td>
             </tr>
             <tr>
-               <th>四国</th>
+               <th class="bg-gray-400">四国</th>
                <td>
                <p v-for="prefecture in prefectures[6]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</p>
                </td>
             </tr>
             <tr>
-               <th>九州・沖縄</th>
+               <th class="bg-gray-400">九州・沖縄</th>
                <td>
                <p v-for="prefecture in prefectures[7]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</p>
                </td>
@@ -59,16 +64,18 @@
       </table>
 
       <div v-if="isShow"  class="m-10">
+         <h1>調べたい場所を選択して『調べる！』を押してください</h1>
          <!-- 選択した都道府県に一致した港を表示 -->
-         <ul class="text-2xl">
-            <li v-for="port in ports" :key="port.portName" @click="hcChoice(port)">
+         <ul>
+            <li v-for="port in ports" :key="port.portName" @click="hcChoice(port)" class="calendarChange">
                {{ port.portName }}
             </li>
          </ul>
+         <div class="clear"></div>
          <br><br>
          <p>都道府県：{{ choicePc }}</p>
          <p>場所：{{ choiceHc }}</p>
-         <button @click="asyncData()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">click!</button>
+         <button @click="asyncData()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">調べる!</button>
       </div>
 
       <!-- カレンダー -->
@@ -78,6 +85,7 @@
             <span class="ml-20 mr-20">{{ timeDatas.yr }}年{{ timeDatas.mn }}月</span>
             <span class="calendarChange" @click="nextMonth()">翌月へ</span>
          </div>
+         <h1>『詳細図』をクリックするとグラフが参照できます</h1>
          <table class="min-w-full text-center border-2">
             <thead class="bg-blue-300 border-2 border-gray-500">
                   <th v-for="(weekDay, weekDayIndex) in weekDays" :key="weekDayIndex" class="align-middle border-2 border-gray-500">{{ weekDay }}</th>
@@ -86,25 +94,18 @@
                   <tr v-for="(weekData, weekDataIndex) in calendar" :key="weekDataIndex" class="border-2 border-gray-500">
                      <td v-for="(dayNumber, dayNumberIndex) in weekData" :key="dayNumberIndex" :class="{'today':isToday(dayNumber)}" class="border-2 border-gray-500">
                         <span v-if="isToday(dayNumber)" class="bg-blue-200 text-white text-2xl font-bold">今日</span>
-                        <span v-else class="text-2xl">{{ dayNumber }}</span>           
-                        <p>{{ tideDatas[0].tide.port.harbor_namej }}</p>
-                        <p>おすすめ度：</p>
-                        <!-- <p>潮名：{{ tideDatas[0].tide.chart['2022-04-01'].moon.title }}</p>
-                        <p>月齢：{{ tideDatas[0].tide.chart['2022-04-01'].moon.age}}</p>
-                        <p>日出：{{ tideDatas[0].tide.chart['2022-04-01'].sun.rise }}</p>
-                        <p>日入：{{ tideDatas[0].tide.chart['2022-04-01'].sun.set}}</p>
-                        <p>月出：{{ tideDatas[0].tide.chart['2022-04-01'].moon.rise }}</p>
-                        <p>月入：{{ tideDatas[0].tide.chart['2022-04-01'].moon.set }}</p>
-                        <p>干潮時刻①：{{ tideDatas[0].tide.chart['2022-04-01'].edd[0].time }}</p>
-                        <p>干潮時刻②：{{ tideDatas[0].tide.chart['2022-04-01'].edd[1].time }}</p>
-                        <p>水位①：{{ tideDatas[0].tide.chart['2022-04-01'].edd[0].cm }}</p>
-                        <p>水位②：{{ tideDatas[0].tide.chart['2022-04-01'].edd[1].cm }}</p>
-                        <p>満潮時刻①：{{ tideDatas[0].tide.chart['2022-04-01'].flood[0].time }}</p>
-                        <p>満潮時刻②：{{ tideDatas[0].tide.chart['2022-04-01'].flood[1].time }}</p>
-                        <p>水位①：{{ tideDatas[0].tide.chart['2022-04-01'].flood[0].cm }}</p>
-                        <p>水位②：{{ tideDatas[0].tide.chart['2022-04-01'].flood[1].cm }}</p> -->
-                        <a v-if="dayNumber > 0" :href=" detailView + dayNumber +  detailView2 " class="text-2xl" target=”_blank”>詳細図</a>
-                        <p v-if="dayNumber > 0">{{ tideDatas[0].tide.chart[timeDatas.yr + "-" + ( "00" + timeDatas.mn ).slice( -2 ) + "-" + ( "00" + dayNumber ).slice( -2 )].sun.rise }}</p>
+                        <span v-else class="text-2xl">{{ dayNumber }}</span>
+                        <div v-if="dayNumber > 0">
+                           <p>{{ choicePc }}・{{ tideDatas.tide.port.harbor_namej }}</p>
+                           <p>潮名：{{ tideDatas.tide.chart[timeDatas.yr + "-" + ( "00" + timeDatas.mn ).slice( -2 ) + "-" + ( "00" + dayNumber ).slice( -2 )].moon.title }}</p>
+                           <p>月齢：{{ tideDatas.tide.chart[timeDatas.yr + "-" + ( "00" + timeDatas.mn ).slice( -2 ) + "-" + ( "00" + dayNumber ).slice( -2 )].moon.age}}</p>
+                           <p>日出：{{ tideDatas.tide.chart[timeDatas.yr + "-" + ( "00" + timeDatas.mn ).slice( -2 ) + "-" + ( "00" + dayNumber ).slice( -2 )].sun.rise }}</p>
+                           <p>日入：{{ tideDatas.tide.chart[timeDatas.yr + "-" + ( "00" + timeDatas.mn ).slice( -2 ) + "-" + ( "00" + dayNumber ).slice( -2 )].sun.set}}</p>
+                           <p>月出：{{ tideDatas.tide.chart[timeDatas.yr + "-" + ( "00" + timeDatas.mn ).slice( -2 ) + "-" + ( "00" + dayNumber ).slice( -2 )].moon.rise }}</p>
+                           <p>月入：{{ tideDatas.tide.chart[timeDatas.yr + "-" + ( "00" + timeDatas.mn ).slice( -2 ) + "-" + ( "00" + dayNumber ).slice( -2 )].moon.set }}</p>
+                        <a :href=" detailView + dayNumber +  detailView2 " class="text-2xl calendarChange" target=”_blank”>詳細図</a>
+                        </div>      
+                        <!-- <p v-if="dayNumber > 0">{{ tideDatas[0].tide.chart[timeDatas.yr + "-" + ( "00" + timeDatas.mn ).slice( -2 ) + "-" + ( "00" + dayNumber ).slice( -2 )].sun.rise }}</p> -->
                      </td>
                   </tr>
             </tbody>
@@ -138,11 +139,12 @@ export default {
          ports: [], // ユーザーが選択した地域の港一覧を入れる配列
          choicePc: '', // ユーザーが選択した地域
          choiceHc: '', // ユーザーが選択した港
-         tideDatas: [], // ユーザーが選択した港から取得したAPIを入れる配列
+         tideDatas: '', // ユーザーが選択した港から取得したAPIを入れる配列
          calendarSwich: false,
          locations: ['北海道', '東北', '関東', '中部', '近畿', '中国', '四国', '九州・沖縄'],
          weekDays:['日','月','火','水','木','金','土'], // カレンダー
          today:'', // カレンダー用
+         calDatas: 'tideDatas[0].tide.chart[timeDatas.yr + "-" + ( "00" + timeDatas.mn ).slice( -2 ) + "-" + ( "00" + dayNumber ).slice( -2 )]',
          detailView: '', // 詳細図のURLの場所を入力する変数
          detailView2: "&rg=day&w=768&h=512&lc=blue&gcs=cyan&gcf=blue&ld=on&ttd=on&tsmd=on", // 詳細図のURLの後半（このまま使用）
          }
@@ -211,9 +213,9 @@ export default {
       // パラメータに現在日時を入力してAPI取得
       async asyncData() {
          // this.tideDatas = [];
-         this.tideDatas[this.tideDatas.length] = await this.$axios.$get('/api/' + '?' + 'pc=' + this.pcNum + '&' + 'hc=' + this.hcNum + '&'+ 'yr=' + timeDatas.yr + '&' + 'mn=' + timeDatas.mn + '&' + 'dy=' + 1 + '&' + 'rg=month');
+         this.tideDatas = await this.$axios.$get('/api/' + '?' + 'pc=' + this.pcNum + '&' + 'hc=' + this.hcNum + '&'+ 'yr=' + timeDatas.yr + '&' + 'mn=' + timeDatas.mn + '&' + 'dy=' + 1 + '&' + 'rg=month');
          if(this.timeDatas.lastDay == 31){
-            this.tideDatas[this.tideDatas.length] = await this.$axios.$get('/api/' + '?' + 'pc=' + this.pcNum + '&' + 'hc=' + this.hcNum + '&' + 'yr=' + timeDatas.yr + '&' + 'mn=' + timeDatas.mn + '&' + 'dy=' + 31 + '&' + 'rg=day');
+            this.tideDatas = this.tideDatas + await this.$axios.$get('/api/' + '?' + 'pc=' + this.pcNum + '&' + 'hc=' + this.hcNum + '&' + 'yr=' + timeDatas.yr + '&' + 'mn=' + timeDatas.mn + '&' + 'dy=' + 31 + '&' + 'rg=day');
          }
          this.detailView = '/img-api/' + '?' + 'pc=' + this.pcNum + '&' + 'hc=' + this.hcNum + '&' + 'yr=' + timeDatas.yr + '&' + 'mn=' + timeDatas.mn + '&' + 'dy=';
          console.log(this.tideDatas);
@@ -254,3 +256,7 @@ export default {
    
 }
 </script>
+
+// ３１日の表示
+// ⓶の時刻と水位表示
+// デザインうんぬん 日曜日赤く

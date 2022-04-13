@@ -1,0 +1,41 @@
+
+const todayData = [
+    [
+        { today: 'YYYY-MM-DD' },
+        { portName: 'gyokoumei' },
+        { moonTitle: 'shiomei' },
+        { moonAge: 'geturei' },
+        { sunRise: 'hinode' },
+        { senSet: 'hinoiri' },
+        { moonRise: 'tukinode' },
+        { moonSet: 'tukiiri' },
+        { eddTime1: 'kantyojikoku1' },
+        { eddTime2: 'kantyojikoku2' },
+        { eddCm1: 'kantyosuii1' },
+        { eddCm2: 'kantyosuii2' },
+        { floodTime1: 'mantyojikoku1' },
+        { floodTime2: 'mantyojikoku2' },
+        { floodCm1: 'mantyosuii1' },
+        { floodCm2: 'mantyosuii2' },
+    ],
+];
+
+
+
+
+
+<p>潮名：{{ tideDatas[0].tide.chart[timeDatas.yr + "-" + ( "00" + timeDatas.mn ).slice( -2 ) + "-" + ( "00" + dayNumber ).slice( -2 )].moon.title }}</p>
+<p>月齢：{{ tideDatas[0].tide.chart[timeDatas.yr + "-" + ( "00" + timeDatas.mn ).slice( -2 ) + "-" + ( "00" + dayNumber ).slice( -2 )].moon.age}}</p>
+<p>日出：{{ tideDatas[0].tide.chart[timeDatas.yr + "-" + ( "00" + timeDatas.mn ).slice( -2 ) + "-" + ( "00" + dayNumber ).slice( -2 )].sun.rise }}</p>
+<p>日入：{{ tideDatas[0].tide.chart[timeDatas.yr + "-" + ( "00" + timeDatas.mn ).slice( -2 ) + "-" + ( "00" + dayNumber ).slice( -2 )].sun.set}}</p>
+<p>月出：{{ tideDatas[0].tide.chart[timeDatas.yr + "-" + ( "00" + timeDatas.mn ).slice( -2 ) + "-" + ( "00" + dayNumber ).slice( -2 )].moon.rise }}</p>
+<p>月入：{{ tideDatas[0].tide.chart[timeDatas.yr + "-" + ( "00" + timeDatas.mn ).slice( -2 ) + "-" + ( "00" + dayNumber ).slice( -2 )].moon.set }}</p>
+
+<p>干潮時刻①：{{ tideDatas[0].tide.chart["2022-04-01"].edd[0].time }}</p>
+<p>干潮時刻②：{{ tideDatas[0].tide.chart["2022-04-01"].edd[1].time }}</p>
+<p>水位①：{{ tideDatas[0].tide.chart["2022-04-01"].edd[0].cm }}</p>
+<p>水位②：{{ tideDatas[0].tide.chart["2022-04-01"].edd[1].cm }}</p>
+<p>満潮時刻①：{{ tideDatas[0].tide.chart["2022-04-01"].flood[0].time }}</p>
+<p>満潮時刻②：{{ tideDatas[0].tide.chart["2022-04-01"].flood[1].time }}</p>
+<p>水位①：{{ tideDatas[0].tide.chart["2022-04-01"].flood[0].cm }}</p>
+<p>水位②：{{ tideDatas[0].tide.chart["2022-04-01"].flood[1].cm }}</p>
