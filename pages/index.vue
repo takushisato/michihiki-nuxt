@@ -111,7 +111,6 @@
                            <p>満潮水位➀：{{ resultTideDatas[dayNumber-1].floodCm1 }}</p>
                            <p>満潮時刻➁：{{ resultTideDatas[dayNumber-1].floodTime2 }}</p>
                            <p>満潮水位➁：{{ resultTideDatas[dayNumber-1].floodCm2 }}</p>
-                           <button @click="TideCalculation.methods.test()">test</button>
                            <a :href=" detailView + dayNumber +  detailView2 " class="text-2xl calendarChange" target=”_blank”>詳細図</a>
                         </div>      
                         <!-- <p v-if="dayNumber > 0">{{ tideDatas[0].tide.chart[timeDatas.yr + "-" + ( "00" + timeDatas.mn ).slice( -2 ) + "-" + ( "00" + dayNumber ).slice( -2 )].sun.rise }}</p> -->
@@ -124,14 +123,11 @@
    <Footer />
 </div>
 </template>
- 
 <script>
 import Header from "~/components/Header.vue"
 import Footer from "~/components/Footer.vue"
-import TideCalculation from "~/components/TideCalculation.vue"
 import { prefectures } from '~/datas/prefecturesData.js'
 import { timeDatas } from '~/datas/timeData.js'
-
 export default {
    components:{
          Header,
@@ -149,15 +145,14 @@ export default {
          ports: [], // ユーザーが選択した地域の港一覧を入れる配列
          choicePc: '', // ユーザーが選択した地域
          choiceHc: '', // ユーザーが選択した港
-         TideCalculation: TideCalculation,
-         resultTideDatas: [], // ユーザーが選択した港から取得したAPIを入れる配列
-         calendarSwich: false,
+         resultTideDatas: [], // ユーザーが選択した港から取得したAPIから摘出したデータを入れてtemplateに返す配列
+         calendarSwich: false, //カレンダーONとOFF
          locations: ['北海道', '東北', '関東', '中部', '近畿', '中国', '四国', '九州・沖縄'],
          weekDays:['日','月','火','水','木','金','土'], // カレンダー
          today:'', // カレンダー用
          calDatas: 'tideDatas[0].tide.chart[timeDatas.yr + "-" + ( "00" + timeDatas.mn ).slice( -2 ) + "-" + ( "00" + dayNumber ).slice( -2 )]',
          detailView: '', // 詳細図のURLの場所を入力する変数
-         detailView2: "&rg=day&w=768&h=512&lc=blue&gcs=cyan&gcf=blue&ld=on&ttd=on&tsmd=on", // 詳細図のURLの後半（このまま使用）
+         detailView2: "&rg=day&w=768&h=768&lc=blue&gcs=cyan&gcf=blue&ld=on&ttd=on&tsmd=on", // 詳細図のURLの後半（このまま使用）
          }
       },
 
@@ -211,7 +206,7 @@ export default {
          timeDatas.lastDay = new Date(timeDatas.yr, timeDatas.mn, 0).getDate();
          this.asyncData();
       },
-      
+
       // カレンダー日付算出
       isToday:function(day){
          let date = timeDatas.yr + "-" + timeDatas.mn + "-" + day;
@@ -223,12 +218,24 @@ export default {
 
       // パラメータに現在日時を入力してAPI取得
       async asyncData() {
+         this.resultTideDatas = [];
          let monthTideDatas = await this.$axios.$get('/api/' + '?' + 'pc=' + this.pcNum + '&' + 'hc=' + this.hcNum + '&'+ 'yr=' + timeDatas.yr + '&' + 'mn=' + timeDatas.mn + '&' + 'dy=' + 1 + '&' + 'rg=month');
-         // if(this.timeDatas.lastDay == 31){
-         //    monthTideDatas = monthTideDatas + await this.$axios.$get('/api/' + '?' + 'pc=' + this.pcNum + '&' + 'hc=' + this.hcNum + '&' + 'yr=' + timeDatas.yr + '&' + 'mn=' + timeDatas.mn + '&' + 'dy=' + 31 + '&' + 'rg=day');
-         // }
-         let dayTideDatas = [];
-         for(let i = 1; i <= 30; i++) {
+         
+         // 月末日からカレンダーのループ回数を設定
+         let calNum = '';
+            if(this.timeDatas.lastDay == 31){
+               calNum = 31;
+            } else {
+               calNum = 30;
+            };
+
+         // APIを分解して欲しいデータだけを配列に格納
+         for(let i = 1; i <= calNum; i++) {
+            if(calNum == 31 && i ==31){
+               monthTideDatas = await this.$axios.$get('/api/' + '?' + 'pc=' + this.pcNum + '&' + 'hc=' + this.hcNum + '&' + 'yr=' + timeDatas.yr + '&' + 'mn=' + timeDatas.mn + '&' + 'dy=' + 31 + '&' + 'rg=day');
+            };
+            
+            let dayTideDatas = [];
             let portName = monthTideDatas.tide.port.harbor_namej;
             let moonTitle = monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].moon.title;
             let moonAge = monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].moon.age;
@@ -255,7 +262,8 @@ export default {
                floodTime1: floodTime1,
                floodCm1: floodCm1,
             }; 
-               
+            
+            // データの数が１つの場合と２つの場合があるため、そこを分岐
             if(monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].edd.length == 2){
                let eddTime2 = monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].edd[1].time;
                let eddCm2 = monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].edd[1].cm;
@@ -265,7 +273,7 @@ export default {
                dayTideDatas.eddTime2 = '--:--';
                dayTideDatas.eddCm2 = '--';
             };
-
+            // こちらもAPIのデータの数により分岐
             if(monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].flood.length == 2){
                let floodTime2 = monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].flood[1].time;
                let floodCm2 = monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].flood[1].cm;
@@ -275,23 +283,23 @@ export default {
                dayTideDatas.floodTime2 = '--:--';
                dayTideDatas.floodCm2 = '--';
             };
-
+            // 日にち毎にまとめたデータを月単位で配列にまとめ
             this.resultTideDatas[this.resultTideDatas.length] = dayTideDatas;
          };
          console.log(this.resultTideDatas);
+         // ユーザーの設定した地域で画像APIを取得
          this.detailView = '/img-api/' + '?' + 'pc=' + this.pcNum + '&' + 'hc=' + this.hcNum + '&' + 'yr=' + timeDatas.yr + '&' + 'mn=' + timeDatas.mn + '&' + 'dy=';
+         // カレンダーをON
          this.calendarSwich = true;
          return this.resultTideDatas, this.detailView, this.calendarSwich;
       },
    },
-
    mounted() {
       // カレンダー日付取得用
       this.today = timeDatas.yr + '-' + timeDatas.mn + '-' + timeDatas.dy;
    },
-
    computed:{
-      // カレンダー
+      // カレンダーの処理
       calendar:function(){
          let calendar = [];
          let dayNumber = 1;
@@ -317,7 +325,3 @@ export default {
    
 }
 </script>
-
-// ３１日の表示
-// ⓶の時刻と水位表示
-// デザインうんぬん 日曜日赤く
