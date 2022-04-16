@@ -72,9 +72,9 @@ ul li, ol li {
     opacity: 0.5;
 }
 
-.calendarChange:hover {
-    opacity: 0.5;
-    cursor : pointer;
+.calendarChange {
+    display: flex;
+    margin: 0 auto;
 }
 
 footer {

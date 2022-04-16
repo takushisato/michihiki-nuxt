@@ -9,7 +9,7 @@
       <br><br>
       <h1>調べたい都道府県を選択してください</h1>
 
-      <!-- ここのテーブルはstyle.cssにてCSS記載 -->
+      <!-- 都道府県テーブル -->
       <table class="local bg-gray-300">
          <tbody>
             <tr>
@@ -63,27 +63,32 @@
          </tbody>
       </table>
 
-      <div v-if="isShow"  class="m-10">
-         <h1>調べたい場所を選択して『調べる！』を押してください</h1>
-         <!-- 選択した都道府県に一致した港を表示 -->
+      <div v-if="isShow" class="m-10">
+         <h1 class="text-xl">調べたい月と場所を選択して『調べる！』を押してください</h1>
          <ul>
-            <li v-for="port in ports" :key="port.portName" @click="hcChoice(port)" class="calendarChange">
+            <li v-for="port in ports" :key="port.portName" @click="hcChoice(port)" class="text-center hover:opacity-30">
                {{ port.portName }}
             </li>
          </ul>
          <div class="clear"></div>
          <br><br>
+         <div class="calendarChange">
+            <button class="ml-auto mt-2 mb-2 bg-blue-500 hover:bg-blue-700 text-white py-2 px-2 border border-blue-700 rounded" @click="lastMonth()">前の月を見る</button>
+            <p class="mt-2 mb-2 ml-10 mr-10 pt-2 text-xl">{{ this.timeDatas.yr }}年{{ this.timeDatas.mn }}月を選択</p>
+            <button class="mr-auto mt-2 mb-2 bg-blue-500 hover:bg-blue-700 text-white py-2 px-2 border border-blue-700 rounded" @click="nextMonth()">次の月を見る</button>
+         </div>
+         <br>
          <p>都道府県：{{ choicePc }}</p>
          <p>場所：{{ choiceHc }}</p>
-         <button @click="asyncData()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">調べる!</button>
+         <br><br>
+         <button v-if="choiceHc != ''" @click="asyncData()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">調べる!</button>
+         <button v-if="choiceHc == ''" class="bg-blue-300 text-white font-bold py-2 px-4 border border-blue-300 rounded opacity-20 pointer-events-none">調べる!</button>
       </div>
 
       <!-- カレンダー -->
       <div v-if="calendarSwich" class="m-auto mt-10 p-10 pb-10 text-1xl">
          <div class="text-3xl mb-2">
-            <span class="calendarChange" @click="lastMonth()">前月へ</span>
             <span class="ml-20 mr-20">{{ timeDatas.yr }}年{{ timeDatas.mn }}月</span>
-            <span class="calendarChange" @click="nextMonth()">翌月へ</span>
          </div>
          <h1>『詳細図』をクリックするとグラフが参照できます</h1>
          <table class="min-w-full text-center border-2">
@@ -98,22 +103,17 @@
                         <div v-if="dayNumber > 0">
                            <p>{{choicePc}}・{{ resultTideDatas[dayNumber-1].portName}}</p>
                            <p>{{ resultTideDatas[dayNumber-1].moonTitle }}</p>
+                           <p>干潮➀：{{ resultTideDatas[dayNumber-1].eddTime1 }}（{{ resultTideDatas[dayNumber-1].eddCm1 }}cm）</p>
+                           <p>干潮➁：{{ resultTideDatas[dayNumber-1].eddTime2 }}（{{ resultTideDatas[dayNumber-1].eddCm2 }}cm）</p>
+                           <p>満潮➀：{{ resultTideDatas[dayNumber-1].floodTime1 }}（{{ resultTideDatas[dayNumber-1].floodCm1 }}cm）</p>
+                           <p>満潮➁：{{ resultTideDatas[dayNumber-1].floodTime2 }}（{{ resultTideDatas[dayNumber-1].floodCm2 }}cm）</p>
                            <p>月齢：{{ resultTideDatas[dayNumber-1].moonAge }}</p>
                            <p>日出：{{ resultTideDatas[dayNumber-1].sunRise }}</p>
                            <p>日入：{{ resultTideDatas[dayNumber-1].sunSet }}</p>
                            <p>月出：{{ resultTideDatas[dayNumber-1].moonRise }}</p>
                            <p>月入：{{ resultTideDatas[dayNumber-1].moonSet }}</p>
-                           <p>干潮時刻➀：{{ resultTideDatas[dayNumber-1].eddTime1 }}</p>
-                           <p>干潮水位➀：{{ resultTideDatas[dayNumber-1].eddCm1 }}</p>
-                           <p>干潮時刻➁：{{ resultTideDatas[dayNumber-1].eddTime2 }}</p>
-                           <p>干潮水位➁：{{ resultTideDatas[dayNumber-1].eddCm2 }}</p>
-                           <p>満潮時刻➀：{{ resultTideDatas[dayNumber-1].floodTime1 }}</p>
-                           <p>満潮水位➀：{{ resultTideDatas[dayNumber-1].floodCm1 }}</p>
-                           <p>満潮時刻➁：{{ resultTideDatas[dayNumber-1].floodTime2 }}</p>
-                           <p>満潮水位➁：{{ resultTideDatas[dayNumber-1].floodCm2 }}</p>
-                           <a :href=" detailView + dayNumber +  detailView2 " class="text-2xl calendarChange" target=”_blank”>詳細図</a>
+                           <a :href=" detailView + dayNumber +  detailView2 " class="text-2xl text-center hover:opacity-30" target=”_blank”>詳細図</a>
                         </div>      
-                        <!-- <p v-if="dayNumber > 0">{{ tideDatas[0].tide.chart[timeDatas.yr + "-" + ( "00" + timeDatas.mn ).slice( -2 ) + "-" + ( "00" + dayNumber ).slice( -2 )].sun.rise }}</p> -->
                      </td>
                   </tr>
             </tbody>
@@ -140,7 +140,6 @@ export default {
          prefectures: prefectures, //  datasディレクトにある都道府県データ
          pcNum: '',  // 都道府県番号
          hcNum: '', // 港番号
-         num: 0, // port取得用管理変数
          isShow: false, // templateの開閉と非表示用のブーリアン
          ports: [], // ユーザーが選択した地域の港一覧を入れる配列
          choicePc: '', // ユーザーが選択した地域
@@ -160,21 +159,13 @@ export default {
       //都道府県選択からの港表示まで
       pcChoice:function(prefecture){
          this.calendarSwich = false;
-         if(this.num == 0){
-            this.pcNum = prefecture.pcNum;
-            this.ports = prefecture.port;
-            this.choicePc = prefecture.name;
-            this.num++;
-            this.isShow = true;
-            return this.ports, this.choicePc, this.num, this.pcNum;
-         } else {
-            this.pcNum = '';
-            this.choicePc = '',
-            this.choiceHc = '',
-            this.num = 0;
-            this.isShow = false;
-            return this.ports, this.num, this.pcNum;
-         }
+         this.pcNum = prefecture.pcNum;
+         this.ports = prefecture.port;
+         this.choicePc = prefecture.name;
+         this.choiceHc = '';
+         this.num++;
+         this.isShow = true;
+         return this.ports, this.choicePc, this.num, this.pcNum;
       },
 
       //PCとHCのparameterを代入
@@ -193,7 +184,7 @@ export default {
             timeDatas.mn = 12;
          }
          timeDatas.lastDay = new Date(timeDatas.yr, timeDatas.mn, 0).getDate();
-         this.asyncData();
+         this.calendarSwich = false;
       },
 
       // カレンダーの翌月表示用
@@ -204,7 +195,7 @@ export default {
             timeDatas.mn = 1;
          }
          timeDatas.lastDay = new Date(timeDatas.yr, timeDatas.mn, 0).getDate();
-         this.asyncData();
+         this.calendarSwich = false;
       },
 
       // カレンダー日付算出
@@ -243,13 +234,10 @@ export default {
             let sunSet = monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].sun.set;
             let moonRise = monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].moon.rise;
             let moonSet = monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].moon.set;
-            let eddTime1 = monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].edd[0].time;
-            let eddCm1 = monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].edd[0].cm;
-            let floodTime1 = monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].flood[0].time;
-            let floodCm1 = monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].flood[0].cm;
+
 
             dayTideDatas = {
-               number: i ,
+               number: i,
                portName: portName,
                moonTitle: moonTitle,
                moonAge: moonAge,
@@ -257,40 +245,65 @@ export default {
                sunSet: sunSet,
                moonRise: moonRise,
                moonSet: moonSet,
-               eddTime1: eddTime1,
-               eddCm1: eddCm1,
-               floodTime1: floodTime1,
-               floodCm1: floodCm1,
             }; 
             
-            // データの数が１つの場合と２つの場合があるため、そこを分岐
+            // 干潮のデータの数が無い場合と１つの場合と２つの場合があるため分岐
             if(monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].edd.length == 2){
+               let eddTime1 = monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].edd[0].time;
+               let eddCm1 = monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].edd[0].cm;
                let eddTime2 = monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].edd[1].time;
                let eddCm2 = monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].edd[1].cm;
+               dayTideDatas.eddTime1 = eddTime1,
+               dayTideDatas.eddCm1 = eddCm1,
                dayTideDatas.eddTime2 = eddTime2;
                dayTideDatas.eddCm2 = eddCm2;
+            } else if(monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].edd.length == 1){
+               let eddTime1 = monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].edd[0].time;
+               let eddCm1 = monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].edd[0].cm;
+               dayTideDatas.eddTime1 = eddTime1,
+               dayTideDatas.eddCm1 = eddCm1,
+               dayTideDatas.eddTime2 = '--:--';
+               dayTideDatas.eddCm2 = '--';
             } else {
+               dayTideDatas.eddTime1 = '--:--';
+               dayTideDatas.eddCm1 = '--';
                dayTideDatas.eddTime2 = '--:--';
                dayTideDatas.eddCm2 = '--';
             };
-            // こちらもAPIのデータの数により分岐
+
+            // こちらは満潮。干潮と同様にAPIのデータの数により分岐
             if(monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].flood.length == 2){
+               let floodTime1 = monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].flood[0].time;
+               let floodCm1 = monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].flood[0].cm;
                let floodTime2 = monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].flood[1].time;
                let floodCm2 = monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].flood[1].cm;
+               dayTideDatas.floodTime1 = floodTime1,
+               dayTideDatas.floodCm1 = floodCm1,
                dayTideDatas.floodTime2 = floodTime2;
                dayTideDatas.floodCm2 = floodCm2;
+            } else if(monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].flood.length == 1) {
+               let floodTime1 = monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].flood[0].time;
+               let floodCm1 = monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].flood[0].cm;
+               dayTideDatas.floodTime1 = floodTime1,
+               dayTideDatas.floodCm1 = floodCm1,
+               dayTideDatas.floodTime2 = '--:--';
+               dayTideDatas.floodCm2 = '--';
             } else {
+               dayTideDatas.floodTime1 = '--:--';
+               dayTideDatas.floodCm1 = '--';
                dayTideDatas.floodTime2 = '--:--';
                dayTideDatas.floodCm2 = '--';
             };
+
             // 日にち毎にまとめたデータを月単位で配列にまとめ
             this.resultTideDatas[this.resultTideDatas.length] = dayTideDatas;
          };
-         console.log(this.resultTideDatas);
          // ユーザーの設定した地域で画像APIを取得
          this.detailView = '/img-api/' + '?' + 'pc=' + this.pcNum + '&' + 'hc=' + this.hcNum + '&' + 'yr=' + timeDatas.yr + '&' + 'mn=' + timeDatas.mn + '&' + 'dy=';
          // カレンダーをON
          this.calendarSwich = true;
+         this.isShow = false;
+         this.choiceHc = '';
          return this.resultTideDatas, this.detailView, this.calendarSwich;
       },
    },
@@ -325,3 +338,8 @@ export default {
    
 }
 </script>
+
+// ヘッダー波
+// ボディをコルク
+// リンク記入
+// CSS
