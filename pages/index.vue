@@ -1,13 +1,12 @@
 <template>
 <div>
    <Header />
-   <div class="container m-auto text-center">
+   <div class="container m-auto text-center select-none">
       <br><br>
-      <h1>当サイトは釣り人さんに使いやすい様に作成した潮見カレンダー表示サイトです</h1>
-      <br>
-      <h1>釣りの他、磯遊びや潮干狩りなど海の遊びの検討にお使いください</h1>
+      <h1 class="font-bold">当サイトは釣り人さんに使いやすい様に作成した潮見カレンダー表示サイトです</h1>
+      <h1 class="font-bold">釣りの他、磯遊びや潮干狩り、海遊びの検討にお使いください</h1>
       <br><br>
-      <h1>調べたい都道府県を選択してください</h1>
+      <h1 class="font-bold">調べたい都道府県を選択してください</h1>
 
       <!-- 都道府県テーブル -->
       <table class="local bg-gray-300">
@@ -64,7 +63,7 @@
       </table>
 
       <div v-if="isShow" class="m-10">
-         <h1 class="text-xl">調べたい月と場所を選択して『調べる！』を押してください</h1>
+         <h1 class="font-bold">調べたい月と場所を選択して『調べる！』を押してください</h1>
          <ul>
             <li v-for="port in ports" :key="port.portName" @click="hcChoice(port)" class="text-center hover:opacity-30">
                {{ port.portName }}
@@ -73,23 +72,22 @@
          <div class="clear"></div>
          <br><br>
          <div class="calendarChange">
-            <button class="ml-auto mt-2 mb-2 bg-blue-500 hover:bg-blue-700 text-white py-2 px-2 border border-blue-700 rounded" @click="lastMonth()">前の月を見る</button>
+            <button class="ml-auto mr-10 mt-2 hover:opacity-30" @click="lastMonth()">＜＜ 前の月を見る</button>
             <p class="mt-2 mb-2 ml-10 mr-10 pt-2 text-xl">{{ this.timeDatas.yr }}年{{ this.timeDatas.mn }}月を選択</p>
-            <button class="mr-auto mt-2 mb-2 bg-blue-500 hover:bg-blue-700 text-white py-2 px-2 border border-blue-700 rounded" @click="nextMonth()">次の月を見る</button>
+            <button class="mr-auto ml-10 mt-2 hover:opacity-30" @click="nextMonth()">次の月を見る ＞＞</button>
          </div>
          <br>
          <p>都道府県：{{ choicePc }}</p>
-         <p>場所：{{ choiceHc }}</p>
+         <p>調べたい沿岸地域：{{ choiceHc }}</p>
          <br><br>
          <button v-if="choiceHc != ''" @click="asyncData()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">調べる!</button>
          <button v-if="choiceHc == ''" class="bg-blue-300 text-white font-bold py-2 px-4 border border-blue-300 rounded opacity-20 pointer-events-none">調べる!</button>
+         <p v-if="choiceHc == ''" class="text-red-500 mt-1">都道府県と沿岸地域を選択するとクリックできます</p>
       </div>
 
       <!-- カレンダー -->
       <div v-if="calendarSwich" class="m-auto mt-10 p-10 pb-10 text-1xl">
-         <div class="text-3xl mb-2">
-            <span class="ml-20 mr-20">{{ timeDatas.yr }}年{{ timeDatas.mn }}月</span>
-         </div>
+         <h1 class="text-3xl">{{ timeDatas.yr }}年{{ timeDatas.mn }}月</h1>
          <h1>『詳細図』をクリックするとグラフが参照できます</h1>
          <table class="min-w-full text-center border-2">
             <thead class="bg-blue-300 border-2 border-gray-500">
@@ -103,10 +101,10 @@
                         <div v-if="dayNumber > 0">
                            <p>{{choicePc}}・{{ resultTideDatas[dayNumber-1].portName}}</p>
                            <p>{{ resultTideDatas[dayNumber-1].moonTitle }}</p>
-                           <p>干潮➀：{{ resultTideDatas[dayNumber-1].eddTime1 }}（{{ resultTideDatas[dayNumber-1].eddCm1 }}cm）</p>
-                           <p>干潮➁：{{ resultTideDatas[dayNumber-1].eddTime2 }}（{{ resultTideDatas[dayNumber-1].eddCm2 }}cm）</p>
                            <p>満潮➀：{{ resultTideDatas[dayNumber-1].floodTime1 }}（{{ resultTideDatas[dayNumber-1].floodCm1 }}cm）</p>
                            <p>満潮➁：{{ resultTideDatas[dayNumber-1].floodTime2 }}（{{ resultTideDatas[dayNumber-1].floodCm2 }}cm）</p>
+                           <p>干潮➀：{{ resultTideDatas[dayNumber-1].eddTime1 }}（{{ resultTideDatas[dayNumber-1].eddCm1 }}cm）</p>
+                           <p>干潮➁：{{ resultTideDatas[dayNumber-1].eddTime2 }}（{{ resultTideDatas[dayNumber-1].eddCm2 }}cm）</p>
                            <p>月齢：{{ resultTideDatas[dayNumber-1].moonAge }}</p>
                            <p>日出：{{ resultTideDatas[dayNumber-1].sunRise }}</p>
                            <p>日入：{{ resultTideDatas[dayNumber-1].sunSet }}</p>
@@ -118,7 +116,15 @@
                   </tr>
             </tbody>
          </table>
-      </div>   
+      </div>
+      <div class="m-3 block">
+         <div class="h-10"></div>
+         <h1 class="mb-1 font-bold">リンク</h1>
+         <h2>風予報と波予報のリンクです</h2>
+         <h2 class="mb-3">（いずれもヤフーの天気予報です）</h2>
+         <p><a href="https://weather.yahoo.co.jp/weather/wind/?m=ground" target=”_blank” class="hover:opacity-30">風予報を見る</a></p>
+         <p><a href="https://weather.yahoo.co.jp/weather/wave/?m=height" target=”_blank” class="hover:opacity-30">波予報を見る</a></p>
+      </div> 
    </div>
    <Footer />
 </div>
@@ -149,7 +155,6 @@ export default {
          locations: ['北海道', '東北', '関東', '中部', '近畿', '中国', '四国', '九州・沖縄'],
          weekDays:['日','月','火','水','木','金','土'], // カレンダー
          today:'', // カレンダー用
-         calDatas: 'tideDatas[0].tide.chart[timeDatas.yr + "-" + ( "00" + timeDatas.mn ).slice( -2 ) + "-" + ( "00" + dayNumber ).slice( -2 )]',
          detailView: '', // 詳細図のURLの場所を入力する変数
          detailView2: "&rg=day&w=768&h=768&lc=blue&gcs=cyan&gcf=blue&ld=on&ttd=on&tsmd=on", // 詳細図のURLの後半（このまま使用）
          }
@@ -184,7 +189,6 @@ export default {
             timeDatas.mn = 12;
          }
          timeDatas.lastDay = new Date(timeDatas.yr, timeDatas.mn, 0).getDate();
-         this.calendarSwich = false;
       },
 
       // カレンダーの翌月表示用
@@ -195,7 +199,6 @@ export default {
             timeDatas.mn = 1;
          }
          timeDatas.lastDay = new Date(timeDatas.yr, timeDatas.mn, 0).getDate();
-         this.calendarSwich = false;
       },
 
       // カレンダー日付算出
@@ -235,9 +238,8 @@ export default {
             let moonRise = monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].moon.rise;
             let moonSet = monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].moon.set;
 
-
             dayTideDatas = {
-               number: i,
+               day: i,
                portName: portName,
                moonTitle: moonTitle,
                moonAge: moonAge,
@@ -298,6 +300,7 @@ export default {
             // 日にち毎にまとめたデータを月単位で配列にまとめ
             this.resultTideDatas[this.resultTideDatas.length] = dayTideDatas;
          };
+         
          // ユーザーの設定した地域で画像APIを取得
          this.detailView = '/img-api/' + '?' + 'pc=' + this.pcNum + '&' + 'hc=' + this.hcNum + '&' + 'yr=' + timeDatas.yr + '&' + 'mn=' + timeDatas.mn + '&' + 'dy=';
          // カレンダーをON
@@ -307,10 +310,12 @@ export default {
          return this.resultTideDatas, this.detailView, this.calendarSwich;
       },
    },
+
    mounted() {
       // カレンダー日付取得用
       this.today = timeDatas.yr + '-' + timeDatas.mn + '-' + timeDatas.dy;
    },
+
    computed:{
       // カレンダーの処理
       calendar:function(){
@@ -338,8 +343,3 @@ export default {
    
 }
 </script>
-
-// ヘッダー波
-// ボディをコルク
-// リンク記入
-// CSS
