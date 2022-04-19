@@ -1,7 +1,8 @@
 
-const todayData = [
+const todayTideData = [
     [
-        { today: 'YYYY-MM-DD' },
+        { month: 'MM' },
+        { today: 'DD' },
         { portName: 'gyokoumei' },
         { moonTitle: 'shiomei' },
         { moonAge: 'geturei' },

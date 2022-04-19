@@ -3,7 +3,7 @@
    <Header />
    <div class="container m-auto text-center select-none">
       <br><br>
-      <h1 class="font-bold">当サイトは釣り人さんに使いやすい様に作成した潮見カレンダー表示サイトです</h1>
+      <h1 class="font-bold">当サイトは潮の満引きをグラフで確認できる潮見カレンダー表示サイトです</h1>
       <h1 class="font-bold">釣りの他、磯遊びや潮干狩り、海遊びの検討にお使いください</h1>
       <br><br>
       <h1 class="font-bold">調べたい都道府県を選択してください</h1>
@@ -12,43 +12,43 @@
       <table class="local bg-gray-300">
          <tbody>
             <tr>
-               <th class="bg-gray-400">北海道</th>
+               <th class="bg-gray-400">北海道地方</th>
                <td>
                <p v-for="prefecture in prefectures[0]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</p>
                </td>
             </tr>
             <tr>
-               <th class="bg-gray-400">東北</th>
+               <th class="bg-gray-400">東北地方</th>
                <td>
                <p v-for="prefecture in prefectures[1]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</p>
                </td>
             </tr>
             <tr>
-               <th class="bg-gray-400">関東</th>
+               <th class="bg-gray-400">関東地方</th>
                <td>
                <p v-for="prefecture in prefectures[2]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</p>
                </td>
             </tr>
             <tr>
-               <th class="bg-gray-400">中部</th>
+               <th class="bg-gray-400">中部地方</th>
                <td>
                <p v-for="prefecture in prefectures[3]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</p>
                </td>
             </tr>
             <tr>
-               <th class="bg-gray-400">近畿</th>
+               <th class="bg-gray-400">近畿地方</th>
                <td>
                <p v-for="prefecture in prefectures[4]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</p>
                </td>
             </tr>
             <tr>
-               <th class="bg-gray-400">中国</th>
+               <th class="bg-gray-400">中国地方</th>
                <td>
                <p v-for="prefecture in prefectures[5]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</p>
                </td>
             </tr>
             <tr>
-               <th class="bg-gray-400">四国</th>
+               <th class="bg-gray-400">四国地方</th>
                <td>
                <p v-for="prefecture in prefectures[6]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</p>
                </td>
@@ -73,7 +73,7 @@
          <br><br>
          <div class="calendarChange">
             <button class="ml-auto mr-10 mt-2 hover:opacity-30" @click="lastMonth()">＜＜ 前の月を見る</button>
-            <p class="mt-2 mb-2 ml-10 mr-10 pt-2 text-xl">{{ this.timeDatas.yr }}年{{ this.timeDatas.mn }}月を選択</p>
+            <p class="mt-2 mb-2 ml-10 mr-10 pt-2 text-xl">{{ this.timeDatas.yr }}年 {{ this.timeDatas.mn }}月を調べる！！</p>
             <button class="mr-auto ml-10 mt-2 hover:opacity-30" @click="nextMonth()">次の月を見る ＞＞</button>
          </div>
          <br>
@@ -250,49 +250,41 @@ export default {
             }; 
             
             // 干潮のデータの数が無い場合と１つの場合と２つの場合があるため分岐
-            if(monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].edd.length == 2){
+            if(monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].edd.length >= 1){
                let eddTime1 = monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].edd[0].time;
                let eddCm1 = monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].edd[0].cm;
-               let eddTime2 = monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].edd[1].time;
-               let eddCm2 = monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].edd[1].cm;
-               dayTideDatas.eddTime1 = eddTime1,
-               dayTideDatas.eddCm1 = eddCm1,
-               dayTideDatas.eddTime2 = eddTime2;
-               dayTideDatas.eddCm2 = eddCm2;
-            } else if(monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].edd.length == 1){
-               let eddTime1 = monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].edd[0].time;
-               let eddCm1 = monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].edd[0].cm;
-               dayTideDatas.eddTime1 = eddTime1,
-               dayTideDatas.eddCm1 = eddCm1,
-               dayTideDatas.eddTime2 = '--:--';
-               dayTideDatas.eddCm2 = '--';
-            } else {
+               dayTideDatas.eddTime1 = eddTime1;
+               dayTideDatas.eddCm1 = eddCm1;
+               } else {
                dayTideDatas.eddTime1 = '--:--';
                dayTideDatas.eddCm1 = '--';
+            };
+            if(monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].edd.length == 2){
+               let eddTime2 = monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].edd[1].time;
+               let eddCm2 = monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].edd[1].cm;
+               dayTideDatas.eddTime2 = eddTime2;
+               dayTideDatas.eddCm2 = eddCm2;
+            } else {
                dayTideDatas.eddTime2 = '--:--';
                dayTideDatas.eddCm2 = '--';
             };
 
             // こちらは満潮。干潮と同様にAPIのデータの数により分岐
-            if(monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].flood.length == 2){
+            if(monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].flood.length >= 1){
                let floodTime1 = monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].flood[0].time;
                let floodCm1 = monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].flood[0].cm;
-               let floodTime2 = monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].flood[1].time;
-               let floodCm2 = monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].flood[1].cm;
-               dayTideDatas.floodTime1 = floodTime1,
-               dayTideDatas.floodCm1 = floodCm1,
-               dayTideDatas.floodTime2 = floodTime2;
-               dayTideDatas.floodCm2 = floodCm2;
-            } else if(monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].flood.length == 1) {
-               let floodTime1 = monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].flood[0].time;
-               let floodCm1 = monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].flood[0].cm;
-               dayTideDatas.floodTime1 = floodTime1,
-               dayTideDatas.floodCm1 = floodCm1,
-               dayTideDatas.floodTime2 = '--:--';
-               dayTideDatas.floodCm2 = '--';
+               dayTideDatas.floodTime1 = floodTime1;
+               dayTideDatas.floodCm1 = floodCm1;
             } else {
                dayTideDatas.floodTime1 = '--:--';
                dayTideDatas.floodCm1 = '--';
+            };
+            if(monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].flood.length == 2){
+               let floodTime2 = monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].flood[1].time;
+               let floodCm2 = monthTideDatas.tide.chart[this.timeDatas.yr + "-" + ( "00" + this.timeDatas.mn ).slice( -2 ) + "-" + ( "00" + i ).slice( -2 )].flood[1].cm;
+               dayTideDatas.floodTime2 = floodTime2;
+               dayTideDatas.floodCm2 = floodCm2;
+            } else {
                dayTideDatas.floodTime2 = '--:--';
                dayTideDatas.floodCm2 = '--';
             };
