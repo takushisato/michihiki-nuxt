@@ -213,7 +213,7 @@ export default {
       // パラメータに現在日時を入力してAPI取得
       async asyncData() {
          this.resultTideDatas = [];
-         let monthTideDatas = await this.$axios.$get('https://api.tide736.net/get_tide.php' + '?' + 'pc=' + this.pcNum + '&' + 'hc=' + this.hcNum + '&'+ 'yr=' + timeDatas.yr + '&' + 'mn=' + timeDatas.mn + '&' + 'dy=' + 1 + '&' + 'rg=month');
+         let monthTideDatas = await this.$axios.$get('/api' + '?' + 'pc=' + this.pcNum + '&' + 'hc=' + this.hcNum + '&'+ 'yr=' + timeDatas.yr + '&' + 'mn=' + timeDatas.mn + '&' + 'dy=' + 1 + '&' + 'rg=month');
          
          // 月末日からカレンダーのループ回数を設定
          let calNum = '';
@@ -226,7 +226,7 @@ export default {
          // APIを分解して欲しいデータだけを配列に格納
          for(let i = 1; i <= calNum; i++) {
             if(calNum == 31 && i ==31){
-               monthTideDatas = await this.$axios.$get('https://api.tide736.net/get_tide.php' + '?' + 'pc=' + this.pcNum + '&' + 'hc=' + this.hcNum + '&' + 'yr=' + timeDatas.yr + '&' + 'mn=' + timeDatas.mn + '&' + 'dy=' + 31 + '&' + 'rg=day');
+               monthTideDatas = await this.$axios.$get('/api' + '?' + 'pc=' + this.pcNum + '&' + 'hc=' + this.hcNum + '&' + 'yr=' + timeDatas.yr + '&' + 'mn=' + timeDatas.mn + '&' + 'dy=' + 31 + '&' + 'rg=day');
             };
             
             let dayTideDatas = [];
@@ -294,7 +294,7 @@ export default {
          };
          
          // ユーザーの設定した地域で画像APIを取得
-         this.detailView = 'https://api.tide736.net/tide_image.php' + '?' + 'pc=' + this.pcNum + '&' + 'hc=' + this.hcNum + '&' + 'yr=' + timeDatas.yr + '&' + 'mn=' + timeDatas.mn + '&' + 'dy=';
+         this.detailView = '/img-api' + '?' + 'pc=' + this.pcNum + '&' + 'hc=' + this.hcNum + '&' + 'yr=' + timeDatas.yr + '&' + 'mn=' + timeDatas.mn + '&' + 'dy=';
          // カレンダーをON
          this.calendarSwich = true;
          this.isShow = false;

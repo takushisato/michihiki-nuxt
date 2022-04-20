@@ -54,14 +54,14 @@ export default {
   },
 
   proxy: {
-    // '/api/': {
-    //   target: 'https://api.tide736.net/get_tide.php',
-    //   pathRewrite: {'^/api/': ''}
-    // },
-    // '/img-api/': {
-    //   target: 'https://api.tide736.net/tide_image.php',
-    //   pathRewrite: {'^/img-api/': ''}
-    // },
+    '/api': {
+      target: 'https://api.tide736.net/get_tide.php/',
+      pathRewrite: {'^/api': ''}
+    },
+    '/img-api': {
+      target: 'https://api.tide736.net/tide_image.php/',
+      pathRewrite: {'^/img-api': ''}
+    },
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
