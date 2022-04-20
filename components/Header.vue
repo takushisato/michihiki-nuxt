@@ -2,7 +2,7 @@
 <div>
     <header>
     <div class="title">
-    <h2 class="text-1xl">釣り人専用の潮見表サイト</h2>
+    <h2 class="text-1xl">グラフで確認する潮見表サイト</h2>
     <Nuxt-link to="/"><h1 class="text-5xl hover:opacity-30">みちひき</h1></Nuxt-link>
     </div>
     </header>
