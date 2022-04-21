@@ -214,7 +214,7 @@ export default {
       async asyncData() {
          this.resultTideDatas = [];
          let monthTideDatas = await this.$axios.$get('/api' + '?' + 'pc=' + this.pcNum + '&' + 'hc=' + this.hcNum + '&'+ 'yr=' + timeDatas.yr + '&' + 'mn=' + timeDatas.mn + '&' + 'dy=' + 1 + '&' + 'rg=month');
-         
+
          // 月末日からカレンダーのループ回数を設定
          let calNum = '';
             if(this.timeDatas.lastDay == 31){
@@ -228,6 +228,7 @@ export default {
             if(calNum == 31 && i ==31){
                monthTideDatas = await this.$axios.$get('/api' + '?' + 'pc=' + this.pcNum + '&' + 'hc=' + this.hcNum + '&' + 'yr=' + timeDatas.yr + '&' + 'mn=' + timeDatas.mn + '&' + 'dy=' + 31 + '&' + 'rg=day');
             };
+            console.log(monthTideDatas);
             
             let dayTideDatas = [];
             let portName = monthTideDatas.tide.port.harbor_namej;
@@ -292,7 +293,7 @@ export default {
             // 日にち毎にまとめたデータを月単位で配列にまとめ
             this.resultTideDatas[this.resultTideDatas.length] = dayTideDatas;
          };
-         
+         console.log(this.resultTideDatas);
          // ユーザーの設定した地域で画像APIを取得
          this.detailView = '/img-api' + '?' + 'pc=' + this.pcNum + '&' + 'hc=' + this.hcNum + '&' + 'yr=' + timeDatas.yr + '&' + 'mn=' + timeDatas.mn + '&' + 'dy=';
          // カレンダーをON
