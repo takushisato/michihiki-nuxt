@@ -18,38 +18,18 @@ header {
     border: solid 2px #0099FF;
 }
 
-ul, ol {
-    width: 80%;
-    margin: 5px auto;
-    padding: 0;
-    position: relative;
-  }
-
-ul li, ol li {
-    width: 50%;
-    float: left;
-    color: blue;
-    border-left: solid 6px #2d8fdd;
-    background: #f1f8ff;
-    margin-bottom: 3px;
-    line-height: 1.5;
-    padding: 0.5em;
-    list-style-type: none;
-    flex-wrap: wrap
-}
-
 .clear {
     clear: both;
 }
 
 .local {
-    width: 80%;
+    /* width: 100%; */
     margin: 20px auto;
     border: #000055 solid 2px;
 }
 
 .local > tbody > tr > th {
-    width: 30%;
+    width: 20%;
     border-right: #000055 double 3px;
     border-bottom:#000055 solid 1px;
 }
@@ -72,9 +52,38 @@ ul li, ol li {
     opacity: 0.5;
 }
 
+.local2 {
+    margin: 0 auto;
+    max-width: 1000px;
+}
+
+.local2 > ul, ol {
+    width: 80%;
+    margin: 5px auto;
+    padding: 0;
+    position: relative;
+  }
+
+.local2 > ul li, ol li {
+    width: 50%;
+    float: left;
+    color: blue;
+    border-left: solid 6px #2d8fdd;
+    background: #f1f8ff;
+    margin-bottom: 3px;
+    line-height: 1.5;
+    padding: 0.5em;
+    list-style-type: none;
+    flex-wrap: wrap
+}
+
 .calendarChange {
     display: flex;
     margin: 0 auto;
+}
+
+#calendar {
+    min-width: 800px;
 }
 
 footer {
@@ -88,4 +97,98 @@ footer {
 .footer-twitter {
     display: flex;
     background-color: #000055;
+}
+
+@media (min-width: 1440px) {
+    .container {
+        max-width: 1400px;
+    }
+    .mobile-local, .mobile-direction {
+        display: none;
+    }
+}
+
+/* Extra Large (xl) */
+@media (max-width: 1280px) {
+    .container {
+        max-width: 1200;
+    }
+    .mobile-local, .mobile-direction {
+        display: none;
+    }
+}
+
+/* Large (lg) */
+@media (max-width: 1024px) {
+    .container {
+        max-width: 900px;
+    }
+    .mobile-local, .mobile-direction {
+        display: none;
+    }
+}
+
+/* Medium (md) */
+@media (max-width: 768px) {
+    .local, .direction {
+        display: none;
+    }
+    .mobile-local, .mobile-direction {
+        display: block;
+    }
+    .calendarChange {
+        display: block;
+        margin: 0 auto;
+    }
+}
+    
+@media (max-width: 640px) {
+
+}
+
+.mobile-local {
+    width: 90%;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.mobile-local > ul > li {
+    height: 0;
+    overflow: hidden;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -ms-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s;
+}
+
+label {
+    display: block;
+    margin: 0 0 4px 0;
+    padding : 15px;
+    line-height: 1;
+    cursor :pointer;
+}
+
+input {
+    display: none;
+}
+
+.mobile-local ul {
+    margin: 0;
+    padding: 0;
+    background :#f4f4f4;
+    list-style: none;
+}
+
+#menu_bar01:checked ~ #links01 li,
+#menu_bar02:checked ~ #links02 li,
+#menu_bar03:checked ~ #links03 li,
+#menu_bar04:checked ~ #links04 li,
+#menu_bar05:checked ~ #links05 li,
+#menu_bar06:checked ~ #links06 li,
+#menu_bar07:checked ~ #links07 li,
+#menu_bar08:checked ~ #links08 li {
+    height: 35px;
+    opacity: 1;
 }
