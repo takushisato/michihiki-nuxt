@@ -87,16 +87,11 @@ header {
 }
 
 footer {
-    height: 10VH;
+    min-height: 12VH;
     background-color: #000055;
     color: white;
     text-align: center;
     margin-bottom: 0;
-}
-
-.footer-twitter {
-    display: flex;
-    background-color: #000055;
 }
 
 @media (min-width: 1440px) {
@@ -191,4 +186,9 @@ input {
 #menu_bar08:checked ~ #links08 li {
     height: 35px;
     opacity: 1;
+}
+
+.mobileContainer {
+    background: pink;
+    width: 800px;
 }

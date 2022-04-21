@@ -1,8 +1,10 @@
 <template>
     <footer>
-      <div class="footer-twitter w-auto"><br><br><br><br><br><br><br><br>
-        <!-- <a href="https://twitter.com/taku820801" target=”_blank”><img src="~/static/twitter.png" alt="ツイッター画像" class="w-8 mr-0"></a> -->
-        <a href="https://twitter.com/taku820801" target=”_blank” class="m-auto">制作者Twitter: taku820801</a>
+      <div class="footer-twitter w-auto text-center block pb-2 text-lg">
+        <h1 class="pt-5">他サイトのリンク</h1>
+        <h2>（どちらもヤフー天気予報へのリンクです。）</h2>
+        <a href="https://weather.yahoo.co.jp/weather/wind/?m=ground" class="block hover:opacity-30">風予報</a>
+        <a href="https://weather.yahoo.co.jp/weather/wave/?m=height" class="block hover:opacity-30">波予報</a>
       </div>
     </footer>    
 </template>

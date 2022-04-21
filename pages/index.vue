@@ -1,9 +1,9 @@
 <template>
-<div>
+<div :class="{ mobileContainer }">
    <Header />
    <div class="container m-auto text-center select-none text-lg">
       <br><br>
-      <h1 class="font-bold te">当サイトは潮の満引きをグラフで確認できる潮見カレンダー表示サイトです</h1>
+      <h1 class="font-bold" id="cal-top">当サイトは潮の満引きをグラフで確認できる潮見カレンダー表示サイトです</h1>
       <h1 class="font-bold">釣りの他、磯遊びや潮干狩り、海遊びの検討にお使いください</h1>
       <br><br>
       <h1 class="font-bold">調べたい都道府県を選択してください</h1>
@@ -105,7 +105,6 @@
                <li v-for="prefecture in prefectures[7]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</li>
             </ul>
       </div>
-      <div id="cal-top"></div>
 
       <!-- 港と月選択画面 -->
       <div v-if="isShow" class="local2">
@@ -124,7 +123,7 @@
             <button class="bg-blue-500 ml-2 mr-auto p-2 hover:bg-blue-700 text-white font-bold border border-blue-700 rounded mobile-direction" @click="nextMonth()">翌月へ</button>
          </div>
          <br><br>
-         
+
          <h1 class="font-bold">沿岸地域を選択してください</h1>
          <ul>
             <li v-for="port in ports" :key="port.portName" @click="hcChoice(port)" class="text-center hover:opacity-30">
@@ -139,9 +138,10 @@
          <p>選択した沿岸地域：{{ choiceHc }}</p>
          <p>選択した月：{{ this.timeDatas.yr }}年 {{ this.timeDatas.mn }}月</p>
          <br>
-         <nuxt-link to="#cal-top"><button v-if="choiceHc != ''" @click="asyncData()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">調べる!</button></nuxt-link>
+         <button v-if="choiceHc != ''" @click="asyncData()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded"><a href="#cal-top">調べる!</a></button>
          <button v-if="choiceHc == ''" class="bg-blue-300 text-white font-bold py-2 px-4 border border-blue-300 rounded opacity-20 pointer-events-none">調べる!</button>
          <p v-if="choiceHc == ''" class="text-red-500 mt-1">沿岸地域を選択するとクリックできます</p>
+         <br><br>
       </div>
 
       <!-- カレンダー -->
@@ -183,14 +183,6 @@
             </tbody>
          </table>
       </div>
-      <div class="m-3 block">
-         <div class="h-10"></div>
-         <h1 class="mb-1 font-bold">リンク</h1>
-         <h2>風予報と波予報のリンクです</h2>
-         <h2 class="mb-3">（いずれもヤフーの天気予報です）</h2>
-         <p><a href="https://weather.yahoo.co.jp/weather/wind/?m=ground" target=”_blank” class="hover:opacity-30">風予報を見る</a></p>
-         <p><a href="https://weather.yahoo.co.jp/weather/wave/?m=height" target=”_blank” class="hover:opacity-30">波予報を見る</a></p>
-      </div> 
    </div>
    <Footer />
 </div>
@@ -208,6 +200,7 @@ export default {
 
    data() {
       return {
+         mobileContainer: false,
          timeDatas: timeDatas, // datasディレクトリで取得した時間
          prefectures: prefectures, //  datasディレクトにある都道府県データ
          pcNum: '',  // 都道府県番号
