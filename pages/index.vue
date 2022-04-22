@@ -7,6 +7,7 @@
       <h1 class="font-bold">釣りの他、磯遊びや潮干狩り、海遊びの検討にお使いください</h1>
       <br><br>
       <h1 class="font-bold">調べたい都道府県を選択してください</h1>
+      <div v-if="isShow == false" class="mb-40"></div>
 
       <!-- PC画面の都道府県テーブル -->
       <table class="local bg-gray-300">
@@ -64,43 +65,43 @@
 
       <!-- モバイルの都道府県の選択画面 -->
       <div class="bg-gray-300 mobile-local">
-         <label for="menu_bar01">北海道以北</label>
-         <input type="checkbox" id="menu_bar01" />
+         <label for="menu_bar01" class="mobile-label">北海道以北</label>
+         <input type="checkbox" id="menu_bar01" class="mobile-input" />
             <ul class="bg-gray-400" id="links01">
                <li v-for="prefecture in prefectures[0]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</li>
             </ul>
-         <label for="menu_bar02">東北地方</label>
-         <input type="checkbox" id="menu_bar02" />
+         <label for="menu_bar02" class="mobile-label">東北地方</label>
+         <input type="checkbox" id="menu_bar02" class="mobile-input" />
             <ul class="bg-gray-400" id="links02">
                <li v-for="prefecture in prefectures[1]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</li>
             </ul>
-         <label for="menu_bar03">関東地方</label>
-         <input type="checkbox" id="menu_bar03" />
+         <label for="menu_bar03" class="mobile-label">関東地方</label>
+         <input type="checkbox" id="menu_bar03" class="mobile-input" />
             <ul class="bg-gray-400" id="links03">
                <li v-for="prefecture in prefectures[2]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</li>
             </ul>
-         <label for="menu_bar04">中部地方</label>
-         <input type="checkbox" id="menu_bar04" />
+         <label for="menu_bar04" class="mobile-label">中部地方</label>
+         <input type="checkbox" id="menu_bar04" class="mobile-input" />
             <ul class="bg-gray-400" id="links04">
                <li v-for="prefecture in prefectures[3]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</li>
             </ul>
-         <label for="menu_bar05">近畿地方</label>
-         <input type="checkbox" id="menu_bar05" />
+         <label for="menu_bar05" class="mobile-label">近畿地方</label>
+         <input type="checkbox" id="menu_bar05" class="mobile-input" />
             <ul class="bg-gray-400" id="links05">
                <li v-for="prefecture in prefectures[4]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</li>
             </ul>
-         <label for="menu_bar06">中国地方</label>
-         <input type="checkbox" id="menu_bar06" />
+         <label for="menu_bar06" class="mobile-label">中国地方</label>
+         <input type="checkbox" id="menu_bar06" class="mobile-input" />
             <ul class="bg-gray-400" id="links06">
                <li v-for="prefecture in prefectures[5]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</li>
             </ul>
-         <label for="menu_bar07">四国地方</label>
-         <input type="checkbox" id="menu_bar07" />
+         <label for="menu_bar07" class="mobile-label">四国地方</label>
+         <input type="checkbox" id="menu_bar07" class="mobile-input" />
             <ul class="bg-gray-400" id="links07">
                <li v-for="prefecture in prefectures[6]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</li>
             </ul>
-         <label for="menu_bar08">九州以南</label>
-         <input type="checkbox" id="menu_bar08" />
+         <label for="menu_bar08" class="mobile-label">九州以南</label>
+         <input type="checkbox" id="menu_bar08" class="mobile-input" />
             <ul class="bg-gray-400" id="links08">
                <li v-for="prefecture in prefectures[7]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</li>
             </ul>
@@ -395,3 +396,6 @@ export default {
    
 }
 </script>
+// 問い合わせフォーム
+// スマホでの一覧画面
+// API読めない問題

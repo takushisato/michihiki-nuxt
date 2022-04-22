@@ -94,6 +94,15 @@ footer {
     margin-bottom: 0;
 }
 
+.contact {
+    width: 500px;
+    margin: 40px auto;
+}
+
+.contact-label {
+    width: 500px;
+}
+
 @media (min-width: 1440px) {
     .container {
         max-width: 1400px;
@@ -157,7 +166,7 @@ footer {
     transition: all 0.5s;
 }
 
-label {
+.mobile-label {
     display: block;
     margin: 0 0 4px 0;
     padding : 15px;
@@ -165,7 +174,7 @@ label {
     cursor :pointer;
 }
 
-input {
+.mobile-input {
     display: none;
 }
 
