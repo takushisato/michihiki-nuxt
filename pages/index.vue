@@ -7,7 +7,7 @@
       <h1 class="font-bold">釣りの他、磯遊びや潮干狩り、海遊びの検討にお使いください</h1>
       <br><br>
       <h1 class="font-bold">調べたい都道府県を選択してください</h1>
-      <div v-if="isShow == false" class="mb-40"></div>
+      <div v-if="isShow == false && calendarSwich == false" class="mb-40"></div>
 
       <!-- PC画面の都道府県テーブル -->
       <table class="local bg-gray-300">

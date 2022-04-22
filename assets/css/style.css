@@ -147,7 +147,12 @@ footer {
 }
     
 @media (max-width: 640px) {
-
+    .contact {
+        width: 90%;
+    }
+    .contact-label {
+        width: 90%;
+    }
 }
 
 .mobile-local {
