@@ -1,7 +1,7 @@
 <template>
 <div>
    <Header />
-   <div class="container m-auto text-left">
+   <div class="container m-auto text-left text-lg">
       <div class="m-5 mt-10">
          <h1 class="text-2xl underline">注意事項</h1>
          <h2 class="text-1xl">当サイトについて</h2>
@@ -20,7 +20,7 @@
 
       <div class="m-5 mt-10">
          <h1 class="text-2xl underline">著作権について</h1>
-         <p>当サイトに掲載されているコンテンツ内容は海上保安庁にて公開されている潮汐表APIサービスからデータを引用させていただき作成しております。（記載内容の著作権などは海上保安庁に帰属します。）</p>
+         <p>当サイトに掲載されているコンテンツ内容は、海上保安庁が公開している『潮汐表APIサービス』からデータを引用させていただき作成しております。（記載内容の著作権などは海上保安庁に帰属します。）</p>
          <p>また、当サイトに掲載されているコンテンツ（文章、画像、写真、動画、ロゴ、プログラム等）を無断で転用・複製などをすることは出来ません。</p>
          <a href="https://tide736.net/" class="hover:opacity-30" target=”_blank”>引用元：海上保安庁 潮汐表APIサービス</a>
       </div>
@@ -39,8 +39,13 @@
 
       <div class="m-5 mt-10">
          <h1 class="text-2xl underline">その他</h1>
-         <p>サイトのバグ、システムの不具合、記載内容に関して何か問題がありましたら制作者にご一報ください。</p>
-         <a href="https://twitter.com/taku820801">制作者Twitter</a>
+         <p>サイトのバグ、システムの不具合、記載内容に関して何か問題がありましたら、下記お問い合わせフォームより制作者にご一報いただけると幸いです。</p>
+         <br>
+         <nuxt-link to="/contact" class="hover:opacity-30">お問い合わせフォーム</nuxt-link>
+      </div>
+      
+      <div class="mt-20 mb-20">
+         <img src="~/static/logo.png" alt="ロゴ画像" class="block m-auto">
       </div>
    </div>
    <Footer />

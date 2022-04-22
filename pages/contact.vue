@@ -5,7 +5,7 @@
             <h1 class="pt-20">不具合やバグ、その他問題がございましたらお手数ですが下記の問い合わせフォームより連絡お願いします。</h1>
             <section>
                 <template v-if="!finished">
-                    <form name="contact" method="POST" data-netlify="true" data-netlify-recaptcha="true" class="contact" @submit.prevent>
+                    <form name="contact" method="POST" data-netlify="true" class="contact" @submit.prevent>
                         <p class="mt-4 mb-4">
                         <label><span class="text-red-600">（必須）</span>
                             お名前:
@@ -24,7 +24,6 @@
                             <textarea v-model="form.content" id="form-content" class="contact-label border border-gray-300 pb-80" placeholder="問い合わせ内容" name="content" />
                         </label>
                         </p>
-                        <div data-netlify-recaptcha="true"></div>
                         <p class="mt-4 mb-4">
                         <button @click="handleSubmit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded" v-text="'送信'" />
                         </p>

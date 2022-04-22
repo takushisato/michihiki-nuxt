@@ -352,6 +352,7 @@ export default {
 
             // 日にち毎にまとめたデータを月単位で配列にまとめ
             this.resultTideDatas[this.resultTideDatas.length] = dayTideDatas;
+            this.mobileContainer = true;
          };
          console.log(this.resultTideDatas);
          // ユーザーの設定した地域で画像APIを取得
