@@ -24,6 +24,7 @@
                             <textarea v-model="form.content" id="form-content" class="contact-label border border-gray-300 pb-80" placeholder="問い合わせ内容" name="content" />
                         </label>
                         </p>
+                        <div data-netlify-recaptcha="true"></div>
                         <p class="mt-4 mb-4">
                         <button @click="handleSubmit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded" v-text="'送信'" />
                         </p>
