@@ -3,7 +3,7 @@
    <Header />
    <div class="container m-auto text-center select-none text-lg">
       <br><br>
-      <h1 class="font-bold" id="cal-top">当サイトは潮の満引きをグラフで確認できる潮見カレンダー表示サイトです</h1>
+      <h1 class="font-bold">当サイトは潮の満引きをグラフで確認できる潮見カレンダー表示サイトです</h1>
       <h1 class="font-bold">釣りの他、磯遊びや潮干狩り、海遊びの検討にお使いください</h1>
       <br><br>
       <h1 class="font-bold">調べたい都道府県を選択してください</h1>
@@ -139,7 +139,7 @@
          <p>選択した沿岸地域：{{ choiceHc }}</p>
          <p>選択した月：{{ this.timeDatas.yr }}年 {{ this.timeDatas.mn }}月</p>
          <br>
-         <button v-if="choiceHc != ''" @click="asyncData()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded"><a href="#cal-top">調べる!</a></button>
+         <button v-if="choiceHc != ''" @click="asyncData()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">調べる!</button>
          <button v-if="choiceHc == ''" class="bg-blue-300 text-white font-bold py-2 px-4 border border-blue-300 rounded opacity-20 pointer-events-none">調べる!</button>
          <p v-if="choiceHc == ''" class="text-red-500 mt-1">沿岸地域を選択するとクリックできます</p>
          <br><br>
