@@ -288,7 +288,6 @@ export default {
             if(calNum == 31 && i ==31){
                monthTideDatas = await this.$axios.$get('/api' + '?' + 'pc=' + this.pcNum + '&' + 'hc=' + this.hcNum + '&' + 'yr=' + timeDatas.yr + '&' + 'mn=' + timeDatas.mn + '&' + 'dy=' + 31 + '&' + 'rg=day');
             };
-            console.log(monthTideDatas);
             
             let dayTideDatas = [];
             let portName = monthTideDatas.tide.port.harbor_namej;
@@ -354,7 +353,6 @@ export default {
             this.resultTideDatas[this.resultTideDatas.length] = dayTideDatas;
             this.mobileContainer = true;
          };
-         console.log(this.resultTideDatas);
          // ユーザーの設定した地域で画像APIを取得
          this.detailView = '/img-api' + '?' + 'pc=' + this.pcNum + '&' + 'hc=' + this.hcNum + '&' + 'yr=' + timeDatas.yr + '&' + 'mn=' + timeDatas.mn + '&' + 'dy=';
          // カレンダーをON

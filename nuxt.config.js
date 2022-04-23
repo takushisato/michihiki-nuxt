@@ -1,3 +1,6 @@
+const baseApiUrl = process.env.BASE_API_URL || "https://api.tide736.net/get_tide.php/";
+const baseImgiUrl = process.env.BASE_IMG_URL || "https://api.tide736.net/tide_image.php/";
+
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
@@ -50,16 +53,18 @@ export default {
   ],
 
   axios: {
+    redentials: true,
     proxy: true,
+    debug: true
   },
 
   proxy: {
     '/api': {
-      target: 'https://api.tide736.net/get_tide.php/',
+      target: baseApiUrl,
       pathRewrite: {'^/api': ''}
     },
     '/img-api': {
-      target: 'https://api.tide736.net/tide_image.php/',
+      target: baseImgiUrl,
       pathRewrite: {'^/img-api': ''}
     },
   },
