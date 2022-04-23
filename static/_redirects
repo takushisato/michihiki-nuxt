@@ -1,3 +1,0 @@
-+ '/api/'*  https://api.tide736.net/get_tide.php/:splat 200
-+ '/img-api/'*  https://api.tide736.net/tide_image.php/:splat 200
-/*    /index.html 200
