@@ -1,7 +1,0 @@
-[[redirects]]
-  from = "/"
-  to = "https://api.tide736.net/get_tide.php"
-  status = 200
-  force = true
-  headers = {X-From = "Netlify"}
-  signed = "API_SIGNATURE_TOKEN"
