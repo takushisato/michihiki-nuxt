@@ -144,10 +144,6 @@ footer {
         display: block;
         margin: 0 auto;
     }
-    .mobileContainer {
-        background: pink;
-        width: 850px;
-    }
 }
     
 @media (max-width: 640px) {
@@ -204,4 +200,9 @@ footer {
 #menu_bar08:checked ~ #links08 li {
     height: 35px;
     opacity: 1;
+}
+
+.mobileContainer {
+    background: pink;
+    width: 800px;
 }

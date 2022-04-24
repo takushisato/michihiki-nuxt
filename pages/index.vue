@@ -351,7 +351,6 @@ export default {
 
             // 日にち毎にまとめたデータを月単位で配列にまとめ
             this.resultTideDatas[this.resultTideDatas.length] = dayTideDatas;
-            this.mobileContainer = true;
          };
          // ユーザーの設定した地域で画像APIを取得
          this.detailView = '/img-api/' + '?' + 'pc=' + this.pcNum + '&' + 'hc=' + this.hcNum + '&' + 'yr=' + timeDatas.yr + '&' + 'mn=' + timeDatas.mn + '&' + 'dy=';
