@@ -1,6 +1,3 @@
-const baseApiUrl = process.env.BASE_API_URL || "http://localhost";
-const baseImgUrl = process.env.BASE_IMG_URL || "http://localhost";
-
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
