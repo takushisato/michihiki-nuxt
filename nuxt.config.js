@@ -1,4 +1,11 @@
+const baseApiUrl = process.env.BASE_API_URL || "http://localhost";
+const baseImgUrl = process.env.BASE_IMG_URL || "http://localhost";
 export default {
+  data(){
+    return{
+      baseApiUrl: process.env.BASE_API_URL,
+    }
+  },
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
 
@@ -57,11 +64,11 @@ export default {
 
   proxy: {
     '/api/': {
-      target: 'https://api.tide736.net/get_tide.php',
+      target: baseApiUrl,
       pathRewrite: {'^/api/': ''}
     },
     '/img-api/': {
-      target: 'https://api.tide736.net/tide_image.php',
+      target: baseImgUrl,
       pathRewrite: {'^/img-api/': ''}
     },
   },

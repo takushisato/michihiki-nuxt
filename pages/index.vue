@@ -201,7 +201,7 @@ export default {
 
    data() {
       return {
-         mobileContainer: false,
+         mobileContainer: false, // mobileクリック後に変更するCSS
          timeDatas: timeDatas, // datasディレクトリで取得した時間
          prefectures: prefectures, //  datasディレクトにある都道府県データ
          pcNum: '',  // 都道府県番号
