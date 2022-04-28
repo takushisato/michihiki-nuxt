@@ -1,5 +1,5 @@
 body {
-    background-color: skyblue;
+    background-color: #79BAF2;
 }
 
 header {
@@ -83,7 +83,9 @@ header {
 }
 
 #calendar {
-    min-width: 800px;
+    min-width: 850px;
+    margin: 0 auto;
+    background: white;
 }
 
 footer {

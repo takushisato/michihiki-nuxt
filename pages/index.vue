@@ -1,5 +1,5 @@
 <template>
-<div :class="{ mobileContainer }">
+<div>
    <Header />
    <div class="container m-auto text-center select-none text-lg">
       <br><br>
@@ -201,7 +201,6 @@ export default {
 
    data() {
       return {
-         mobileContainer: false, // mobileクリック後に変更するCSS
          timeDatas: timeDatas, // datasディレクトリで取得した時間
          prefectures: prefectures, //  datasディレクトにある都道府県データ
          pcNum: '',  // 都道府県番号
@@ -354,9 +353,9 @@ export default {
          };
          // ユーザーの設定した地域で画像APIを取得
          this.detailView = '/img-api/' + '?' + 'pc=' + this.pcNum + '&' + 'hc=' + this.hcNum + '&' + 'yr=' + timeDatas.yr + '&' + 'mn=' + timeDatas.mn + '&' + 'dy=';
-         // カレンダーをON
-         this.calendarSwich = true;
-         this.isShow = false;
+         
+         this.calendarSwich = true; //カレンダーの横幅を増幅
+         this.isShow = false; //地域選択画面オフ
          this.choiceHc = '';
          return this.resultTideDatas, this.detailView, this.calendarSwich;
       },

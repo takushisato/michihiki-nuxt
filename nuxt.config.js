@@ -1,5 +1,3 @@
-const baseApiUrl = process.env.BASE_API_URL || "http://localhost";
-const baseImgUrl = process.env.BASE_IMG_URL || "http://localhost";
 export default {
   data(){
     return{
@@ -64,11 +62,11 @@ export default {
 
   proxy: {
     '/api/': {
-      target: baseApiUrl,
+      target: 'https://api.tide736.net/get_tide.php/',
       pathRewrite: {'^/api/': ''}
     },
     '/img-api/': {
-      target: baseImgUrl,
+      target: 'https://api.tide736.net/tide_image.php/',
       pathRewrite: {'^/img-api/': ''}
     },
   },
