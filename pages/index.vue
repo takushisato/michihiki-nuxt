@@ -190,7 +190,8 @@
          <h1 class="text-3xl">{{ timeDatas.yr }}年{{ timeDatas.mn }}月</h1>
          <h1>『詳細図』をクリックするとグラフが参照できます</h1>
          <table class="m-auto">
-            <tr v-for="(weekData, weekDataIndex) in calendar" :key="weekDataIndex" class="">
+            <tr v-for="(weekData, weekDataIndex) in calendar" :key="weekDataIndex">
+               <label class="mobile-calLabel">{{ weekNumber[weekDataIndex] }}</label>
                <td v-for="(dayNumber, dayNumberIndex) in weekData" :key="dayNumberIndex" :class="{'today':isToday(dayNumber)}" class="border-2 border-gray-500 block mobileDay">
                   <div class="flex">
                      <span v-if="isToday(dayNumber)" class="bg-blue-200 text-white text-2xl font-bold m-auto">今日</span>
@@ -248,6 +249,7 @@ export default {
          resultTideDatas: [], // ユーザーが選択した港から取得したAPIから摘出したデータを入れてtemplateに返す配列
          calendarSwich: false, //カレンダーONとOFF
          weekDays:['日','月','火','水','木','金','土'], // カレンダー
+         weekNumber: ['第１週','第２週','第３週','第４週','第５週',],
          today:'', // カレンダー用
          detailView: '', // 詳細図のURLの場所を入力する変数
          detailView2: "&rg=day&w=768&h=768&lc=blue&gcs=cyan&gcf=blue&ld=on&ttd=on&tsmd=on", // 詳細図のURLの後半（このまま使用）
@@ -256,7 +258,7 @@ export default {
 
    methods: {
       //都道府県選択からの港表示まで
-      pcChoice:function(prefecture){
+      pcChoice(prefecture){
          this.calendarSwich = false;
          this.pcNum = prefecture.pcNum;
          this.ports = prefecture.port;
@@ -268,7 +270,7 @@ export default {
       },
 
       //PCとHCのparameterを代入
-      hcChoice:function(port){
+      hcChoice(port){
          this.hcNum = port.hcNum;
          this.choiceHc = port.portName;
          this.calendarSwich = false;
@@ -296,7 +298,7 @@ export default {
       },
 
       // カレンダー日付算出
-      isToday:function(day){
+      isToday(day){
          let date = timeDatas.yr + "-" + timeDatas.mn + "-" + day;
          if(this.today == date){
                return true;
@@ -403,7 +405,7 @@ export default {
 
    computed:{
       // カレンダーの処理
-      calendar:function(){
+      calendar(){
          let calendar = [];
          let dayNumber = 1;
          let firstWeekDay = new Date(timeDatas.yr, timeDatas.mn - 1, 1).getDay();
