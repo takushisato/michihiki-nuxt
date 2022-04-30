@@ -112,6 +112,9 @@ footer {
     .mobile-local, .mobile-direction {
         display: none;
     }
+    .mobileCalendar {
+        display: none;
+    }
 }
 
 /* Extra Large (xl) */
@@ -122,6 +125,12 @@ footer {
     .mobile-local, .mobile-direction {
         display: none;
     }
+    .mobileCalendar {
+        display: none;
+    }
+    .pcCalendar {
+        display: block;
+    }
 }
 
 /* Large (lg) */
@@ -131,6 +140,12 @@ footer {
     }
     .mobile-local, .mobile-direction {
         display: none;
+    }
+    .mobileCalendar {
+        display: none;
+    }
+    .pcCalendar {
+        display: block;
     }
 }
 
@@ -145,6 +160,13 @@ footer {
     .calendarChange {
         display: block;
         margin: 0 auto;
+    }
+    .mobileCalendar {
+        margin: 20px auto;
+        display: block;
+    }
+    .pcCalendar {
+        display: none;
     }
 }
     
@@ -204,7 +226,7 @@ footer {
     opacity: 1;
 }
 
-.mobileContainer {
-    background: pink;
-    width: 800px;
+.mobileDay {
+    margin: auto;
+    min-height: 250px;
 }

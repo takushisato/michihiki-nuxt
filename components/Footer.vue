@@ -1,4 +1,4 @@
-<template>
+<template> 
     <footer>
         <div class="footer-twitter text-center block pb-4 text-lg">
           <br>

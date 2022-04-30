@@ -55,7 +55,7 @@
                </td>
             </tr>
             <tr>
-               <th class="bg-gray-400">九州以南</th>
+               <th class="bg-gray-400">九州沖縄</th>
                <td>
                <p v-for="prefecture in prefectures[7]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</p>
                </td>
@@ -100,7 +100,7 @@
             <ul class="bg-gray-400" id="links07">
                <li v-for="prefecture in prefectures[6]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</li>
             </ul>
-         <label for="menu_bar08" class="mobile-label">九州以南</label>
+         <label for="menu_bar08" class="mobile-label">九州沖縄</label>
          <input type="checkbox" id="menu_bar08" class="mobile-input" />
             <ul class="bg-gray-400" id="links08">
                <li v-for="prefecture in prefectures[7]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</li>
@@ -145,8 +145,8 @@
          <br><br>
       </div>
 
-      <!-- カレンダー -->
-      <div v-if="calendarSwich" class="m-auto mt-10 p-10 pb-10 text-1xl" id="calendar">
+      <!-- PCカレンダー -->
+      <div v-if="calendarSwich" class="pcCalendar m-auto mt-10 p-10 pb-10 text-1xl" id="calendar">
          <h1 class="text-3xl">{{ timeDatas.yr }}年{{ timeDatas.mn }}月</h1>
          <h1>『詳細図』をクリックするとグラフが参照できます</h1>
          <table class="min-w-full text-center border-2 text-base">
@@ -184,6 +184,42 @@
             </tbody>
          </table>
       </div>
+
+      <!-- mobileカレンダー -->
+      <div v-if="calendarSwich" class="mobileCalendar">
+         <h1 class="text-3xl">{{ timeDatas.yr }}年{{ timeDatas.mn }}月</h1>
+         <h1>『詳細図』をクリックするとグラフが参照できます</h1>
+         <table class="m-auto">
+            <tr v-for="(weekData, weekDataIndex) in calendar" :key="weekDataIndex" class="">
+               <td v-for="(dayNumber, dayNumberIndex) in weekData" :key="dayNumberIndex" :class="{'today':isToday(dayNumber)}" class="border-2 border-gray-500 block mobileDay">
+                  <div class="flex">
+                     <span v-if="isToday(dayNumber)" class="bg-blue-200 text-white text-2xl font-bold m-auto">今日</span>
+                     <span v-else class="text-2xl m-auto">{{ dayNumber }}</span>
+                     <span class="text-lg">{{ weekDays[dayNumberIndex] }}</span>
+                        <div v-if="dayNumber > 0">
+                           <p class="text-2xl">{{ resultTideDatas[dayNumber-1].moonTitle }}</p>
+                           <div class="flex">
+                              <div class="block m-3">
+                                 <p>満潮➀：{{ resultTideDatas[dayNumber-1].floodTime1 }}</p>
+                                 <p class="mb-1">（{{ resultTideDatas[dayNumber-1].floodCm1 }}cm）</p>
+                                 <p>満潮➁：{{ resultTideDatas[dayNumber-1].floodTime2 }}</p>
+                                 <p>（{{ resultTideDatas[dayNumber-1].floodCm2 }}cm）</p>
+                              </div>
+                              <div class="block m-3">
+                                 <p>干潮➀：{{ resultTideDatas[dayNumber-1].eddTime1 }}</p>
+                                 <p class="mb-1">（{{ resultTideDatas[dayNumber-1].eddCm1 }}cm）</p>
+                                 <p>干潮➁：{{ resultTideDatas[dayNumber-1].eddTime2 }}</p>
+                                 <p>（{{ resultTideDatas[dayNumber-1].eddCm2 }}cm）</p>
+                              </div>
+                           </div>
+                           <p>{{choicePc}}・{{ resultTideDatas[dayNumber-1].portName}}</p>
+                           <a :href=" detailView + dayNumber +  detailView2 " class="text-2xl text-center hover:opacity-30" target=”_blank”>詳細図</a>
+                        </div>
+                  </div>      
+               </td>
+            </tr>
+         </table>
+      </div>
    </div>
    <Footer />
 </div>
@@ -211,7 +247,6 @@ export default {
          choiceHc: '', // ユーザーが選択した港
          resultTideDatas: [], // ユーザーが選択した港から取得したAPIから摘出したデータを入れてtemplateに返す配列
          calendarSwich: false, //カレンダーONとOFF
-         locations: ['北海道', '東北', '関東', '中部', '近畿', '中国', '四国', '九州・沖縄'],
          weekDays:['日','月','火','水','木','金','土'], // カレンダー
          today:'', // カレンダー用
          detailView: '', // 詳細図のURLの場所を入力する変数
@@ -393,4 +428,3 @@ export default {
    
 }
 </script>
-// エラー修正済み
