@@ -187,11 +187,18 @@
 
       <!-- mobileカレンダー -->
       <div v-if="calendarSwich" class="mobileCalendar">
+          <div class="m-3 border-2 nav">
+            <a href="#fast" class="m-3"><p>第１週を見る</p></a>
+            <a href="#second" class="m-3"><p>第２週を見る</p></a>
+            <a href="#third" class="m-3"><p>第３週を見る</p></a>
+            <a href="#ford" class="m-3"><p>第４週を見る</p></a>
+            <a href="#five" class="m-3"><p>第５週を見る</p></a>
+         </div>
          <h1 class="text-3xl">{{ timeDatas.yr }}年{{ timeDatas.mn }}月</h1>
          <h1>『詳細図』をクリックするとグラフが参照できます</h1>
          <table class="m-auto">
             <tr v-for="(weekData, weekDataIndex) in calendar" :key="weekDataIndex">
-               <label class="mobile-calLabel">{{ weekNumber[weekDataIndex] }}</label>
+               <label class="mobile-calLabel" :id="weekNuv[weekDataIndex]">{{ weekNumber[weekDataIndex] }}</label>
                <td v-for="(dayNumber, dayNumberIndex) in weekData" :key="dayNumberIndex" :class="{'today':isToday(dayNumber)}" class="border-2 border-gray-500 block mobileDay">
                   <div class="flex">
                      <span v-if="isToday(dayNumber)" class="bg-blue-200 text-white text-2xl font-bold m-auto">今日</span>
@@ -221,6 +228,9 @@
             </tr>
          </table>
       </div>
+      <div class="mt-2 mb-3 mr-3 text-right">
+         <button @click="returnTop()" class="p-2 bg-blue-400 text-white rounded-full h-20 w-20">↑↑</button>
+      </div>
    </div>
    <Footer />
 </div>
@@ -249,10 +259,16 @@ export default {
          resultTideDatas: [], // ユーザーが選択した港から取得したAPIから摘出したデータを入れてtemplateに返す配列
          calendarSwich: false, //カレンダーONとOFF
          weekDays:['日','月','火','水','木','金','土'], // カレンダー
-         weekNumber: ['第１週','第２週','第３週','第４週','第５週',],
+         weekNuv: ['fast', 'second', 'third', 'ford', 'five'], //mobileカレンダー　ページスクロール用
+         weekNumber: ['第１週','第２週','第３週','第４週','第５週'], //mobileカレンダー　週の表示用
          today:'', // カレンダー用
          detailView: '', // 詳細図のURLの場所を入力する変数
          detailView2: "&rg=day&w=768&h=768&lc=blue&gcs=cyan&gcf=blue&ld=on&ttd=on&tsmd=on", // 詳細図のURLの後半（このまま使用）
+         fastDiv: '',
+         secondDiv: '',
+         thirdDiv: '',
+         fordDiv: '',
+         fiveDiv: '',
          }
       },
 
@@ -304,6 +320,43 @@ export default {
                return true;
          }
          return false;
+      },
+
+      // ページスクロール
+      // returnScroll(value) {
+      //    if(value == 1){
+      //    window.scrollTo({
+      //       top: this.fastDiv.y,
+      //       behavior: 'smooth'
+      //    })
+      //    } else if(value == 2){
+      //    window.scrollTo({
+      //       top: this.secondDiv.y,
+      //       behavior: 'smooth'
+      //    })
+      //    } else if(value == 3){
+      //    window.scrollTo({
+      //       top: this.thirdDiv.y,
+      //       behavior: 'smooth'
+      //    })
+      //    } else if(value == 4){
+      //    window.scrollTo({
+      //       top: this.fordDiv.y,
+      //       behavior: 'smooth'
+      //    })
+      //    } else {
+      //    window.scrollTo({
+      //       top: this.fiveDiv.y,
+      //       behavior: 'smooth'
+      //    })
+      //    }
+      // },
+
+      returnTop(){
+         window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+         })
       },
 
       // パラメータに現在日時を入力してAPI取得
@@ -425,7 +478,7 @@ export default {
             calendar.push(weekData); 
          }
          return calendar;
-      },  
+      }, 
    },
    
 }
