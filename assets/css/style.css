@@ -151,6 +151,9 @@ footer {
 
 /* Medium (md) */
 @media (max-width: 768px) {
+    .container {
+        width: 90%;
+    }
     .local, .direction {
         display: none;
     }
@@ -166,7 +169,8 @@ footer {
         display: block;
     }
     .nav {
-        width: 350px;
+        max-width: 350px;
+        width: 90%;
         margin: auto;
     }
     .pcCalendar {
@@ -226,11 +230,12 @@ footer {
 #menu_bar06:checked ~ #links06 li,
 #menu_bar07:checked ~ #links07 li,
 #menu_bar08:checked ~ #links08 li {
-    height: 35px;
+    height: 40px;
     opacity: 1;
 }
 
 .mobileDay {
     margin: auto;
-    min-height: 250px;
+    min-height: 200px;
+    max-width: 270px;
 }

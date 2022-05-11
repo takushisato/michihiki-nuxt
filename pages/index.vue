@@ -1,67 +1,70 @@
 <template>
 <div>
    <Header />
-   <div class="container m-auto text-center select-none text-lg">
-      <br><br>
+   <div class="container m-auto text-center select-none" id="top">
+      <div class="mb-32"></div>
       <h1 class="font-bold">当サイトは潮の満引きをグラフで確認できる潮見カレンダー表示サイトです</h1>
+      <br>
       <h1 class="font-bold">釣りの他、磯遊びや潮干狩り、海遊びの検討にお使いください</h1>
-      <br><br>
+      <br>
       <h1 class="font-bold">調べたい都道府県を選択してください</h1>
-      <div v-if="isShow == false && calendarSwich == false" class="mb-40"></div>
+      <div class="mb-32"></div>
 
       <!-- PC画面の都道府県テーブル -->
-      <table class="local bg-gray-300">
-         <tbody>
-            <tr>
-               <th class="bg-gray-400">北海道以北</th>
-               <td>
-               <p v-for="prefecture in prefectures[0]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</p>
-               </td>
-            </tr>
-            <tr>
-               <th class="bg-gray-400">東北地方</th>
-               <td>
-               <p v-for="prefecture in prefectures[1]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</p>
-               </td>
-            </tr>
-            <tr>
-               <th class="bg-gray-400">関東地方</th>
-               <td>
-               <p v-for="prefecture in prefectures[2]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</p>
-               </td>
-            </tr>
-            <tr>
-               <th class="bg-gray-400">中部地方</th>
-               <td>
-               <p v-for="prefecture in prefectures[3]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</p>
-               </td>
-            </tr>
-            <tr>
-               <th class="bg-gray-400">近畿地方</th>
-               <td>
-               <p v-for="prefecture in prefectures[4]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</p>
-               </td>
-            </tr>
-            <tr>
-               <th class="bg-gray-400">中国地方</th>
-               <td>
-               <p v-for="prefecture in prefectures[5]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</p>
-               </td>
-            </tr>
-            <tr>
-               <th class="bg-gray-400">四国地方</th>
-               <td>
-               <p v-for="prefecture in prefectures[6]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</p>
-               </td>
-            </tr>
-            <tr>
-               <th class="bg-gray-400">九州沖縄</th>
-               <td>
-               <p v-for="prefecture in prefectures[7]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</p>
-               </td>
-            </tr>
-         </tbody>
-      </table>
+      <div>
+         <table class="local bg-gray-300">
+            <tbody>
+               <tr>
+                  <th class="bg-gray-400">北海道以北</th>
+                  <td>
+                  <p v-for="prefecture in prefectures[0]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</p>
+                  </td>
+               </tr>
+               <tr>
+                  <th class="bg-gray-400">東北地方</th>
+                  <td>
+                  <p v-for="prefecture in prefectures[1]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</p>
+                  </td>
+               </tr>
+               <tr>
+                  <th class="bg-gray-400">関東地方</th>
+                  <td>
+                  <p v-for="prefecture in prefectures[2]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</p>
+                  </td>
+               </tr>
+               <tr>
+                  <th class="bg-gray-400">中部地方</th>
+                  <td>
+                  <p v-for="prefecture in prefectures[3]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</p>
+                  </td>
+               </tr>
+               <tr>
+                  <th class="bg-gray-400">近畿地方</th>
+                  <td>
+                  <p v-for="prefecture in prefectures[4]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</p>
+                  </td>
+               </tr>
+               <tr>
+                  <th class="bg-gray-400">中国地方</th>
+                  <td>
+                  <p v-for="prefecture in prefectures[5]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</p>
+                  </td>
+               </tr>
+               <tr>
+                  <th class="bg-gray-400">四国地方</th>
+                  <td>
+                  <p v-for="prefecture in prefectures[6]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</p>
+                  </td>
+               </tr>
+               <tr>
+                  <th class="bg-gray-400">九州沖縄</th>
+                  <td>
+                  <p v-for="prefecture in prefectures[7]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</p>
+                  </td>
+               </tr>
+            </tbody>
+         </table>
+      </div>
 
       <!-- モバイルの都道府県の選択画面 -->
       <div class="bg-gray-300 mobile-local">
@@ -114,7 +117,7 @@
          <!-- PC用 -->
          <div class="calendarChange text-center">
             <button class="ml-auto mr-10 mt-2 hover:opacity-30 direction" @click="lastMonth()">＜＜ 前の月を見る</button>
-            <p class="mt-2 mb-2 ml-10 mr-10 pt-2 text-2xl">{{ this.timeDatas.yr }}年 {{ this.timeDatas.mn }}月</p>
+            <p class="mt-2 mb-2 ml-10 mr-10 pt-2 text-xl">{{ this.timeDatas.yr }}年 {{ this.timeDatas.mn }}月</p>
             <button class="mr-auto ml-10 mt-2 hover:opacity-30 direction" @click="nextMonth()">次の月を見る ＞＞</button>
          </div>
 
@@ -127,7 +130,7 @@
 
          <h1 class="font-bold">沿岸地域を選択してください</h1>
          <ul>
-            <li v-for="port in ports" :key="port.portName" @click="hcChoice(port)" class="text-center hover:opacity-30">
+            <li v-for="port in ports" :key="port.portName" @click="hcChoice(port)" class="text-center hover:opacity-30 cursor-pointer">
                {{ port.portName }}
             </li>
          </ul>
@@ -135,19 +138,19 @@
          <br><br>
          <br>
          <h1 class="font-bold mb-1">選択した内容に問題が無ければ下の『調べる！』をクリックください</h1>
-         <p>都道府県：{{ choicePc }}</p>
-         <p>選択した沿岸地域：{{ choiceHc }}</p>
-         <p>選択した月：{{ this.timeDatas.yr }}年 {{ this.timeDatas.mn }}月</p>
          <br>
-         <button v-if="choiceHc != ''" @click="asyncData()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">調べる!</button>
+         <p>{{ choicePc }}　{{ choiceHc }}</p>
+         <p>{{ this.timeDatas.yr }}年{{ this.timeDatas.mn }}月</p>
+         <br>
+         <button v-if="choiceHc != ''" @click="asyncData()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded"><a href="#top">調べる!</a></button>
          <button v-if="choiceHc == ''" class="bg-blue-300 text-white font-bold py-2 px-4 border border-blue-300 rounded opacity-20 pointer-events-none">調べる!</button>
          <p v-if="choiceHc == ''" class="text-red-500 mt-1">沿岸地域を選択するとクリックできます</p>
          <br><br>
       </div>
 
       <!-- PCカレンダー -->
-      <div v-if="calendarSwich" class="pcCalendar m-auto mt-10 p-10 pb-10 text-1xl" id="calendar">
-         <h1 class="text-3xl">{{ timeDatas.yr }}年{{ timeDatas.mn }}月</h1>
+      <div v-if="calendarSwich" class="pcCalendar m-auto mt-10 p-10 pb-10 text-lg" id="calendar">
+         <h1 class="text-xl">{{ timeDatas.yr }}年{{ timeDatas.mn }}月</h1>
          <h1>『詳細図』をクリックするとグラフが参照できます</h1>
          <table class="min-w-full text-center border-2 text-base">
             <thead class="bg-blue-300 border-2 border-gray-500">
@@ -156,8 +159,8 @@
             <tbody>
                   <tr v-for="(weekData, weekDataIndex) in calendar" :key="weekDataIndex" class="border-2 border-gray-500">
                      <td v-for="(dayNumber, dayNumberIndex) in weekData" :key="dayNumberIndex" :class="{'today':isToday(dayNumber)}" class="border-2 border-gray-500">
-                        <span v-if="isToday(dayNumber)" class="bg-blue-200 text-white text-2xl font-bold">今日</span>
-                        <span v-else class="text-2xl">{{ dayNumber }}</span>
+                        <span v-if="isToday(dayNumber)" class="bg-blue-200 text-white text-xl font-bold">今日</span>
+                        <span v-else class="text-xl">{{ dayNumber }}</span>
                         <div v-if="dayNumber > 0">
                            <p class="text-lg">{{ resultTideDatas[dayNumber-1].moonTitle }}</p>
                            <br>
@@ -177,7 +180,7 @@
                            <p>月入：{{ resultTideDatas[dayNumber-1].moonSet }}</p>
                            <br>
                            <p>{{choicePc}}・{{ resultTideDatas[dayNumber-1].portName}}</p>
-                           <a :href=" detailView + dayNumber +  detailView2 " class="text-2xl text-center hover:opacity-30" target=”_blank”>詳細図</a>
+                           <a :href=" detailView + dayNumber +  detailView2 " class="text-xl text-center hover:opacity-30" target=”_blank”>詳細図</a>
                         </div>      
                      </td>
                   </tr>
@@ -188,24 +191,25 @@
       <!-- mobileカレンダー -->
       <div v-if="calendarSwich" class="mobileCalendar">
           <div class="m-3 border-2 nav">
-            <a href="#fast" class="m-3"><p>第１週を見る</p></a>
-            <a href="#second" class="m-3"><p>第２週を見る</p></a>
-            <a href="#third" class="m-3"><p>第３週を見る</p></a>
-            <a href="#ford" class="m-3"><p>第４週を見る</p></a>
-            <a href="#five" class="m-3"><p>第５週を見る</p></a>
+            <a href="#fast" class="m-1"><p>第１週を見る</p></a>
+            <a href="#second" class="m-1"><p>第２週を見る</p></a>
+            <a href="#third" class="m-1"><p>第３週を見る</p></a>
+            <a href="#ford" class="m-1"><p>第４週を見る</p></a>
+            <a href="#five" class="m-1"><p>第５週を見る</p></a>
          </div>
-         <h1 class="text-3xl">{{ timeDatas.yr }}年{{ timeDatas.mn }}月</h1>
+         <h1 class="text-2xl">{{ timeDatas.yr }}年{{ timeDatas.mn }}月</h1>
          <h1>『詳細図』をクリックするとグラフが参照できます</h1>
          <table class="m-auto">
             <tr v-for="(weekData, weekDataIndex) in calendar" :key="weekDataIndex">
-               <label class="mobile-calLabel" :id="weekNuv[weekDataIndex]">{{ weekNumber[weekDataIndex] }}</label>
-               <td v-for="(dayNumber, dayNumberIndex) in weekData" :key="dayNumberIndex" :class="{'today':isToday(dayNumber)}" class="border-2 border-gray-500 block mobileDay">
-                  <div class="flex">
+               <div class="mt-4"></div>
+               <label class="mobile-calLabel mt-5 text-xl" :id="weekNuv[weekDataIndex]">{{ weekNumber[weekDataIndex] }}</label>
+               <td v-for="(dayNumber, dayNumberIndex) in weekData" :key="dayNumberIndex" :class="{'today':isToday(dayNumber)}" class="border-2 border-gray-300 block mobileDay">
+                  <div class="flex m-1">
                      <span v-if="isToday(dayNumber)" class="bg-blue-200 text-white text-2xl font-bold m-auto">今日</span>
-                     <span v-else class="text-2xl m-auto">{{ dayNumber }}</span>
+                     <span v-else class="text-3xl m-auto ml-1">{{ dayNumber }}</span>
                      <span class="text-lg">{{ weekDays[dayNumberIndex] }}</span>
                         <div v-if="dayNumber > 0">
-                           <p class="text-2xl">{{ resultTideDatas[dayNumber-1].moonTitle }}</p>
+                           <p class="text-xl">{{ resultTideDatas[dayNumber-1].moonTitle }}</p>
                            <div class="flex">
                               <div class="block m-3">
                                  <p>満潮➀：{{ resultTideDatas[dayNumber-1].floodTime1 }}</p>
@@ -221,15 +225,15 @@
                               </div>
                            </div>
                            <p>{{choicePc}}・{{ resultTideDatas[dayNumber-1].portName}}</p>
-                           <a :href=" detailView + dayNumber +  detailView2 " class="text-2xl text-center hover:opacity-30" target=”_blank”>詳細図</a>
+                           <a :href=" detailView + dayNumber +  detailView2 " class="text-xl text-center hover:opacity-30" target=”_blank”>詳細図</a>
                         </div>
-                  </div>      
+                  </div>
                </td>
             </tr>
          </table>
       </div>
-      <div class="mt-2 mb-3 mr-3 text-right">
-         <button @click="returnTop()" class="p-2 bg-blue-400 text-white rounded-full h-20 w-20">↑↑</button>
+      <div v-if="isShow||calendarSwich" class="mt-auto mb-2">
+         <img src="~/static/yajirusi.png" alt="矢印の画像" class="rounded-full h-11 w-11 bg-blue-600 p-2 mr-2 mb-2 ml-auto hover:opacity-30 cursor-pointer" @click="returnTop()">
       </div>
    </div>
    <Footer />
