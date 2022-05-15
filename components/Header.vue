@@ -1,6 +1,6 @@
 <template>
 <div>
-    <header>
+    <header class="select-none">
     <div class="title">
     <h2 class="text-1xl">グラフで確認する潮見表サイト</h2>
     <nuxt-link to="/"><h1 class="text-5xl hover:opacity-30">みちひき</h1></nuxt-link>

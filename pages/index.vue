@@ -1,14 +1,14 @@
 <template>
 <div>
    <Header />
-   <div class="container m-auto text-center select-none" id="top">
-      <div class="mb-32"></div>
+   <div class="container m-auto text-center select-none">
+      <div class="mb-16"></div>
       <h1 class="font-bold">当サイトは潮の満引きをグラフで確認できる潮見カレンダー表示サイトです</h1>
       <br>
       <h1 class="font-bold">釣りの他、磯遊びや潮干狩り、海遊びの検討にお使いください</h1>
       <br>
       <h1 class="font-bold">調べたい都道府県を選択してください</h1>
-      <div class="mb-32"></div>
+      <div class="mb-16"></div>
 
       <!-- PC画面の都道府県テーブル -->
       <div>
@@ -68,50 +68,51 @@
 
       <!-- モバイルの都道府県の選択画面 -->
       <div class="bg-gray-300 mobile-local">
-         <label for="menu_bar01" class="mobile-label">北海道以北</label>
+         <label for="menu_bar01" class="mobile-label border-2 border-gray-400 m-0">北海道以北</label>
          <input type="checkbox" id="menu_bar01" class="mobile-input" />
             <ul class="bg-gray-400" id="links01">
-               <li v-for="prefecture in prefectures[0]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</li>
+               <li v-for="prefecture in prefectures[0]" :key="prefecture.name" @click="pcChoice(prefecture)"><a href="#choicePal">{{ prefecture.name }}</a></li>
             </ul>
-         <label for="menu_bar02" class="mobile-label">東北地方</label>
+         <label for="menu_bar02" class="mobile-label border-2 border-gray-400 m-0">東北地方</label>
          <input type="checkbox" id="menu_bar02" class="mobile-input" />
             <ul class="bg-gray-400" id="links02">
-               <li v-for="prefecture in prefectures[1]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</li>
+               <li v-for="prefecture in prefectures[1]" :key="prefecture.name" @click="pcChoice(prefecture)"><a href="#choicePal">{{ prefecture.name }}</a></li>
             </ul>
-         <label for="menu_bar03" class="mobile-label">関東地方</label>
+         <label for="menu_bar03" class="mobile-label border-2 border-gray-400">関東地方</label>
          <input type="checkbox" id="menu_bar03" class="mobile-input" />
             <ul class="bg-gray-400" id="links03">
-               <li v-for="prefecture in prefectures[2]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</li>
+               <li v-for="prefecture in prefectures[2]" :key="prefecture.name" @click="pcChoice(prefecture)"><a href="#choicePal">{{ prefecture.name }}</a></li>
             </ul>
-         <label for="menu_bar04" class="mobile-label">中部地方</label>
+         <label for="menu_bar04" class="mobile-label border-2 border-gray-400">中部地方</label>
          <input type="checkbox" id="menu_bar04" class="mobile-input" />
             <ul class="bg-gray-400" id="links04">
-               <li v-for="prefecture in prefectures[3]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</li>
+               <li v-for="prefecture in prefectures[3]" :key="prefecture.name" @click="pcChoice(prefecture)"><a href="#choicePal">{{ prefecture.name }}</a></li>
             </ul>
-         <label for="menu_bar05" class="mobile-label">近畿地方</label>
+         <label for="menu_bar05" class="mobile-label border-2 border-gray-400">近畿地方</label>
          <input type="checkbox" id="menu_bar05" class="mobile-input" />
             <ul class="bg-gray-400" id="links05">
-               <li v-for="prefecture in prefectures[4]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</li>
+               <li v-for="prefecture in prefectures[4]" :key="prefecture.name" @click="pcChoice(prefecture)"><a href="#choicePal">{{ prefecture.name }}</a></li>
             </ul>
-         <label for="menu_bar06" class="mobile-label">中国地方</label>
+         <label for="menu_bar06" class="mobile-label border-2 border-gray-400">中国地方</label>
          <input type="checkbox" id="menu_bar06" class="mobile-input" />
             <ul class="bg-gray-400" id="links06">
-               <li v-for="prefecture in prefectures[5]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</li>
+               <li v-for="prefecture in prefectures[5]" :key="prefecture.name" @click="pcChoice(prefecture)"><a href="#choicePal">{{ prefecture.name }}</a></li>
             </ul>
-         <label for="menu_bar07" class="mobile-label">四国地方</label>
+         <label for="menu_bar07" class="mobile-label border-2 border-gray-400">四国地方</label>
          <input type="checkbox" id="menu_bar07" class="mobile-input" />
             <ul class="bg-gray-400" id="links07">
-               <li v-for="prefecture in prefectures[6]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</li>
+               <li v-for="prefecture in prefectures[6]" :key="prefecture.name" @click="pcChoice(prefecture)"><a href="#choicePal">{{ prefecture.name }}</a></li>
             </ul>
-         <label for="menu_bar08" class="mobile-label">九州沖縄</label>
+         <label for="menu_bar08" class="mobile-label border-2 border-gray-400">九州沖縄</label>
          <input type="checkbox" id="menu_bar08" class="mobile-input" />
             <ul class="bg-gray-400" id="links08">
-               <li v-for="prefecture in prefectures[7]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</li>
+               <li v-for="prefecture in prefectures[7]" :key="prefecture.name" @click="pcChoice(prefecture)"><a href="#choicePal">{{ prefecture.name }}</a></li>
             </ul>
       </div>
+      <br>
 
       <!-- 港と月選択画面 -->
-      <div v-if="isShow" class="local2">
+      <div v-if="isShow" class="local2" id="choicePal">
          <br><br>
          <h1 class="font-bold">月を選択してください</h1>
          <!-- PC用 -->
@@ -131,7 +132,7 @@
          <h1 class="font-bold">沿岸地域を選択してください</h1>
          <ul>
             <li v-for="port in ports" :key="port.portName" @click="hcChoice(port)" class="text-center hover:opacity-30 cursor-pointer">
-               {{ port.portName }}
+               <a href="#choiceButton">{{ port.portName }}</a>
             </li>
          </ul>
          <div class="clear"></div>
@@ -139,10 +140,10 @@
          <br>
          <h1 class="font-bold mb-1">選択した内容に問題が無ければ下の『調べる！』をクリックください</h1>
          <br>
-         <p>{{ choicePc }}　{{ choiceHc }}</p>
-         <p>{{ this.timeDatas.yr }}年{{ this.timeDatas.mn }}月</p>
+         <p class="text-lg">{{ choicePc }}　{{ choiceHc }}</p>
+         <p class="text-lg">{{ this.timeDatas.yr }}年{{ this.timeDatas.mn }}月</p>
          <br>
-         <button v-if="choiceHc != ''" @click="asyncData()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded"><a href="#top">調べる!</a></button>
+         <button v-if="choiceHc != ''" @click="asyncData()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded" id="choiceButton">調べる!</button>
          <button v-if="choiceHc == ''" class="bg-blue-300 text-white font-bold py-2 px-4 border border-blue-300 rounded opacity-20 pointer-events-none">調べる!</button>
          <p v-if="choiceHc == ''" class="text-red-500 mt-1">沿岸地域を選択するとクリックできます</p>
          <br><br>
@@ -232,10 +233,8 @@
             </tr>
          </table>
       </div>
-      <div v-if="isShow||calendarSwich" class="mt-auto mb-2">
-         <img src="~/static/yajirusi.png" alt="矢印の画像" class="rounded-full h-11 w-11 bg-blue-600 p-2 mr-2 mb-2 ml-auto hover:opacity-30 cursor-pointer" @click="returnTop()">
-      </div>
    </div>
+   <img v-show="buttonActive" src="~/static/yajirusi.png" alt="矢印の画像" class="rounded-full h-11 w-11 bg-blue-600 p-2 mr-2 mb-2 cursor-pointer fixed bottom-0 right-0" @click="returnTop()">
    <Footer />
 </div>
 </template>
@@ -268,11 +267,8 @@ export default {
          today:'', // カレンダー用
          detailView: '', // 詳細図のURLの場所を入力する変数
          detailView2: "&rg=day&w=768&h=768&lc=blue&gcs=cyan&gcf=blue&ld=on&ttd=on&tsmd=on", // 詳細図のURLの後半（このまま使用）
-         fastDiv: '',
-         secondDiv: '',
-         thirdDiv: '',
-         fordDiv: '',
-         fiveDiv: '',
+         buttonActive: false,
+         scroll: 0,
          }
       },
 
@@ -326,41 +322,21 @@ export default {
          return false;
       },
 
-      // ページスクロール
-      // returnScroll(value) {
-      //    if(value == 1){
-      //    window.scrollTo({
-      //       top: this.fastDiv.y,
-      //       behavior: 'smooth'
-      //    })
-      //    } else if(value == 2){
-      //    window.scrollTo({
-      //       top: this.secondDiv.y,
-      //       behavior: 'smooth'
-      //    })
-      //    } else if(value == 3){
-      //    window.scrollTo({
-      //       top: this.thirdDiv.y,
-      //       behavior: 'smooth'
-      //    })
-      //    } else if(value == 4){
-      //    window.scrollTo({
-      //       top: this.fordDiv.y,
-      //       behavior: 'smooth'
-      //    })
-      //    } else {
-      //    window.scrollTo({
-      //       top: this.fiveDiv.y,
-      //       behavior: 'smooth'
-      //    })
-      //    }
-      // },
-
+      // TOPに戻るボタン
       returnTop(){
          window.scrollTo({
             top: 0,
             behavior: 'smooth'
          })
+      },
+      scrollWindow() {
+      const top = 500 // TOPに戻るボタンを表示させたい位置
+      this.scroll = window.scrollY
+         if (top <= this.scroll) {
+         this.buttonActive = true;
+         } else {
+         this.buttonActive = false;
+         }
       },
 
       // パラメータに現在日時を入力してAPI取得
@@ -458,6 +434,7 @@ export default {
    mounted() {
       // カレンダー日付取得用
       this.today = timeDatas.yr + '-' + timeDatas.mn + '-' + timeDatas.dy;
+      window.addEventListener('scroll', this.scrollWindow);
    },
 
    computed:{

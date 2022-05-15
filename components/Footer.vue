@@ -1,5 +1,5 @@
 <template> 
-    <footer>
+    <footer class="select-none">
         <div class="footer-twitter text-center block pb-4 text-lg">
           <br>
           <nuxt-link to="/contact" class="text-xl hover:opacity-30">お問い合わせはこちら</nuxt-link>
