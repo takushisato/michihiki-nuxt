@@ -191,13 +191,6 @@
 
       <!-- mobileカレンダー -->
       <div v-if="calendarSwich" class="mobileCalendar">
-          <div class="m-3 border-2 nav">
-            <a href="#fast" class="m-1"><p>第１週を見る</p></a>
-            <a href="#second" class="m-1"><p>第２週を見る</p></a>
-            <a href="#third" class="m-1"><p>第３週を見る</p></a>
-            <a href="#ford" class="m-1"><p>第４週を見る</p></a>
-            <a href="#five" class="m-1"><p>第５週を見る</p></a>
-         </div>
          <h1 class="text-2xl">{{ timeDatas.yr }}年{{ timeDatas.mn }}月</h1>
          <h1>『詳細図』をクリックするとグラフが参照できます</h1>
          <table class="m-auto">
@@ -232,9 +225,19 @@
                </td>
             </tr>
          </table>
+         <div class="border-2 bg-white text-2xl fixed bottom-0 left-0 nav">
+            <h2 class="bg-white text-sm mb-1 ml-3 text-left">何週目かクリック下さい</h2>
+            <div class="flex">
+               <a href="#fast" class="m-auto"><p>➀</p></a>
+               <a href="#second" class="m-auto"><p>➁</p></a>
+               <a href="#third" class="m-auto"><p>➂</p></a>
+               <a href="#ford" class="m-auto"><p>➃</p></a>
+               <a href="#five" class="m-auto"><p>➄</p></a>
+            </div>
+         </div>
       </div>
    </div>
-   <img v-show="buttonActive" src="~/static/yajirusi.png" alt="矢印の画像" class="rounded-full h-11 w-11 bg-blue-600 p-2 mr-2 mb-2 cursor-pointer fixed bottom-0 right-0" @click="returnTop()">
+   <img v-show="buttonActive" src="~/static/yajirusi.png" alt="矢印の画像" class="rounded-full h-11 w-11 bg-blue-600 p-2 mr-2 mb-2 cursor-pointer fixed bottom-10 right-0" @click="returnTop()">
    <Footer />
 </div>
 </template>
