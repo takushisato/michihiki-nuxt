@@ -434,6 +434,8 @@ export default {
    mounted() {
       // カレンダー日付取得用
       this.today = timeDatas.yr + '-' + timeDatas.mn + '-' + timeDatas.dy;
+
+      //ページスクロール用
       window.addEventListener('scroll', this.scrollWindow);
    },
 

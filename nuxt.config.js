@@ -55,9 +55,9 @@ export default {
   ],
 
   axios: {
-    redentials: true,
+    // redentials: true,
     proxy: true,
-    debug: true
+    // debug: true
   },
 
   proxy: {

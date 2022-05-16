@@ -9,7 +9,7 @@
     <div class="bg-blue-800 text-center text-white text-lg">
       <nuxt-link to="/precautions" class="hover:opacity-30">注意事項</nuxt-link>
     </div>
-    <head><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4568664831429987"
-     crossorigin="anonymous"></script></head>
+    <!-- <head><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4568664831429987"
+     crossorigin="anonymous"></script></head> -->
 </div>
 </template>
