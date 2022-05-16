@@ -187,6 +187,7 @@
                   </tr>
             </tbody>
          </table>
+         <img v-show="buttonActive" src="~/static/yajirusi.png" alt="矢印の画像" class="rounded-full h-11 w-11 bg-blue-600 p-2 mr-2 mb-2 cursor-pointer fixed bottom-2 right-0" @click="returnTop()">
       </div>
 
       <!-- mobileカレンダー -->
@@ -205,13 +206,13 @@
                         <div v-if="dayNumber > 0">
                            <p class="text-xl">{{ resultTideDatas[dayNumber-1].moonTitle }}</p>
                            <div class="flex">
-                              <div class="block m-3">
+                              <div class="block m-1">
                                  <p>満潮➀：{{ resultTideDatas[dayNumber-1].floodTime1 }}</p>
                                  <p class="mb-1">（{{ resultTideDatas[dayNumber-1].floodCm1 }}cm）</p>
                                  <p>満潮➁：{{ resultTideDatas[dayNumber-1].floodTime2 }}</p>
                                  <p>（{{ resultTideDatas[dayNumber-1].floodCm2 }}cm）</p>
                               </div>
-                              <div class="block m-3">
+                              <div class="block m-1">
                                  <p>干潮➀：{{ resultTideDatas[dayNumber-1].eddTime1 }}</p>
                                  <p class="mb-1">（{{ resultTideDatas[dayNumber-1].eddCm1 }}cm）</p>
                                  <p>干潮➁：{{ resultTideDatas[dayNumber-1].eddTime2 }}</p>
@@ -225,8 +226,9 @@
                </td>
             </tr>
          </table>
+         <img v-show="buttonActive" src="~/static/yajirusi.png" alt="矢印の画像" class="rounded-full h-11 w-11 bg-blue-600 p-2 mr-2 mb-2 cursor-pointer fixed bottom-14 right-0" @click="returnTop()">
          <div class="border-2 bg-white text-2xl fixed bottom-0 left-0 nav">
-            <h2 class="bg-white text-sm mb-1 ml-3 text-left">何週目かクリック下さい</h2>
+            <h2 class="text-sm mb-1 ml-3 text-left">何週目を確認しますか？</h2>
             <div class="flex">
                <a href="#fast" class="m-auto"><p>➀</p></a>
                <a href="#second" class="m-auto"><p>➁</p></a>
@@ -237,8 +239,7 @@
          </div>
       </div>
    </div>
-   <img v-show="buttonActive" src="~/static/yajirusi.png" alt="矢印の画像" class="rounded-full h-11 w-11 bg-blue-600 p-2 mr-2 mb-2 cursor-pointer fixed bottom-10 right-0" @click="returnTop()">
-   <Footer />
+  <Footer />
 </div>
 </template>
 <script>
@@ -333,7 +334,7 @@ export default {
          })
       },
       scrollWindow() {
-      const top = 500 // TOPに戻るボタンを表示させたい位置
+      const top = 600 // TOPに戻るボタンを表示させたい位置
       this.scroll = window.scrollY
          if (top <= this.scroll) {
          this.buttonActive = true;

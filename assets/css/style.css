@@ -181,6 +181,7 @@ footer {
         width: 100vw;
         margin: 0 calc(50% - 50vw);
         margin: auto;
+        z-index: 10;
     }
     .pcCalendar {
         display: none;
