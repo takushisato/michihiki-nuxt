@@ -2,13 +2,22 @@
 <div>
    <Header />
    <div class="container m-auto text-center select-none">
-      <div class="mb-16"></div>
-      <h1 class="font-bold">当サイトは潮の満引きをグラフで確認できる潮見カレンダー表示サイトです</h1>
-      <br>
-      <h1 class="font-bold">釣りの他、磯遊びや潮干狩り、海遊びの検討にお使いください</h1>
-      <br>
-      <h1 class="font-bold">調べたい都道府県を選択してください</h1>
-      <div class="mb-16"></div>
+
+      <!-- 広告　釣りビジョン -->
+      <div class="turivision">
+         <a href="https://px.a8.net/svt/ejp?a8mat=3NAHG5+4KBNQQ+4H4K+61RI9" rel="nofollow" target=”_blank”>
+         <img border="0" width="468" height="60" alt="" src="https://www25.a8.net/svt/bgt?aid=220518869276&wid=001&eno=01&mid=s00000020882001016000&mc=1" class="mt-2 mb-2 ml-auto mr-auto"></a>
+         <img border="0" width="1" height="1" src="https://www19.a8.net/0.gif?a8mat=3NAHG5+4KBNQQ+4H4K+61RI9" alt="">
+      </div>
+
+      <div class="mb-16 mt-8">
+         <h1 class="font-bold">当サイトは潮の満引きをグラフで確認できる潮見カレンダー表示サイトです</h1>
+         <br>
+         <h1 class="font-bold">釣りの他、磯遊びや潮干狩り、海遊びの検討にお使いください</h1>
+         <br>
+         <h1 class="font-bold">調べたい都道府県を選択してください</h1>
+      </div>
+
 
       <!-- PC画面の都道府県テーブル -->
       <div>
@@ -238,6 +247,21 @@
             </div>
          </div>
       </div>
+
+      <!-- 広告　アフィリエイト -->
+      <div class="affiliate">
+         <div class="ml-auto mr-2 mb-2">
+            <a href="https://px.a8.net/svt/ejp?a8mat=3NAHG4+GGECGQ+4KZ6+O3UA9" rel="nofollow" target=”_blank”>
+            <img border="0" width="300" height="250" alt="" src="https://www28.a8.net/svt/bgt?aid=220518868995&wid=002&eno=01&mid=s00000021381004049000&mc=1" class="m-auto"></a>
+            <img border="0" width="1" height="1" src="https://www13.a8.net/0.gif?a8mat=3NAHG4+GGECGQ+4KZ6+O3UA9" alt="">
+         </div>
+         <div class="ml-2 mr-auto mb-2">
+            <a href="https://px.a8.net/svt/ejp?a8mat=3NAHG5+10BHGA+3Q7E+1BNYOX" rel="nofollow" target=”_blank”>
+            <img border="0" width="300" height="250" alt="" src="https://www24.a8.net/svt/bgt?aid=220518869061&wid=002&eno=01&mid=s00000017393008006000&mc=1" class="m-auto"></a>
+            <img border="0" width="1" height="1" src="https://www15.a8.net/0.gif?a8mat=3NAHG5+10BHGA+3Q7E+1BNYOX" alt="">
+         </div>
+      </div>
+      
    </div>
   <Footer />
 </div>

@@ -18,6 +18,10 @@ header {
     border: solid 2px #0099FF;
 }
 
+.turivision {
+    margin-top: 48px;
+}
+
 .clear {
     clear: both;
 }
@@ -86,6 +90,11 @@ header {
     min-width: 850px;
     margin: 0 auto;
     background: white;
+}
+
+.affiliate {
+    text-align: center;
+    display: flex;
 }
 
 footer {
@@ -189,11 +198,24 @@ footer {
 }
     
 @media (max-width: 640px) {
+    .turivision{
+        width: 90%;
+        margin-top: 20px;
+        margin-left: auto;
+        margin-right: auto;
+    }
     .contact {
         width: 90%;
     }
     .contact-label {
         width: 90%;
+    }
+    .affiliate {
+        display: block;
+    }
+    .affiliate > div {
+        max-width: 90%;
+        margin: 5px auto;
     }
 }
 
