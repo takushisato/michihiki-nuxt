@@ -1,9 +1,4 @@
 export default {
-  data(){
-    return{
-      baseApiUrl: process.env.BASE_API_URL,
-    }
-  },
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
 
@@ -24,7 +19,7 @@ export default {
       { hid: 'og:url', property: 'og:url', content: 'https://sio-michihiki.com' },
       { hid: 'og:title', property: 'og:title', content: '-グラフで潮の満ち引きを確認するサイト-' },
       { hid: 'og:description', property: 'og:description', content: '潮の満潮時刻と干潮時刻をグラフで確認できるサイトです。釣りや海遊び、潮干狩りなどにご利用ください。' },
-      { hid: 'og:image', property: 'og:image', content: '/ogp2.png' },
+      { hid: 'og:image', property: 'og:image', content: 'https://sio-michihiki.com/ogp.png' },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/icons8.png' }
