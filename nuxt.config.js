@@ -47,13 +47,7 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     '@nuxtjs/axios',
-    '@nuxtjs/google-adsense',
   ],
-
-  'google-adsense': {
-    id: 'ca-pub-4568664831429987',
-    pageLevelAds: true,
-  },
 
   axios: {
     proxy: true,
