@@ -150,7 +150,7 @@ footer {
 /* Extra Large (xl) */
 @media (max-width: 1280px) {
     .container {
-        max-width: 1200;
+        max-width: 1100;
     }
     .mobile-local, .mobile-direction {
         display: none;
