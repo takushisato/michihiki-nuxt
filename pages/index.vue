@@ -1,5 +1,6 @@
 <template>
 <div>
+   <div id="top"></div>
    <Header />
    <meta name="google-site-verification" content="wjJumBDICAvEfDcfySF6LNF4sjEMLQQm21I5PoU4_wM" />
    <div class="container m-auto text-center select-none">
@@ -19,7 +20,6 @@
          <h1 class="font-bold">調べたい都道府県を選択してください</h1>
       </div>
 
-
       <!-- PC画面の都道府県テーブル -->
       <div>
          <table class="local bg-gray-300">
@@ -27,49 +27,49 @@
                <tr>
                   <th class="bg-gray-400">北海道以北</th>
                   <td>
-                  <p v-for="prefecture in prefectures[0]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</p>
+                     <p v-for="prefecture in prefectures[0]" :key="prefecture.name" @click="pcChoice(prefecture)"><nuxt-link  v-scroll-to="`#choicePal`" to>{{ prefecture.name }}</nuxt-link></p>
                   </td>
                </tr>
                <tr>
                   <th class="bg-gray-400">東北地方</th>
                   <td>
-                  <p v-for="prefecture in prefectures[1]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</p>
+                     <p v-for="prefecture in prefectures[1]" :key="prefecture.name" @click="pcChoice(prefecture)"><nuxt-link  v-scroll-to="`#choicePal`" to>{{ prefecture.name }}</nuxt-link></p>
                   </td>
                </tr>
                <tr>
                   <th class="bg-gray-400">関東地方</th>
                   <td>
-                  <p v-for="prefecture in prefectures[2]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</p>
+                     <p v-for="prefecture in prefectures[2]" :key="prefecture.name" @click="pcChoice(prefecture)"><nuxt-link  v-scroll-to="`#choicePal`" to>{{ prefecture.name }}</nuxt-link></p>
                   </td>
                </tr>
                <tr>
                   <th class="bg-gray-400">中部地方</th>
                   <td>
-                  <p v-for="prefecture in prefectures[3]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</p>
+                     <p v-for="prefecture in prefectures[3]" :key="prefecture.name" @click="pcChoice(prefecture)"><nuxt-link  v-scroll-to="`#choicePal`" to>{{ prefecture.name }}</nuxt-link></p>
                   </td>
                </tr>
                <tr>
                   <th class="bg-gray-400">近畿地方</th>
                   <td>
-                  <p v-for="prefecture in prefectures[4]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</p>
+                     <p v-for="prefecture in prefectures[4]" :key="prefecture.name" @click="pcChoice(prefecture)"><nuxt-link  v-scroll-to="`#choicePal`" to>{{ prefecture.name }}</nuxt-link></p>
                   </td>
                </tr>
                <tr>
                   <th class="bg-gray-400">中国地方</th>
                   <td>
-                  <p v-for="prefecture in prefectures[5]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</p>
+                     <p v-for="prefecture in prefectures[5]" :key="prefecture.name" @click="pcChoice(prefecture)"><nuxt-link  v-scroll-to="`#choicePal`" to>{{ prefecture.name }}</nuxt-link></p>
                   </td>
                </tr>
                <tr>
                   <th class="bg-gray-400">四国地方</th>
                   <td>
-                  <p v-for="prefecture in prefectures[6]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</p>
+                     <p v-for="prefecture in prefectures[6]" :key="prefecture.name" @click="pcChoice(prefecture)"><nuxt-link  v-scroll-to="`#choicePal`" to>{{ prefecture.name }}</nuxt-link></p>
                   </td>
                </tr>
                <tr>
                   <th class="bg-gray-400">九州沖縄</th>
                   <td>
-                  <p v-for="prefecture in prefectures[7]" :key="prefecture.name" @click="pcChoice(prefecture)">{{ prefecture.name }}</p>
+                     <p v-for="prefecture in prefectures[7]" :key="prefecture.name" @click="pcChoice(prefecture)"><nuxt-link  v-scroll-to="`#choicePal`" to>{{ prefecture.name }}</nuxt-link></p>
                   </td>
                </tr>
             </tbody>
@@ -81,32 +81,32 @@
          <label for="menu_bar01" class="mobile-label border-2 border-gray-400 m-0">北海道以北</label>
          <input type="checkbox" id="menu_bar01" class="mobile-input" />
             <ul class="bg-gray-400" id="links01">
-               <li v-for="prefecture in prefectures[0]" :key="prefecture.name" @click="pcChoice(prefecture)"><a href="#choicePal">{{ prefecture.name }}</a></li>
+               <li v-for="prefecture in prefectures[0]" :key="prefecture.name" @click="pcChoice(prefecture)"><nuxt-link  v-scroll-to="`#choicePal`" to>{{ prefecture.name }}</nuxt-link></li>
             </ul>
          <label for="menu_bar02" class="mobile-label border-2 border-gray-400 m-0">東北地方</label>
          <input type="checkbox" id="menu_bar02" class="mobile-input" />
             <ul class="bg-gray-400" id="links02">
-               <li v-for="prefecture in prefectures[1]" :key="prefecture.name" @click="pcChoice(prefecture)"><a href="#choicePal">{{ prefecture.name }}</a></li>
+               <li v-for="prefecture in prefectures[1]" :key="prefecture.name" @click="pcChoice(prefecture)"><nuxt-link  v-scroll-to="`#choicePal`" to>{{ prefecture.name }}</nuxt-link></li>
             </ul>
          <label for="menu_bar03" class="mobile-label border-2 border-gray-400">関東地方</label>
          <input type="checkbox" id="menu_bar03" class="mobile-input" />
             <ul class="bg-gray-400" id="links03">
-               <li v-for="prefecture in prefectures[2]" :key="prefecture.name" @click="pcChoice(prefecture)"><a href="#choicePal">{{ prefecture.name }}</a></li>
+               <li v-for="prefecture in prefectures[2]" :key="prefecture.name" @click="pcChoice(prefecture)"><nuxt-link  v-scroll-to="`#choicePal`" to>{{ prefecture.name }}</nuxt-link></li>
             </ul>
          <label for="menu_bar04" class="mobile-label border-2 border-gray-400">中部地方</label>
          <input type="checkbox" id="menu_bar04" class="mobile-input" />
             <ul class="bg-gray-400" id="links04">
-               <li v-for="prefecture in prefectures[3]" :key="prefecture.name" @click="pcChoice(prefecture)"><a href="#choicePal">{{ prefecture.name }}</a></li>
+               <li v-for="prefecture in prefectures[3]" :key="prefecture.name" @click="pcChoice(prefecture)"><nuxt-link  v-scroll-to="`#choicePal`" to>{{ prefecture.name }}</nuxt-link></li>
             </ul>
          <label for="menu_bar05" class="mobile-label border-2 border-gray-400">近畿地方</label>
          <input type="checkbox" id="menu_bar05" class="mobile-input" />
             <ul class="bg-gray-400" id="links05">
-               <li v-for="prefecture in prefectures[4]" :key="prefecture.name" @click="pcChoice(prefecture)"><a href="#choicePal">{{ prefecture.name }}</a></li>
+               <li v-for="prefecture in prefectures[4]" :key="prefecture.name" @click="pcChoice(prefecture)"><nuxt-link  v-scroll-to="`#choicePal`" to>{{ prefecture.name }}</nuxt-link></li>
             </ul>
          <label for="menu_bar06" class="mobile-label border-2 border-gray-400">中国地方</label>
          <input type="checkbox" id="menu_bar06" class="mobile-input" />
             <ul class="bg-gray-400" id="links06">
-               <li v-for="prefecture in prefectures[5]" :key="prefecture.name" @click="pcChoice(prefecture)"><a href="#choicePal">{{ prefecture.name }}</a></li>
+               <li v-for="prefecture in prefectures[5]" :key="prefecture.name" @click="pcChoice(prefecture)"><nuxt-link  v-scroll-to="`#choicePal`" to>{{ prefecture.name }}</nuxt-link></li>
             </ul>
          <label for="menu_bar07" class="mobile-label border-2 border-gray-400">四国地方</label>
          <input type="checkbox" id="menu_bar07" class="mobile-input" />
@@ -122,7 +122,8 @@
       <br>
 
       <!-- 港と月選択画面 -->
-      <div v-if="isShow" class="local2" id="choicePal">
+      <div id="choicePal"></div>
+      <div v-if="isShow" class="local2">
          <br><br>
          <h1 class="font-bold">月を選択してください</h1>
          <!-- PC用 -->
@@ -142,7 +143,7 @@
          <h1 class="font-bold">沿岸地域を選択してください</h1>
          <ul>
             <li v-for="port in ports" :key="port.portName" @click="hcChoice(port)" class="text-center hover:opacity-30 cursor-pointer">
-               <a href="#choiceButton">{{ port.portName }}</a>
+               <nuxt-link  v-scroll-to="`#choiceButton`" to>{{ port.portName }}</nuxt-link>
             </li>
          </ul>
          <div class="clear"></div>
@@ -154,7 +155,7 @@
          <p class="text-lg">{{ this.timeDatas.yr }}年{{ this.timeDatas.mn }}月</p>
          <br>
          <button v-if="choiceHc != ''" @click="asyncData()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded" id="choiceButton">調べる!</button>
-         <button v-if="choiceHc == ''" class="bg-blue-300 text-white font-bold py-2 px-4 border border-blue-300 rounded opacity-20 pointer-events-none">調べる!</button>
+         <button v-if="choiceHc == ''" class="bg-blue-300 text-white font-bold py-2 px-4 border border-blue-300 rounded opacity-20 pointer-events-none" id="choiceButton">調べる!</button>
          <p v-if="choiceHc == ''" class="text-red-500 mt-1">沿岸地域を選択するとクリックできます</p>
          <br><br>
       </div>
@@ -197,7 +198,6 @@
                   </tr>
             </tbody>
          </table>
-         <img v-show="buttonActive" src="~/static/yajirusi.png" alt="矢印の画像" class="rounded-full h-11 w-11 bg-blue-600 p-2 mr-2 mb-2 cursor-pointer fixed bottom-2 right-0" @click="returnTop()">
       </div>
 
       <!-- mobileカレンダー -->
@@ -236,33 +236,35 @@
                </td>
             </tr>
          </table>
-         <img v-show="buttonActive" src="~/static/yajirusi.png" alt="矢印の画像" class="rounded-full h-11 w-11 bg-blue-600 p-2 mr-2 mb-2 cursor-pointer fixed bottom-14 right-0" @click="returnTop()">
          <div class="border-2 bg-white text-2xl fixed bottom-0 left-0 nav">
             <h2 class="text-sm mb-1 ml-3 text-left">何週目を確認しますか？</h2>
             <div class="flex">
-               <a href="#fast" class="m-auto"><p>➀</p></a>
-               <a href="#second" class="m-auto"><p>➁</p></a>
-               <a href="#third" class="m-auto"><p>➂</p></a>
-               <a href="#ford" class="m-auto"><p>➃</p></a>
-               <a href="#five" class="m-auto"><p>➄</p></a>
+               <nuxt-link class="m-auto" v-scroll-to="`#fast`" to><p>➀</p></nuxt-link>
+               <nuxt-link class="m-auto" v-scroll-to="`#second`" to><p>➁</p></nuxt-link>
+               <nuxt-link class="m-auto" v-scroll-to="`#third`" to><p>➂</p></nuxt-link>
+               <nuxt-link class="m-auto" v-scroll-to="`#ford`" to><p>➃</p></nuxt-link>
+               <nuxt-link class="m-auto" v-scroll-to="`#five`" to><p>➄</p></nuxt-link>
             </div>
          </div>
       </div>
 
       <!-- 広告　アフィリエイト -->
       <div class="affiliate">
-         <div class="ml-auto mr-2 mb-2">
+         <div class="ml-auto mr-2 mb-4">
             <a href="https://px.a8.net/svt/ejp?a8mat=3NAHG4+GGECGQ+4KZ6+O3UA9" rel="nofollow" target=”_blank”>
             <img border="0" width="300" height="250" alt="" src="https://www28.a8.net/svt/bgt?aid=220518868995&wid=002&eno=01&mid=s00000021381004049000&mc=1" class="m-auto"></a>
             <img border="0" width="1" height="1" src="https://www13.a8.net/0.gif?a8mat=3NAHG4+GGECGQ+4KZ6+O3UA9" alt="">
          </div>
-         <div class="ml-2 mr-auto mb-2">
+         <div class="ml-2 mr-auto mb-4">
             <a href="https://px.a8.net/svt/ejp?a8mat=3NAHG5+10BHGA+3Q7E+1BNYOX" rel="nofollow" target=”_blank”>
             <img border="0" width="300" height="250" alt="" src="https://www24.a8.net/svt/bgt?aid=220518869061&wid=002&eno=01&mid=s00000017393008006000&mc=1" class="m-auto"></a>
             <img border="0" width="1" height="1" src="https://www15.a8.net/0.gif?a8mat=3NAHG5+10BHGA+3Q7E+1BNYOX" alt="">
          </div>
       </div>
       
+      <!-- ページスクロールボタン -->
+      <nuxt-link v-scroll-to="`#top`" to><img src="~/static/yajirusi.png" alt="矢印の画像" class="rounded-full h-11 w-11 bg-blue-600 p-2 mr-2 mb-2 cursor-pointer bottom-14 right-0 mobileTopButton"></nuxt-link>
+      <nuxt-link v-scroll-to="`#top`" to><img src="~/static/yajirusi.png" alt="矢印の画像" class="rounded-full h-11 w-11 bg-blue-600 p-2 mr-2 mb-2 cursor-pointer bottom-2 right-0 pcTopButton"></nuxt-link>
    </div>
   <Footer />
 </div>
@@ -296,8 +298,6 @@ export default {
          today:'', // カレンダー用
          detailView: '', // 詳細図のURLの場所を入力する変数
          detailView2: "&rg=day&w=768&h=768&lc=blue&gcs=cyan&gcf=blue&ld=on&ttd=on&tsmd=on", // 詳細図のURLの後半（このまま使用）
-         buttonActive: false,
-         scroll: 0,
          }
       },
 
@@ -349,23 +349,6 @@ export default {
                return true;
          }
          return false;
-      },
-
-      // TOPに戻るボタン
-      returnTop(){
-         window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-         })
-      },
-      scrollWindow() {
-      const top = 600 // TOPに戻るボタンを表示させたい位置
-      this.scroll = window.scrollY
-         if (top <= this.scroll) {
-         this.buttonActive = true;
-         } else {
-         this.buttonActive = false;
-         }
       },
 
       // パラメータに現在日時を入力してAPI取得
@@ -463,9 +446,6 @@ export default {
    mounted() {
       // カレンダー日付取得用
       this.today = timeDatas.yr + '-' + timeDatas.mn + '-' + timeDatas.dy;
-
-      //ページスクロール用
-      window.addEventListener('scroll', this.scrollWindow);
    },
 
    computed:{
