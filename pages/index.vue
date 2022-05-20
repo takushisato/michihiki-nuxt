@@ -1,6 +1,7 @@
 <template>
 <div>
    <Header />
+   <meta name="google-site-verification" content="wjJumBDICAvEfDcfySF6LNF4sjEMLQQm21I5PoU4_wM" />
    <div class="container m-auto text-center select-none">
 
       <!-- 広告　釣りビジョン -->

@@ -20,6 +20,7 @@ export default {
       { hid: 'og:title', property: 'og:title', content: '-グラフで潮の満ち引きを確認するサイト-' },
       { hid: 'og:description', property: 'og:description', content: '潮の満潮時刻と干潮時刻をグラフで確認できるサイトです。釣りや海遊び、潮干狩りなどにご利用ください。' },
       { hid: 'og:image', property: 'og:image', content: 'https://sio-michihiki.com/ogp.png' },
+      { name: 'google-site-verification', content:'wjJumBDICAvEfDcfySF6LNF4sjEMLQQm21I5PoU4_wM' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/icons8.png' }
