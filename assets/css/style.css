@@ -123,9 +123,21 @@ footer {
     width: 500px;
 }
 
-@media (min-width: 1440px) {
+@media (min-width: 1441px) {
     .container {
         max-width: 1400px;
+    }
+    .mobile-local, .mobile-direction {
+        display: none;
+    }
+    .mobileCalendar {
+        display: none;
+    }
+}
+
+@media (max-width: 1440px) {
+    .container {
+        max-width: 1200px;
     }
     .mobile-local, .mobile-direction {
         display: none;
