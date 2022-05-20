@@ -207,7 +207,7 @@
          <table class="m-auto">
             <tr v-for="(weekData, weekDataIndex) in calendar" :key="weekDataIndex">
                <div class="mt-4"></div>
-               <label class="mobile-calLabel mt-5 text-xl" :id="weekNuv[weekDataIndex]">{{ weekNumber[weekDataIndex] }}</label>
+               <label class="mt-5 text-xl text-gray-700 font-bold" :id="weekNuv[weekDataIndex]">{{ weekNumber[weekDataIndex] }}</label>
                <td v-for="(dayNumber, dayNumberIndex) in weekData" :key="dayNumberIndex" :class="{'today':isToday(dayNumber)}" class="border-2 border-gray-300 block mobileDay">
                   <div class="flex m-1">
                      <span v-if="isToday(dayNumber)" class="bg-blue-200 text-white text-2xl font-bold m-auto">今日</span>
