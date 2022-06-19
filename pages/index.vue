@@ -5,11 +5,19 @@
    <meta name="google-site-verification" content="wjJumBDICAvEfDcfySF6LNF4sjEMLQQm21I5PoU4_wM" />
    <div class="container m-auto text-center select-none">
 
-      <!-- 広告　釣りビジョン -->
-      <div class="turivision">
-         <a href="https://px.a8.net/svt/ejp?a8mat=3NAHG5+4KBNQQ+4H4K+61RI9" rel="nofollow" target=”_blank”>
-         <img border="0" width="468" height="60" alt="" src="https://www25.a8.net/svt/bgt?aid=220518869276&wid=001&eno=01&mid=s00000020882001016000&mc=1" class="mt-2 mb-2 ml-auto mr-auto"></a>
-         <img border="0" width="1" height="1" src="https://www19.a8.net/0.gif?a8mat=3NAHG5+4KBNQQ+4H4K+61RI9" alt="">
+      <!-- 広告　アフィリエイト -->
+      <div class="affiliate mt-6">
+         <div class="ml-auto mr-2 mb-4">
+            <a href="https://px.a8.net/svt/ejp?a8mat=3NCB7X+BE7PCQ+50NW+5ZU29" rel="nofollow" target=”_blank”>
+            <img border="0" width="300" height="250" alt="" src="https://www27.a8.net/svt/bgt?aid=220604109689&wid=002&eno=01&mid=s00000023414001007000&mc=1" class="m-auto"></a>
+            <img border="0" width="1" height="1" src="https://www11.a8.net/0.gif?a8mat=3NCB7X+BE7PCQ+50NW+5ZU29" alt="">
+         </div>
+         <div class="ml-2 mr-auto mb-4">
+            <a href="https://px.a8.net/svt/ejp?a8mat=3NAHG5+4KBNQQ+4H4K+64Z8X" rel="nofollow" target=”_blank”>
+            <img border="0" width="300" height="250" alt="" src="https://www23.a8.net/svt/bgt?aid=220518869276&wid=001&eno=01&mid=s00000020882001031000&mc=1" class="m-auto"></a>
+            <img border="0" width="1" height="1" src="https://www13.a8.net/0.gif?a8mat=3NAHG5+4KBNQQ+4H4K+64Z8X" alt="">
+         </div>
+
       </div>
 
       <div class="mb-16 mt-8">
