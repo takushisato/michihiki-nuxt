@@ -271,10 +271,10 @@
       </div>
       
       <!-- ページスクロールボタン -->
-      <dir  v-scroll-to="`#top`" to>
+      <div  v-scroll-to="`#top`" to>
          <img src="~/static/yajirusi.png" alt="矢印の画像" class="rounded-full h-11 w-11 bg-blue-600 p-2 mr-2 mb-2 cursor-pointer bottom-14 right-0 mobileTopButton">
          <img src="~/static/yajirusi.png" alt="矢印の画像" class="rounded-full h-11 w-11 bg-blue-600 p-2 mr-2 mb-2 cursor-pointer bottom-2 right-0 pcTopButton">
-      </dir>
+      </div>
    </div>
   <Footer />
 </div>
